@@ -43,18 +43,13 @@
     ============================================ -->
 <script src="<?= ASSETS ?>js/jquery.maskedinput.min.js"></script>
 <script src="<?= ASSETS ?>js/masking-active.js"></script>
-<!-- datepicker JS
-    ============================================ -->
-<script src="<?= ASSETS ?>js/datepicker/jquery-ui.min.js"></script>
-<script src="<?= ASSETS ?>js/datepicker/datepicker-active.js"></script>
+
 <!-- form validate JS
     ============================================ -->
 <script src="<?= ASSETS ?>js/form-validation/jquery.form.min.js"></script>
 <script src="<?= ASSETS ?>js/form-validation/jquery.validate.min.js"></script>
 <script src="<?= ASSETS ?>js/form-validation/form-active.js"></script>
-<!-- dropzone JS
-    ============================================ -->
-<script src="<?= ASSETS ?>js/dropzone/dropzone.js"></script>
+
 <!-- tab JS
     ============================================ -->
 <script src="<?= ASSETS ?>js/tab.js"></script>
