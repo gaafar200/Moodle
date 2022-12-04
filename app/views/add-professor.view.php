@@ -1,6 +1,7 @@
+
 <?php $this->view("include/header"); ?>
 <?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar"); ?>
+<?php $this->view("include/upbar",["user"=>$user[0]]); ?>
 
             <div class="mobile-menu-area">
                 <div class="container">
@@ -96,7 +97,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="/upload"
+                                                    <form action="<?= ROOT ?>Professor/add" method="POST"
                                                         class="dropzone dropzone-custom needsclick add-professors"
                                                         id="demo1-upload">
                                                         <div class="row">

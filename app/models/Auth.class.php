@@ -81,7 +81,6 @@ class Auth extends Model
         if ($data) {
             return $data[0]->user_id;
         }
-        echo "Why";
         return false;
     }
 }

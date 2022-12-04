@@ -2,15 +2,14 @@
 
 class Home extends Controller
 {
-
     public function index()
     {
-        $user = new User();
-        if($user->is_logged_in()){
-            $this->view("index");
+         $this->data["user"] = $this->Auth->is_logged_in();
+        if($this->data["user"]){
+            $this->view("index",$this->data);
         }
         else{
-            header("Location: " . ROOT . "Login");
+            $this->redirect("Login");
         }
 
     }

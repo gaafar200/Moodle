@@ -97,4 +97,6 @@
         animation: 'fade'
     }); 	   
  
-})(jQuery); 
+})(jQuery);
+
+

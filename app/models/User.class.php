@@ -1,18 +1,13 @@
 <?php
 
-class User
+class User extends Model
 {
     public database $db;
     public function __construct(){
         $this->db = new database();
     }
-    public function is_logged_in(){
-        if(isset($_SESSION["User"])){
-            return true;
-        }
-        return false;
-    }
-    public function validateLogin($data)
+
+    public function validateLoginData($data)
     {
         if(isset($data["username"])){
             $isValidUser = $this->validateusername($data["username"]);
@@ -26,11 +21,7 @@ class User
         else{
             return ["password","Please Enter Your password"];
         }
-        if($isValidPassword && $isValidUser){
-            return true;
-        }
-        return is_array($isValidPassword) ? $isValidPassword : $isValidUser;
-
+        return true;
     }
 
     private function validateusername($username)
@@ -50,33 +41,12 @@ class User
 
     }
 
-    public function login($data)
-    {
-        $arr["username"] = $data["username"];
-        $arr["password"] = sha1($data["password"]);
-        $remember = isset($data["remember"]) ? true : false;
-        $query = "SELECT * FROM users WHERE (username = :username || university_id = :username) && password = :password LIMIT 1";
-        $userdata =  $this->db->read($query,$arr);
-        if($userdata === false){
-            return false;
-        }
-        $this->log_in($userdata);
-        if($remember == true){
-            //todo
-        }
-        return $userdata;
-    }
 
-    private function log_in($userdata)
-    {
-        $_SESSION["User"] = $userdata;
-    }
-    public function getUserData(){
-        if(isset($_SESSION["User"])){
-            return $_SESSION["User"];
-        }
-        return false;
-    }
+
+
+
+
+
 
 
 }

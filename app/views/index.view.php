@@ -1,10 +1,8 @@
 <?php $this->view("include/header"); ?>
 <?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar"); ?>
-
-
-
+<?php $this->view("include/upbar",["user"=>$user[0]]); ?>
             <!-- Mobile Menu start -->
+
             <div class="mobile-menu-area">
                 <div class="container">
                     <div class="row">

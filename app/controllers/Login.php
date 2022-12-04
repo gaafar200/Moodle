@@ -5,13 +5,13 @@ class Login extends Controller
     public function index(){
         $data = array();
         $user = new User();
+        $Auth = new Auth();
         if(isset($_POST)){
-             $check = $user->validateLogin($_POST);
+             $check = $user->validateLoginData($_POST);
              if($check === true){
-                $login = $user->login($_POST);
+                $login = $Auth->login($_POST);
                 if($login !== false){
-                    header("Location: " . ROOT . "Home");
-                    exit(0);
+                    $this->redirect("Home",$login);
                 }
              }
         }

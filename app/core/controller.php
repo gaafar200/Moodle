@@ -2,22 +2,31 @@
 
 class Controller
 {
+    public Auth $Auth;
+    public array $data = array();
+    public function __construct()
+    {
+        $this->Auth = new Auth();
+        $result = $this->Auth->is_logged_in();
+        if($result){
+            $this->data["user"] = $result;
+        }
+        else{
+            $this->redirect("Login");
+        }
+    }
+
     public function view($path , $data = [])
     {
+        extract($data);
         if(file_exists("../app/views/" . $path . ".view.php"))
         {
             include "../app/views/" . $path . ".view.php";
         }
     }
-
-    public function load_model($model)
-    {
-        if(file_exists("../app/models/" . strtolower($model) . ".class.php"))
-        {
-            include "../app/models/" . strtolower($model) . ".class.php";
-            return $a = new $model();
-        }
-        return false;
+    public function redirect($path = ""){
+        header("Location: " . ROOT . $path);
+        die;
     }
 
 }

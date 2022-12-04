@@ -125,7 +125,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
-                                    <p><b>Name</b><br /> Fly Zend</p>
+                                    <p><b>Name</b><br /><?= $user[0]->f_name. " " . $user[0]->m_name . " " . $user[0]->l_name ?></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
