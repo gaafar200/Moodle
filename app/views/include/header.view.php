@@ -33,6 +33,9 @@
     <!-- meanmenu icon CSS
 		============================================ -->
     <link rel="stylesheet" href="<?= ASSETS ?>css/meanmenu.min.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?= ASSETS ?>css/d-image.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="<?= ASSETS ?>css/main.css">
