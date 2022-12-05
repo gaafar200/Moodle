@@ -2,6 +2,7 @@
 
 class Professor extends Controller
 {
+    public lecturer $prof;
     public function index(){
         $this->view("all-professors",$this->data);
     }
@@ -13,9 +14,11 @@ class Professor extends Controller
     }
     public function add(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            var_dump($_POST);
-            var_dump($_FILES);
-            die;
+            $this->prof = new lecturer();
+            $result = $this->prof->validateProfData($_POST,$_FILES);
+            if($result === true){
+                $result = $this->prof->registerNewProfessor($_POST,$_FILES,$this->data["user"]);
+            }
         }
         $this->view("add-professor",$this->data);
     }

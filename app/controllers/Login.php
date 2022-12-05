@@ -8,6 +8,7 @@ class Login extends Controller
         $Auth = new Auth();
         if(isset($_POST)){
              $check = $user->validateLoginData($_POST);
+             var_dump($check);
              if($check === true){
                 $login = $Auth->login($_POST);
                 if($login !== false){
