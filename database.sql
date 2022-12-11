@@ -212,7 +212,7 @@ alter table users drop m_name;
 alter table users add description varchar(250) after rank;
 drop table lecturer_degree;
 
-
+ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(10) NOT NULL;
 
    
 

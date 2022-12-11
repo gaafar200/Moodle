@@ -29,8 +29,6 @@
                                             Professor</span></a></li>
                             <li><a title="Edit Professor" href="<?= ROOT ?>Professor/edit"><span class="mini-sub-pro">Edit
                                             Professor</span></a></li>
-                            <li><a title="Professor Profile" href="<?= ROOT ?>Professor/profile"><span
-                                        class="mini-sub-pro">Professor Profile</span></a></li>
                         </ul>
                     </li>
                     <li>

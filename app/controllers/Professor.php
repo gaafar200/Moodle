@@ -15,7 +15,8 @@ class Professor extends Controller
     public function edit(){
         $this->view("edit-professor",$this->data);
     }
-    public function profile(){
+    public function profile($username = ""){
+        $this->data["ProfProfile"] = $this->user->getUserDataFromUsername($username);
         $this->view("professor-profile",$this->data);
     }
     public function add(){

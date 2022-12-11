@@ -96,9 +96,10 @@ class lecturer extends User
     {
         if($this->Auth->hasRightPrivilege("techEmployee")){
             $checkIfProfessorExists = $this->checkIfProfessorExists($username);
-            if($checkIfProfessorExists !== true){
+            if($checkIfProfessorExists === false){
                 return ["lecturer"=>"lecturer does not exists"];
             }
+            $photoDeleted = $this->deletephoto($checkIfProfessorExists[0]->photo);
             $result = $this->delete($username);
             if($result !== true){
                 return ["lecturer"=>"failed to delete lecturer"];
@@ -110,10 +111,10 @@ class lecturer extends User
 
     private function checkIfProfessorExists($username)
     {
-        $checkIfExists = $this->getUserDataFromUsername($username);
-        if($checkIfExists){
-            if($checkIfExists[0]->rank == "lecturer"){
-                return true;
+        $data = $this->getUserDataFromUsername($username);
+        if($data){
+            if($data[0]->rank == "lecturer"){
+                return $data;
             }
         }
         return false;

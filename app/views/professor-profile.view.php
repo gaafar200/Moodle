@@ -119,37 +119,37 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
                             <div class="profile-img">
-                                <img src="<?= ASSETS ?>img/profile/1.jpg" alt="" />
+                                <img src="<?= $ProfProfile[0]->photo ?>" alt="" />
                             </div>
                             <div class="profile-details-hr">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Name</b><br /> Fly Zend</p>
+                                            <p><b>Name</b><br /><?=$ProfProfile[0]->f_name . " " . $ProfProfile[0]->l_name?></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Designation</b><br /> Head of Dept.</p>
+                                            <p><b>User Name</b><br /> <?= $ProfProfile[0]->username ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Email ID</b><br /> fly@gmail.com</p>
+                                            <p><b>Email ID</b><br /> <?= $ProfProfile[0]->email ?></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Phone</b><br /> +01962067309</p>
+                                            <p><b>Phone</b><br /> <?= $ProfProfile[0]->phone_number ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="address-hr">
-                                            <p><b>Address</b><br /> E104, catn-2, Chandlodia Ahmedabad Gujarat, UK.</p>
+                                            <p><b>Address</b><br /> <?= $ProfProfile[0]->address ?></p>
                                         </div>
                                     </div>
                                 </div>

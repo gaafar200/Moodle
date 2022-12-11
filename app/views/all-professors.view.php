@@ -130,7 +130,7 @@
                                             <?= $lecturer->description  ?>
                                         </p>
                                         <div>
-                                           <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
+                                           <a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
                                            <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
                                         </div>
 
@@ -141,7 +141,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="container-fluid">
-                        <div class="container-fluid">]
+                        <div class="container-fluid">
                             <h3 style="margin-left: auto">No Lecturer To display</h3>
                         </div>
                     <?php endif; ?>
