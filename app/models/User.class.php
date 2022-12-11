@@ -3,8 +3,10 @@
 class User extends Model
 {
     public database $db;
+    public  $Auth;
     public function __construct(){
         $this->db = new database();
+        $this->Auth = new Auth();
     }
 
     public function validateLoginData($data)
@@ -122,7 +124,80 @@ class User extends Model
         }
         return true;
     }
+    protected function getFileSystemReady()
+    {
+        if(!file_exists($this->getImagePath())){
+            $check = $this->createImagePath();
+            if($check !== true){
+                return ["file-System" => "<div class='fail'>File System Error</div>"];
+            }
+        }
+        return true;
+    }
+    protected function getImagePath(){
+        return  $_SERVER["DOCUMENT_ROOT"] . "/model/public/assets/data/users/";
+    }
+    protected function createImagePath(){
+        $check = mkdir($this->getImagePath(),0777);
+        return $check;
+    }
+    private function getImageFinalDestination($image){
+        $imagePath = "";
+        $imageParts = explode(".",$image["image"]["name"]);
+        $imageName = $imageParts[0];
+        $ext = $imageParts[1];
 
+        $check = true;
+        while($check){
+            $imagePath = $this->getImagePath() . $imageName . $this->generateRandomString(4) . "." . $ext;
+            $query = "SELECT photo FROM users WHERE photo = :photo LIMIT 1";
+            $check = $this->db->read($query,
+            [
+                "photo"=>$imagePath
+            ]);
+        }
+        return $imagePath;
+    }
+    protected function getImageServerPath($image){
+        $image_path = $this->getImageFinalDestination($image);
+        $replacement_part = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
+        return str_replace($_SERVER["DOCUMENT_ROOT"],$replacement_part,$image_path);
+    }
+
+
+    protected function getCreatorId()
+    {
+        $Auth = new Auth();
+        $data = $Auth->is_logged_in();
+        return $data[0]->id;
+    }
+
+    protected function storeImageInTheFileSystem($username,$image)
+    {
+        $query = "SELECT photo FROM users WHERE username = :username LIMIT 1";
+        $destinationPath = $this->db->read($query,[
+            "username"=>$username
+        ]);
+        $destinationPath = $this->alterPathToSuitFileSystem($destinationPath[0]->photo);
+        $check =  move_uploaded_file($image["image"]["tmp_name"],$destinationPath);
+        if(!$check){
+            return ["file-system"=>"<div class='fail'>failed to write to file system</div>"];
+        }
+        return true;
+    }
+
+    private function alterPathToSuitFileSystem($path)
+    {
+        $replacement_parts = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
+        return str_replace($replacement_parts,$_SERVER["DOCUMENT_ROOT"],$path);
+    }
+    protected function getUserDataFromUsername($username){
+        $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        $data = $this->db->read($query,[
+            "username"=>$username
+        ]);
+        return $data;
+    }
 
 
 }

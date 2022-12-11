@@ -3,7 +3,13 @@
 class Professor extends Controller
 {
     public lecturer $prof;
+    public array $messages;
+    public function __construct(){
+        parent::__construct();
+        $this->prof = new lecturer();
+    }
     public function index(){
+        $this->getMissingData();
         $this->view("all-professors",$this->data);
     }
     public function edit(){
@@ -14,7 +20,6 @@ class Professor extends Controller
     }
     public function add(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $this->prof = new lecturer();
             $result = $this->prof->validateProfData($_POST,$_FILES);
             if($result === true){
                 $result = $this->prof->registerNewProfessor($_POST,$_FILES,$this->data["user"]);
@@ -22,5 +27,18 @@ class Professor extends Controller
         }
         $this->view("add-professor",$this->data);
     }
-
+    public function delete($username = ""){
+        if($username != ""){
+            $result = $this->prof->deleteProfessor($username);
+            if($result === true){
+                $this->data["success"] = ["lecturer"=> "Lecturer Deleted Successfully"];
+            }
+        }
+        $this->getMissingData();
+        $this->view("all-professors",$this->data);
+    }
+    public function getMissingData(){
+        $lecturers = $this->prof->getAllLecturers();
+        $this->data["lecturers"] = $lecturers;
+    }
 }

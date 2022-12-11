@@ -209,6 +209,8 @@ CREATE TABLE IF NOT EXISTS user_tokens
 INSERT INTO `users` (`id`, `university_id`, `f_name`, `m_name`, `l_name`, `address`, `phone_number`, `username`, `password`, `email`, `photo`, `rank`, `created_by`, `date`) VALUES (NULL, NULL, 'mahmoud', 'mohammed', 'jaafar', 'palestine-gaza', '0598790035', 'admin2000', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', 'C:\\xampp\\htdocs\\model\\data\\users\\admin.jpg', 'admin', NULL, current_timestamp());
 alter table user_tokens modify expiry BIGINT not null;
 alter table users drop m_name;
+alter table users add description varchar(250) after rank;
+drop table lecturer_degree;
 
 
 

@@ -1,6 +1,6 @@
 <?php $this->view("include/header"); ?>
 <?php  $this->view("include/sidebar");?>
-<?php $this->view("include/upbar",["user"=>$user[0]]); ?>
+<?php $this->view("include/upbar",["user"=>$user]); ?>
 
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
@@ -93,7 +93,7 @@
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..."
                                                     class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
+                                                <a type="submit"><i class="fa fa-search"></i></a>
                                             </form>
                                         </div>
                                     </div>
@@ -115,163 +115,36 @@
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                            <div id="id01" class="modal-delete">
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close-delete" title="Close Modal">×</span>
-                                <form class="modal-content" action="/action_page.php">
-                                    <div class="container-delete">
-                                    <h1>Delete Account</h1>
-                                    <p>Are you sure you want to delete account?</p>
-                                    
-                                    <div class="clearfix">
-                                        <button class="btn-delete cancelbtn" type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button>
-                                        <a href="#">
-                                             <button class="btn-delete deletebtn" type="button" onclick="document.getElementById('id01').style.display='none'">Delete</button>
-                                        </a>
-                                       
+
+
+                    <?php if(isset($lecturers) && is_array($lecturers)): ?>
+                        <?php foreach ($lecturers as $lecturer): ?>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                                    <div class="panel-body custom-panel-jw">
+                                        <img alt="logo" class="img-circle m-b" src="<?= $lecturer->photo ?>">
+                                        <h3><a href=""><?= $lecturer->f_name . " " . $lecturer->l_name ?></a></h3>
+                                        <p class="all-pro-ad"><?= $lecturer->address ?></p>
+                                        <p>
+                                            <?= $lecturer->description  ?>
+                                            <?= $lecturer->description  ?>
+                                        </p>
+                                        <div>
+                                           <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
+                                           <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                        </div>
+
+
                                     </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/1.jpg">
-                                <h3><a href="">John Alva</a></h3>
-                                <p class="all-pro-ad">London, LA</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/2.jpg">
-                                <h3><a href="">Amir dex</a></h3>
-                                <p class="all-pro-ad">Pakistan, Los</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
                                 </div>
                             </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="container-fluid">
+                        <div class="container-fluid">]
+                            <h3 style="margin-left: auto">No Lecturer To display</h3>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div
-                            class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30 res-tablet-mg-t-30 dk-res-t-pro-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/3.jpg">
-                                <h3><a href="">Alva Adition</a></h3>
-                                <p class="all-pro-ad">India, Col</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs res-tablet-mg-t-30 dk-res-t-pro-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/4.jpg">
-                                <h3><a href="">Sex Dog</a></h3>
-                                <p class="all-pro-ad">Uk, LA</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/1.jpg">
-                                <h3><a href="">Fox Well</a></h3>
-                                <p class="all-pro-ad">California, LA</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/3.jpg">
-                                <h3><a href="">Drom Simson</a></h3>
-                                <p class="all-pro-ad">Austrolia, LA</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/2.jpg">
-                                <h3><a href="">Sima son</a></h3>
-                                <p class="all-pro-ad">Suiden, Cro</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel hblue contact-panel contact-panel-cs mg-t-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" src="<?= ASSETS ?>img/contact/4.jpg">
-                                <h3><a href="">Drama Son</a></h3>
-                                <p class="all-pro-ad">USA, LA</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt
-                                    est vitae ultrices accumsan.
-                                </p>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

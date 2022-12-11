@@ -1,8 +1,7 @@
 <?php
-class Auth extends Model
+class Auth extends model
 {
     public $db = null;
-
     public function __construct()
     {
         $this->db = new database();
@@ -82,6 +81,20 @@ class Auth extends Model
             return $data[0]->user_id;
         }
         return false;
+    }
+
+    public function hasRightPrivilege($privilegeRequired){
+        $data = $this->is_logged_in();
+        $RANK["admin"] = ["admin","techEmployee","lecturer","student"];
+        $RANK["techEmployee"] = ["techEmployee","lecturer","student"];
+        $RANK["lecturer"] = ["lecturer","student"];
+        $RANK["student"] = ["student"];
+        if(in_array($privilegeRequired,$RANK[$data[0]->rank])){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
 

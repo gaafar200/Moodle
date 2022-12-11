@@ -1,7 +1,7 @@
 
 <?php $this->view("include/header"); ?>
 <?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar",["user"=>$user[0]]); ?>
+<?php $this->view("include/upbar",["user"=>$user]); ?>
 
             <div class="mobile-menu-area">
                 <div class="container">
@@ -145,6 +145,9 @@
                                                                         class="form-control"
                                                                         placeholder="Confirm Password">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                <textarea name="description" class="form-control" placeholder="Enter The Lecturer description"></textarea>
+                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">

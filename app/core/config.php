@@ -1,5 +1,4 @@
 <?php
-
 define("WEBSITE_TITLE" , "  ");
 $root = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"];
 define("ROOT",str_replace("index.php","",$root));

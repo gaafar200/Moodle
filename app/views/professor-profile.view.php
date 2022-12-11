@@ -1,6 +1,6 @@
 <?php $this->view("include/header"); ?>
 <?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar",["user"=>$user[0]]); ?>
+<?php $this->view("include/upbar",["user"=>$user]); ?>
 
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
