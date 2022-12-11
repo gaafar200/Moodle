@@ -44,7 +44,7 @@ class Auth extends model
 
     public function getUserData($id)
     {
-        $query = "SELECT * FROM users WHERE id = :id";
+        $query = "SELECT * FROM users WHERE id = :id LIMIT 1";
         return $this->db->read($query, [
             "id" => $id
         ]);
@@ -86,7 +86,7 @@ class Auth extends model
     public function hasRightPrivilege($privilegeRequired){
         $data = $this->is_logged_in();
         $RANK["admin"] = ["admin","techEmployee","lecturer","student"];
-        $RANK["techEmployee"] = ["techEmployee","lecturer","student"];
+        $RANK["techEmployeed"] = ["techEmployee","lecturer","student"];
         $RANK["lecturer"] = ["lecturer","student"];
         $RANK["student"] = ["student"];
         if(in_array($privilegeRequired,$RANK[$data[0]->rank])){

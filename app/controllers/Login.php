@@ -1,6 +1,6 @@
 <?php
 
-class Login extends Controller
+class Login
 {
     public function index(){
         $data = array();
@@ -18,4 +18,16 @@ class Login extends Controller
         $this->view("login");
     }
 
+    public function view($path , $data = [])
+    {
+        extract($data);
+        if(file_exists("../app/views/" . $path . ".view.php"))
+        {
+            include "../app/views/" . $path . ".view.php";
+        }
+    }
+    public function redirect($path = ""){
+        header("Location: " . ROOT . $path);
+        die;
+    }
 }

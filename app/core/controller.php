@@ -10,7 +10,7 @@ class Controller
         $result = $this->Auth->is_logged_in();
         if($result){
             $this->data["user"] = $result[0];
-        }
+       }
         else{
             $this->redirect("Login");
         }
