@@ -3,9 +3,11 @@
 class Controller
 {
     public Auth $Auth;
+    public User $user;
     public array $data = array();
     public function __construct()
     {
+        $this->user = new User();
         $this->Auth = new Auth();
         $result = $this->Auth->is_logged_in();
         if($result){

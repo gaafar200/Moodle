@@ -191,13 +191,20 @@ class User extends Model
         $replacement_parts = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
         return str_replace($replacement_parts,$_SERVER["DOCUMENT_ROOT"],$path);
     }
-    protected function getUserDataFromUsername($username){
+    public function getUserDataFromUsername($username){
         $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
         $data = $this->db->read($query,[
             "username"=>$username
         ]);
         return $data;
     }
-
+    protected function deletephoto($imagePath){
+        $path = $this->alterPathToSuitFileSystem($imagePath);
+        if(file_exists($path)){
+            unlink($path);
+            return true;
+        }
+        return false;
+    }
 
 }
