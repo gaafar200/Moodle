@@ -93,7 +93,7 @@
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..."
                                                     class="search-int form-control">
-                                                <a type="submit"><i class="fa fa-search"></i></a>
+                                                <a><i class="fa fa-search"></i></a>
                                             </form>
                                         </div>
                                     </div>
