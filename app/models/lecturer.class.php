@@ -128,9 +128,9 @@ class lecturer extends User
         ]);
     }
 
-    public function changePhoto($username,$_FILES)
+    public function changePhoto($username,$files)
     {
-        $check = $this->isValidImage($_FILES);
+        $check = $this->isValidImage($files);
         if(is_array($check)){
             return $check;
         }
