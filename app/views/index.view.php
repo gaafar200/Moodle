@@ -92,8 +92,8 @@
                                         <div class="breadcome-heading">
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
+                                                    class="search-int form-control" name="search">
+                                                <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
                                             </form>
                                         </div>
                                     </div>
@@ -113,9 +113,6 @@
             </div>
         </div>
 
-    </div>
-    <div class="container-fluid red">
-        <h1>Mahmoud jaafar</h1>
     </div>
 <?php $this->view("include/footer"); ?>
 

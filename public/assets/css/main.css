@@ -283,3 +283,36 @@ textarea {
     }
 
 }
+
+/* Start Modify all-Professor page */
+.pro-1 {
+    margin-bottom: 30px;
+}
+
+.pro-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    align-items: center;
+}
+
+.pro-3 {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.pro-4 {
+    color: #333;
+    background-color: #F3F3F3;
+    padding: 3px 0;
+}
+
+.pro-5 {
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+/* End Modify all-Professor page */

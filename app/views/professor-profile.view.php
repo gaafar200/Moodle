@@ -2,6 +2,7 @@
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
 
+
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
                 <div class="container">
@@ -92,8 +93,8 @@
                                         <div class="breadcome-heading">
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
+                                                    class="search-int form-control" name="search">
+                                                <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
                                             </form>
                                         </div>
                                     </div>
@@ -150,6 +151,13 @@
                                     <div class="col-lg-12">
                                         <div class="address-hr">
                                             <p><b>Address</b><br /> <?= $ProfProfile[0]->address ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="address-hr">
+                                            <a href="<?= ROOT ?>Professor/edit/"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
                                     </div>
                                 </div>

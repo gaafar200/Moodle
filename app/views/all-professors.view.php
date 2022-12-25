@@ -93,7 +93,7 @@
                                             <form role="search" class="sr-input-func" action="<?= ROOT ?>Professor">
                                                 <input type="text" name="search" placeholder="Search..."
                                                     class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
+                                               <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
                                             </form>
                                         </div>
                                     </div>
@@ -120,14 +120,12 @@
                     <?php if(isset($lecturers) && is_array($lecturers)): ?>
                         <?php foreach ($lecturers as $lecturer): ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                                    <div class="panel-body custom-panel-jw">
-                                        <img alt="logo" class="img-circle m-b" src="<?= $lecturer->photo ?>">
+                                <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30 pro-1">
+                                    <div class="panel-body custom-panel-jw pro-2">
+                                        <img alt="logo" class="img-rounded m-b pro-3" src="<?= $lecturer->photo ?>">
                                         <h3><a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>">Prof.<?= ucfirst($lecturer->f_name) . " " . $lecturer->l_name ?></a></h3>
                                         <p class="all-pro-ad"><?= $lecturer->email ?></p>
-                                        <p>
-                                            <?= $lecturer->description  ?>
-                                        </p>
+                                        <marquee class="pro-4">   <?= $lecturer->description  ?></marquee>
                                         <div>
                                            <a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
                                            <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>

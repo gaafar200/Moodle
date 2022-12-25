@@ -105,18 +105,22 @@
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
                                                                         class="form-control" placeholder="First Name">
+                                                                        <em for="firstname" class="invalid">Please enter first name</em> 
                                                                 </div>
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
                                                                     <input name="lastname" type="text"
                                                                         class="form-control" placeholder="Last Name">
+                                                                        <em for="lastname" class="invalid">Please enter last name</em>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
                                                                         class="form-control" placeholder="Address">
+                                                                        <em for="address" class="invalid">Please enter Address</em>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
                                                                         class="form-control" placeholder="Mobile no.">
+                                                                        <em for="mobileno" class="invalid">Please enter mobileno</em>
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                         
@@ -124,29 +128,35 @@
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
                                                                     <input name="image" type="file" id="images" accept="image/*" required>
+                                                                    <em for="image" class="invalid">Please enter image</em>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input type="email" class="form-control" name="email"
-                                                                        placeholder="Email">
+                                                                        placeholder="Email" required>
+                                                                    <em for="email" class="invalid">Please enter email</em>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
-                                                                        class="form-control" placeholder="User Name">
+                                                                        class="form-control" placeholder="User Name" required>
+                                                                        <em for="username" class="invalid">Please enter username</em>   
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="password" type="password"
-                                                                        class="form-control" placeholder="Password">
+                                                                        class="form-control" placeholder="Password" required>
+                                                                        <em for="password" class="invalid">Please enter Password</em>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="confirmpassword" type="password"
                                                                         class="form-control"
-                                                                        placeholder="Confirm Password">
+                                                                        placeholder="Confirm Password" required>
+                                                                    <em for="confirmpassword" class="invalid">Please enter confirm password</em>    
                                                                 </div>
                                                                 <div class="form-group">
                                                                 <textarea name="description" class="form-control" placeholder="Enter The Lecturer description"></textarea>
+                                                                <em for="description" class="invalid">Please enter description</em>
                                                             </div>
                                                         </div>
                                                         <div class="row">
