@@ -135,120 +135,29 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                    <?php if(is_array($students) && !empty($students)):  ?>
+                        <?php foreach ($students as $student): ?>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div class="student-inner-std res-mg-b-30">
+                                    <div class="student-img">
+                                        <img src="<?= $student->photo ?>" alt="" />
+                                    </div>
+                                    <div class="student-dtl">
+                                        <h2><?= $student->f_name ?> <?= $student->l_name ?></h2>
+                                        <div>
+                                           <a href="<?= ROOT ?>Student/profile/<?= $student->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
+                                           <a href="<?= ROOT ?>Student/delete/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="container-fluid">
+                            <h3 style="margin-left: auto">No Students To display</h3>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/2.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30 res-tablet-mg-t-30 dk-res-t-pro-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/3.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-tablet-mg-t-30 dk-res-t-pro-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/4.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/2.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/3.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="<?= ASSETS ?>img/student/4.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>

@@ -119,37 +119,37 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="profile-info-inner">
                     <div class="profile-img">
-                        <img src="<?= $user[0]->photo?>" alt="" />
+                        <img src="<?= $user->photo?>" alt="" />
                     </div>
                     <div class="profile-details-hr">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
-                                    <p><b>Name</b><br /><?= $user[0]->f_name. " "  . $user[0]->l_name ?></p>
+                                    <p><b>Name</b><br /><?= $user->f_name. " "  . $user->l_name ?></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    <p><b>Designation</b><br /><?= $user[0]->rank ?></p>
+                                    <p><b>Designation</b><br /><?= $user->rank ?></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
-                                    <p><b>Email ID</b><br /><?= $user[0]->email ?></p>
+                                    <p><b>Email ID</b><br /><?= $user->email ?></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    <p><b>Phone</b><br /><?= $user[0]->phone_number ?></p>
+                                    <p><b>Phone</b><br /><?= $user->phone_number ?></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="address-hr">
-                                    <p><b>Address</b><br /><?= $user[0]->address ?></p>
+                                    <p><b>Address</b><br /><?= $user->address ?></p>
                                 </div>
                             </div>
                         </div>

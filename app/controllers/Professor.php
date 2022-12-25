@@ -9,10 +9,25 @@ class Professor extends Controller
         $this->prof = new lecturer();
     }
     public function index(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            var_dump($_POST);
+        }
         $this->getMissingData();
+
         $this->view("all-professors",$this->data);
     }
-    public function edit(){
+    public function edit($username = ""){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(!empty($_FILES)){
+                //$this->prof->changePhoto($username,$_FILES);
+            }
+            //$this->prof->updateChanges($_POST);
+
+        }
+        $this->data["lectData"] = false;
+        if($username !== ""){
+            $this->data["lectData"] = $this->prof->getUserDataFromUsername($username);
+        }
         $this->view("edit-professor",$this->data);
     }
     public function profile($username = ""){

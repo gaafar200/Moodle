@@ -49,6 +49,16 @@ class User extends Model
         }
         return true;
     }
+    protected function validategender($gender){
+        $genders = ["male","female"];
+        if(!$gender){
+            ["gender"=>"gender must be specified"];
+        }
+        if(!in_array($gender,$genders)){
+            ["gender"=>"please choose valid gender"];
+        }
+        return true;
+    }
 
     protected function isVaildName($name){
         if(!$name){
@@ -118,7 +128,8 @@ class User extends Model
     protected function isValidImage($image){
         if ($image['image']['error'] !== UPLOAD_ERR_OK) {
             return ["image"=>"Upload failed with error code " . $image['image']['error']];
-        }        $info = getimagesize($image['image']['tmp_name']);
+        }
+        $info = getimagesize($image['image']['tmp_name']);
         if ($info === FALSE) {
             return ["image"=>"please upload an image"];
         }
@@ -205,6 +216,13 @@ class User extends Model
             return true;
         }
         return false;
+    }
+    protected function getAllUsersWithRank($rank){
+        $query = "SELECT * FROM users WHERE rank = :rank";
+        return $this->db->read($query,
+        [
+            "rank"=>$rank
+        ]);
     }
 
 }

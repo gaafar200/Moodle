@@ -127,4 +127,20 @@ class lecturer extends User
             "username"=>$username
         ]);
     }
+
+    public function changePhoto($username,$_FILES)
+    {
+        $check = $this->isValidImage($_FILES);
+        if(is_array($check)){
+            return $check;
+        }
+        $data = $this->getUserDataFromUsername($username);
+        $image_Path = $data[0]->photo;
+        $this->deletephoto($image_Path);
+        $this->reflectChangeToDataBase();
+        $check = $this->getFileSystemReady();
+
+    }
+
+
 }

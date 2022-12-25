@@ -90,10 +90,10 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..."
+                                            <form role="search" class="sr-input-func" action="<?= ROOT ?>Professor">
+                                                <input type="text" name="search" placeholder="Search..."
                                                     class="search-int form-control">
-                                                <a><i class="fa fa-search"></i></a>
+                                                <a href="#"><i class="fa fa-search"></i></a>
                                             </form>
                                         </div>
                                     </div>
@@ -123,21 +123,21 @@
                                 <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
                                     <div class="panel-body custom-panel-jw">
                                         <img alt="logo" class="img-circle m-b" src="<?= $lecturer->photo ?>">
-                                        <h3><a href=""><?= $lecturer->f_name . " " . $lecturer->l_name ?></a></h3>
-                                        <p class="all-pro-ad"><?= $lecturer->address ?></p>
+                                        <h3><a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>">Prof.<?= ucfirst($lecturer->f_name) . " " . $lecturer->l_name ?></a></h3>
+                                        <p class="all-pro-ad"><?= $lecturer->email ?></p>
                                         <p>
-                                            <?= $lecturer->description  ?>
                                             <?= $lecturer->description  ?>
                                         </p>
                                         <div>
                                            <a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
                                            <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                           <a href="<?= ROOT ?>Professor/edit/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
 
 
                                     </div>
                                 </div>
-                            </div>
+                            </div></a>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="container-fluid">

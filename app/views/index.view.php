@@ -114,5 +114,8 @@
         </div>
 
     </div>
+    <div class="container-fluid red">
+        <h1>Mahmoud jaafar</h1>
+    </div>
 <?php $this->view("include/footer"); ?>
 
