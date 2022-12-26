@@ -126,7 +126,7 @@
                                                                                                                                         <label for="images" class="drop-container">
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
-                                                                    <input type="file" id="images" accept="image/*" required>
+                                                                    <input type="file" id="images" accept="image/*" >
                                                                     </label>
                                                                     
                                                                 </div>
