@@ -19,9 +19,20 @@ class Professor extends Controller
     public function edit($username = ""){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(!empty($_FILES)){
-                //$this->prof->changePhoto($username,$_FILES);
+                $imageChangedSuccessfully = $this->prof->changePhoto($username,$_FILES);
+                if($imageChangedSuccessfully !== true){
+                    $this->data["errors"] = $imageChangedSuccessfully;
+                }
+
             }
-            //$this->prof->updateChanges($_POST);
+            if($check =  $this->prof->checkForEditData($_POST) !== true){
+                $this->data["errors"] = $check;
+            }
+            if(!isset($this->data["errors"])){
+                if($this->prof->EditProfessorData($_POST)){
+                    $this->redirect("Professor");
+                }
+            }
 
         }
         $this->data["lectData"] = false;
@@ -39,6 +50,9 @@ class Professor extends Controller
             $result = $this->prof->validateProfData($_POST,$_FILES);
             if($result === true){
                 $result = $this->prof->registerNewProfessor($_POST,$_FILES,$this->data["user"]);
+            }
+            else{
+                $this->data["errors"] = $result;
             }
         }
         $this->view("add-professor",$this->data);

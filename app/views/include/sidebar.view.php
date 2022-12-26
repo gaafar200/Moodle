@@ -27,8 +27,6 @@
                                             Professors</span></a></li>
                             <li><a title="Add Professor" href="<?= ROOT ?>Professor/add"><span class="mini-sub-pro">Add
                                             Professor</span></a></li>
-                            <li><a title="Edit Professor" href="<?= ROOT ?>Professor/edit"><span class="mini-sub-pro">Edit
-                                            Professor</span></a></li>
                         </ul>
                     </li>
                     <li>

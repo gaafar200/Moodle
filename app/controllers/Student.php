@@ -11,7 +11,15 @@ class Student extends  Controller
         $this->data["students"] = $this->student->getAllStudent();
         $this->view("all-students",$this->data);
     }
-    public function edit(){
+    public function edit($username = ""){
+        if($username != ""){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                if(!empty($_FILES)){
+                    $this->student->changePhoto($username,$_FILES["image"]);
+                }
+            }
+        }
+
         $this->view("edit-student",$this->data);
     }
     public function profile($username = ""){
@@ -21,8 +29,11 @@ class Student extends  Controller
     public function add(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $isValidData = $this->student->validateStudentData($_POST,$_FILES);
-            if($isValidData){
+            if($isValidData === true){
                 $isCreatedSuccessfully = $this->student->registerNewStudent($_POST,$_FILES,$this->data["user"]);
+            }
+            else{
+                $this->data["errors"] = $isValidData;
             }
         }
         $this->view("add-student",$this->data);

@@ -98,7 +98,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="#" class="dropzone dropzone-custom needsclick add-professors"
+                                                    <form  class="dropzone dropzone-custom needsclick add-professors" method="POST" enctype="multipart/form-data"
                                                         id="demo1-upload">
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

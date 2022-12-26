@@ -115,5 +115,9 @@ class Stud extends User
         ]);
     }
 
+    public function replacePhoto()
+    {
+    }
+
 
 }

@@ -105,22 +105,31 @@
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
                                                                         class="form-control" placeholder="First Name">
-                                                                        <em for="firstname" class="invalid">Please enter first name</em> 
+                                                                        <?php if(isset($errors) && isset($errors["name"])): ?>
+                                                                            <em for="firstname" class="invalid"><?= ucfirst($errors["name"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="lastname" type="text"
                                                                         class="form-control" placeholder="Last Name">
-                                                                        <em for="lastname" class="invalid">Please enter last name</em>
+                                                                        <?php if(isset($errors) && isset($errors["name"])): ?>
+                                                                            <em for="lastname" class="invalid"><?= ucfirst($errors["name"]) ?></em>
+                                                                        <?php endif; ?>
+
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
                                                                         class="form-control" placeholder="Address">
-                                                                        <em for="address" class="invalid">Please enter Address</em>
+                                                                        <?php if(isset($errors) && isset($errors["address"])): ?>
+                                                                            <em for="address" class="invalid"><?= ucfirst($errors["address"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
                                                                         class="form-control" placeholder="Mobile no.">
-                                                                        <em for="mobileno" class="invalid">Please enter mobileno</em>
+                                                                        <?php if(isset($errors) && isset($errors["mobile"])): ?>
+                                                                            <em for="mobileno" class="invalid"><?= ucfirst($errors["mobile"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                         
@@ -128,7 +137,9 @@
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
                                                                     <input name="image" type="file" id="images" accept="image/*" required>
-                                                                    <em for="image" class="invalid">Please enter image</em>
+                                                                        <?php if(isset($errors) && isset($errors["image"])): ?>
+                                                                            <em for="image" class="invalid"><?= ucfirst($errors["image"]) ?></em>
+                                                                        <?php endif; ?>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -136,23 +147,31 @@
                                                                 <div class="form-group">
                                                                     <input type="email" class="form-control" name="email"
                                                                         placeholder="Email" required>
-                                                                    <em for="email" class="invalid">Please enter email</em>
+                                                                    <?php if(isset($errors) && isset($errors["email"])): ?>
+                                                                        <em for="email" class="invalid"><?= ucfirst($errors["email"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
                                                                         class="form-control" placeholder="User Name" required>
-                                                                        <em for="username" class="invalid">Please enter username</em>   
+                                                                        <?php if(isset($errors) && isset($errors["username"])): ?>
+                                                                            <em for="username" class="invalid"><?= ucfirst($errors["username"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="password" type="password"
                                                                         class="form-control" placeholder="Password" required>
-                                                                        <em for="password" class="invalid">Please enter Password</em>
+                                                                        <?php if(isset($errors) && isset($errors["password"])): ?>
+                                                                            <em for="password" class="invalid"><?= ucfirst($errors["password"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="confirmpassword" type="password"
                                                                         class="form-control"
                                                                         placeholder="Confirm Password" required>
-                                                                    <em for="confirmpassword" class="invalid">Please enter confirm password</em>    
+                                                                    <?php if(isset($errors) && isset($errors["passwords"])): ?>
+                                                                        <em for="confirmpassword" class="invalid">Please enter confirm password</em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                 <textarea name="description" class="form-control" placeholder="Enter The Lecturer description"></textarea>

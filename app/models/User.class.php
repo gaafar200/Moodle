@@ -62,10 +62,10 @@ class User extends Model
 
     protected function isVaildName($name){
         if(!$name){
-            return ["name"=>"the firstname can't be empty"];
+            return ["name"=>"the name can't be empty"];
         }
         if(!preg_match("/^[a-zA-Z]+$/",$name)){
-            return ["name"=>"firstname must consist of chars only"];
+            return ["name"=>"name must consist of chars only"];
         }
         return true;
     }
@@ -223,6 +223,30 @@ class User extends Model
         [
             "rank"=>$rank
         ]);
+    }
+    protected function changeImagePath($username,$image_new_path)
+    {
+        $query = "UPDATE users SET photo = :photo WHERE username = :username";
+        $this->db->write($query,[
+            "photo"=>$image_new_path,
+            "username" => $username
+        ]);
+    }
+    public function changePhoto($username,$image)
+    {
+        $check = $this->isValidImage($image);
+        if(is_array($check)){
+            return $check;
+        }
+        $data = $this->getUserDataFromUsername($username);
+        $image_Path = $data[0]->photo;
+        $this->deletephoto($image_Path);
+        $image_new_path = $this->getImageServerPath($image);
+        $this->changeImagePath($username,$image_new_path);
+        $check = $this->getFileSystemReady();
+        $result = $this->storeImageInTheFileSystem($username,$image);
+        return true;
+
     }
 
 }
