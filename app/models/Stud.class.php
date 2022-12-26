@@ -71,9 +71,6 @@ class Stud extends User
         $data["created_by"] = $this->getCreatorId();
         $data["university_id"] = $this->createUniqueUniversityId($data["gender"]);
         $data["rank"] = self::RANK;
-        echo "<pre>";
-        print_r($data);
-        echo "<pre>";
         $query = "INSERT INTO users (university_id,f_name,l_name,address,phone_number,username,password,gender,email,photo,rank,created_by) VALUES(:university_id,:firstname,:lastname,:address,:mobileno,:username,:password,:gender,:email,:photo,:rank,:created_by)";
         if($this->db->write($query,$data)){
             return true;
@@ -117,6 +114,46 @@ class Stud extends User
 
     public function replacePhoto()
     {
+    }
+
+    public function checkForEditData($data)
+    {
+        foreach ($data as $key => $value){
+            $$key = $value ?? false;
+        }
+        $check = $this->isVaildName($firstname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isVaildName($lastname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidAddress($address);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidMobilNo($mobileno);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidEmail($email);
+        if(is_array($check)){
+            return $check;
+        }
+        return true;
+    }
+
+    public function editStudentData($data)
+    {
+        $query = "UPDATE users SET f_name = :firstname,
+                 l_name = :lastname,
+                 address = :address,
+                 phone_number = :mobileno,
+                 gender = :gender,
+                 email = :email 
+             WHERE username = :username";
+        return $this->db->write($query,$data);
     }
 
 

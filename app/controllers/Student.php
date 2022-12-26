@@ -14,10 +14,21 @@ class Student extends  Controller
     public function edit($username = ""){
         if($username != ""){
             if($_SERVER["REQUEST_METHOD"] == "POST"){
-                if(!empty($_FILES)){
-                    $this->student->changePhoto($username,$_FILES["image"]);
+                if($_FILES["image"]["full_path"] !== ""){
+                    $isPhotoChanged = $this->student->changePhoto($username,$_FILES);
+                    if($isPhotoChanged !== true){
+                        $this->data["errors"] = $isPhotoChanged;
+                    }
+                }
+                $check =  $this->student->checkForEditData($_POST);
+                if($check === true){
+                    $isEdited = $this->student->editStudentData($_POST);
+                    if($isEdited){
+                        $this->redirect("student");
+                    }
                 }
             }
+            $this->data["studData"] = $this->student->getUserDataFromUsername($username);
         }
 
         $this->view("edit-student",$this->data);
@@ -31,6 +42,7 @@ class Student extends  Controller
             $isValidData = $this->student->validateStudentData($_POST,$_FILES);
             if($isValidData === true){
                 $isCreatedSuccessfully = $this->student->registerNewStudent($_POST,$_FILES,$this->data["user"]);
+                $this->redirect("Student");
             }
             else{
                 $this->data["errors"] = $isValidData;

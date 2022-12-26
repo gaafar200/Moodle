@@ -38,10 +38,6 @@
                                             Students</span></a></li>
                             <li><a title="Add Students" href="<?= ROOT ?>Student/add"><span class="mini-sub-pro">Add
                                             Student</span></a></li>
-                            <li><a title="Edit Students" href="<?= ROOT ?>Student/edit"><span class="mini-sub-pro">Edit
-                                            Student</span></a></li>
-                            <li><a title="Students Profile" href="<?= ROOT ?>Student/profile"><span
-                                        class="mini-sub-pro">Student Profile</span></a></li>
                         </ul>
                     </li>
                     <li>

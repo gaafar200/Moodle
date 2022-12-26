@@ -8,9 +8,7 @@ function show($data){
 /* start Edit Lecturer Info part */
 function checkVaildLecturerData($lecturerData){
     if(isset($lecturerData) && is_array($lecturerData) && !empty($lecturerData)){
-        if($lecturerData[0]->rank == "lecturer"){
-            return true;
-        }
+        return true;
     }
     return false;
 }
@@ -56,4 +54,12 @@ function setUserName($lecturerData){
         return "";
     }
     return "readonly";
+}
+function displayGender($data,$gender){
+    if(checkVaildLecturerData($data) === false){
+        return "";
+    }
+    if($data[0]->gender == $gender){
+        return "selected";
+    }
 }

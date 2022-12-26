@@ -18,14 +18,15 @@ class Professor extends Controller
     }
     public function edit($username = ""){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(!empty($_FILES)){
+            if($_FILES["image"]["full_path"] !== ""){
                 $imageChangedSuccessfully = $this->prof->changePhoto($username,$_FILES);
                 if($imageChangedSuccessfully !== true){
                     $this->data["errors"] = $imageChangedSuccessfully;
                 }
 
             }
-            if($check =  $this->prof->checkForEditData($_POST) !== true){
+            $check =  $this->prof->checkForEditData($_POST);
+            if($check !== true){
                 $this->data["errors"] = $check;
             }
             if(!isset($this->data["errors"])){

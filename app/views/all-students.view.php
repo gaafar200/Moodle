@@ -147,6 +147,7 @@
                                         <div>
                                            <a href="<?= ROOT ?>Student/profile/<?= $student->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
                                            <a href="<?= ROOT ?>Student/delete/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                           <a href="<?= ROOT ?>Student/edit/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
                                     </div>
                                 </div>

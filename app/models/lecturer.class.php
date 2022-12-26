@@ -149,9 +149,11 @@ class lecturer extends User
         if(is_array($check)){
             return $check;
         }
+        $check = $this->validategender($gender);
+        if(is_array($check)){
+            return $check;
+        }
         return true;
-
-
     }
 
     public function EditProfessorData($data)

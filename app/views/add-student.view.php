@@ -105,14 +105,23 @@
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
                                                                         class="form-control" placeholder="First Name">
+                                                                        <?php if(isset($errors) && isset($errors["name"])): ?>
+                                                                            <em for="firstname" class="invalid"><?= ucfirst($errors["name"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                     <div class="form-group">
                                                                     <input name="lastname" type="text"
                                                                         class="form-control" placeholder="Last Name">
+                                                                        <?php if(isset($errors) && isset($errors["name"])): ?>
+                                                                            <em for="lastname" class="invalid"><?= ucfirst($errors["name"]) ?></em>
+                                                                        <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
                                                                         class="form-control" placeholder="Address">
+                                                                    <?php if(isset($errors) && isset($errors["address"])): ?>
+                                                                        <em for="address" class="invalid"><?= ucfirst($errors["address"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select class="form-control" name="gender">
@@ -124,12 +133,18 @@
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
                                                                         class="form-control" placeholder="Mobile no.">
+                                                                    <?php if(isset($errors) && isset($errors["mobile"])): ?>
+                                                                        <em for="mobileno" class="invalid"><?= ucfirst($errors["mobile"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                                                                                     <label for="images" class="drop-container">
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
                                                                     <input type="file" id="images" name="image" accept="image/*" required>
+                                                                    <?php if(isset($errors) && isset($errors["image"])): ?>
+                                                                        <em for="image" class="invalid"><?= ucfirst($errors["image"]) ?></em>
+                                                                    <?php endif; ?>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -137,19 +152,31 @@
                                                                 <div class="form-group">
                                                                     <input type="text" class="form-control" name="email"
                                                                         placeholder="Email">
+                                                                    <?php if(isset($errors) && isset($errors["email"])): ?>
+                                                                        <em for="email" class="invalid"><?= ucfirst($errors["email"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
                                                                         class="form-control" placeholder="User Name">
+                                                                    <?php if(isset($errors) && isset($errors["username"])): ?>
+                                                                        <em for="username" class="invalid"><?= ucfirst($errors["username"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="password" type="password"
                                                                         class="form-control" placeholder="Password">
+                                                                    <?php if(isset($errors) && isset($errors["password"])): ?>
+                                                                        <em for="password" class="invalid"><?= ucfirst($errors["password"]) ?></em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="confirmpassword" type="password"
                                                                         class="form-control"
                                                                         placeholder="Confirm Password">
+                                                                    <?php if(isset($errors) && isset($errors["passwords"])): ?>
+                                                                        <em for="confirmpassword" class="invalid">Please enter confirm password</em>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                         </div>
                                                         <div class="row">

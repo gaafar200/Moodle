@@ -104,29 +104,32 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
-                                                                        class="form-control" placeholder="First Name" value="Mohammed" >
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="midname" type="text"
-                                                                        class="form-control" placeholder="Mid Name" value="Abd">
+                                                                        class="form-control" placeholder="First Name" value="<?= displayLecturerFirstName($studData) ?>" >
                                                                 </div>
                                                                     <div class="form-group">
                                                                     <input name="lastname" type="text"
-                                                                        class="form-control" placeholder="Last Name" value="AboSido">
+                                                                        class="form-control" placeholder="Last Name" value="<?= displayLecturerLastName($studData) ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
-                                                                        class="form-control" placeholder="Address" value="GAZA">
+                                                                        class="form-control" placeholder="Address" value="<?= displayLecturerAddress($studData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option>Select Gender</option>
+                                                                        <option value="male" <?= displayGender($studData,"male") ?>>Male</option>
+                                                                        <option value="female" <?= displayGender($studData,"female") ?>>Female</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
-                                                                        class="form-control" placeholder="Mobile no." value="0594136074">
+                                                                        class="form-control" placeholder="Mobile no." value="<?= displayLecturerMobileNumber($studData) ?>">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                                                                                         <label for="images" class="drop-container">
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
-                                                                    <input type="file" id="images" accept="image/*" >
+                                                                    <input type="file" name="image" id="images" accept="image/*" >
                                                                     </label>
                                                                     
                                                                 </div>
@@ -134,21 +137,13 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input type="text" class="form-control" name="email"
-                                                                        placeholder="Email" value="abosido2@gmail.com">
+                                                                        placeholder="Email" value="<?= displayEmailAddress($studData) ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
-                                                                        class="form-control" placeholder="User Name" value="Mohammed123">
+                                                                        class="form-control" placeholder="User Name" value="<?= displayUserName($studData) ?> "<?= setUserName($studData) ?>>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <input name="password" type="password"
-                                                                        class="form-control" placeholder="Password" value="123456">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="confarmpassword" type="password"
-                                                                        class="form-control"
-                                                                        placeholder="Confirm Password" value="123456">
-                                                                </div>
+
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
