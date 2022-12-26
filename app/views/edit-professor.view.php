@@ -97,7 +97,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="#"
+                                                    <form action="#" method="POST" enctype="multipart/form-data"
                                                         class="dropzone dropzone-custom needsclick add-professors"
                                                         id="demo1-upload">
                                                         <div class="row">
@@ -122,7 +122,7 @@
                                                                     <label for="images" class="drop-container">
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
-                                                                    <input type="file" id="images" accept="image/*" >
+                                                                    <input type="file" name="image" id="images" accept="image/*" >
                                                                     </label>
                                                                     
                                                                 </div>
