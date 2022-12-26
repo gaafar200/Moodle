@@ -8,7 +8,12 @@ class Student extends  Controller
         $this->student = new Stud();
     }
     public function index(){
-        $this->data["students"] = $this->student->getAllStudent();
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->data["students"] = $this->student->searchForStudents($_POST["search"]);
+        }
+        else{
+            $this->data["students"] = $this->student->getAllStudent();
+        }
         $this->view("all-students",$this->data);
     }
     public function edit($username = ""){

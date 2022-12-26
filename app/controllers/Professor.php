@@ -10,9 +10,11 @@ class Professor extends Controller
     }
     public function index(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            var_dump($_POST);
+            $this->data["lecturers"] = $this->prof->searchForProfessors($_POST["search"]);
         }
-        $this->getMissingData();
+        else{
+            $this->getMissingData();
+        }
 
         $this->view("all-professors",$this->data);
     }

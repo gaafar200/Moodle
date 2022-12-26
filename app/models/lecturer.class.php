@@ -167,5 +167,15 @@ class lecturer extends User
         return true;
     }
 
+    public function searchForProfessors($search)
+    {
+        $query = "SELECT * FROM users WHERE (f_name LIKE :name OR l_name LIKE :name OR username LIKE :name) AND rank = :rank ";
+        $search = '%' . $search . '%';
+        return $this->db->read($query,[
+           "name"=>$search,
+            "rank"=>"lecturer"
+        ]);
+    }
+
 
 }

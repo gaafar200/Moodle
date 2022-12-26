@@ -90,7 +90,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
+                                            <form role="search" class="sr-input-func" method="POST">
                                                 <input type="text" placeholder="Search..."
                                                     class="search-int form-control" name="search">
                                                 <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>

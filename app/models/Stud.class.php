@@ -156,5 +156,16 @@ class Stud extends User
         return $this->db->write($query,$data);
     }
 
+    public function searchForStudents($search)
+    {
+        $query = "SELECT * FROM users WHERE (f_name LIKE :name OR l_name LIKE :name OR username LIKE :name OR university_id = :id) AND rank = :rank ";
+        $search = '%' . $search . '%';
+        return $this->db->read($query,[
+            "name"=>$search,
+            "id"=>$search,
+            "rank"=>"student"
+        ]);
+    }
+
 
 }
