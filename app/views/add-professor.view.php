@@ -1,5 +1,5 @@
 
-<?php $this->view("include/header"); ?>
+<?php $this->view("include/header",["pageName"=>$pageName]); ?>
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
 

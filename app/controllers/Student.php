@@ -8,6 +8,7 @@ class Student extends  Controller
         $this->student = new Stud();
     }
     public function index(){
+        $this->data["pageName"] = "All Students";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $this->data["students"] = $this->student->searchForStudents($_POST["search"]);
         }
@@ -17,6 +18,7 @@ class Student extends  Controller
         $this->view("all-students",$this->data);
     }
     public function edit($username = ""){
+        $this->data["pageName"] = "Edit Student";
         if($username != ""){
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if($_FILES["image"]["full_path"] !== ""){
@@ -39,6 +41,7 @@ class Student extends  Controller
         $this->view("edit-student",$this->data);
     }
     public function profile($username = ""){
+        $this->data["pageName"] = "Student Profile";
         $this->data["studProfile"] = $this->user->getUserDataFromUsername($username);
         $this->view("student-profile",$this->data);
     }

@@ -1,4 +1,4 @@
-<?php $this->view("include/header"); ?>
+<?php $this->view("include/header",["pageName"=>$pageName]); ?>
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
 
@@ -97,7 +97,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form action="/upload"
+                                                    <form action="<?= ROOT ?>Course/add" method="POST" enctype="multipart/form-data"
                                                         class="dropzone dropzone-custom needsclick addcourse"
                                                         id="demo1-upload">
                                                         <div class="row">
@@ -107,20 +107,15 @@
                                                                         class="form-control" placeholder="Course Name">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone"
-                                                                            aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">Drop image here or click
-                                                                            to upload.</h2>
-                                                                        <p class="edudropnone"><span
-                                                                                class="note needsclick">(This is just a
-                                                                                demo dropzone. Selected image is
-                                                                                <strong>not</strong> actually
-                                                                                uploaded.)</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img"
-                                                                            type="text" />
-                                                                    </div>
+
+                                                                    <label for="images" class="drop-container">
+                                                                        <span class="drop-title">Drop files here</span>
+                                                                        or
+                                                                        <input name="image" type="file" id="images" accept="image/*" required>
+                                                                        <?php if(isset($errors) && isset($errors["image"])): ?>
+                                                                            <em for="image" class="invalid"><?= ucfirst($errors["image"]) ?></em>
+                                                                        <?php endif; ?>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -129,8 +124,8 @@
                                                                         placeholder="Description"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="crprofessor" type="text"
-                                                                        class="form-control" placeholder="Professor">
+                                                                    <input name="professorusername" type="text"
+                                                                        class="form-control" placeholder="Professor username">
                                                                 </div>
                                                             </div>
                                                         </div>

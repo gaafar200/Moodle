@@ -1,4 +1,4 @@
-<?php $this->view("include/header"); ?>
+<?php $this->view("include/header",["pageName"=>$pageName]); ?>
   <div class="error-pagewrap">
     <div class="error-page-int">
       <div class="text-center m-b-md custom-login">

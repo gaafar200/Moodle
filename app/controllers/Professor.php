@@ -9,6 +9,7 @@ class Professor extends Controller
         $this->prof = new lecturer();
     }
     public function index(){
+        $this->data["pageName"] = "All Professors";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $this->data["lecturers"] = $this->prof->searchForProfessors($_POST["search"]);
         }
@@ -19,6 +20,7 @@ class Professor extends Controller
         $this->view("all-professors",$this->data);
     }
     public function edit($username = ""){
+        $this->data["pageName"] = "edit Professor";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_FILES["image"]["full_path"] !== ""){
                 $imageChangedSuccessfully = $this->prof->changePhoto($username,$_FILES);
@@ -45,10 +47,12 @@ class Professor extends Controller
         $this->view("edit-professor",$this->data);
     }
     public function profile($username = ""){
+        $this->data["pageName"] = "Professor Profile";
         $this->data["ProfProfile"] = $this->user->getUserDataFromUsername($username);
         $this->view("professor-profile",$this->data);
     }
     public function add(){
+        $this->data["pageName"] = "add Professor";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $result = $this->prof->validateProfData($_POST,$_FILES);
             if($result === true){

@@ -6,6 +6,7 @@ class Login
         $data = array();
         $user = new User();
         $Auth = new Auth();
+        $data["pageName"] = "login";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
              $check = $user->validateLoginData($_POST);
              if($check === true){
@@ -15,7 +16,7 @@ class Login
                 }
              }
         }
-        $this->view("login");
+        $this->view("login",$data);
     }
 
     public function view($path , $data = [])

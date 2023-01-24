@@ -109,7 +109,7 @@ class lecturer extends User
         return ["lecturer"=>"you don't have the right Privilege to perform this action"];
     }
 
-    private function checkIfProfessorExists($username)
+    public function checkIfProfessorExists($username)
     {
         $data = $this->getUserDataFromUsername($username);
         if($data){

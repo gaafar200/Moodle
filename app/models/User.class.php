@@ -103,7 +103,7 @@ class User extends Model
         }
         return true;
     }
-    protected function isValidUserName($username){
+    public function isValidUserName($username){
         $check = $this->validateusername($username);
         if(is_array($check)){
             return $check;
