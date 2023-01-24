@@ -84,8 +84,7 @@ class Courses{
        $courseData["name"] = $data["coursename"];
        $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by)";
        $db = new database();
-       $result = $db->write($query,$courseData);
-       return $result;
+        return $db->write($query,$courseData);
     }
 
     private function getLecturerId(mixed $professorusername)
@@ -93,5 +92,25 @@ class Courses{
         $lect = new Lecturer();
         $data = $lect->checkIfProfessorExists($professorusername);
         return $data[0]->id;
+    }
+
+    public function getCoursesData()
+    {
+        $query = "SELECT u.f_name,u.l_name,c.name,c.id From users u join course c ON(c.lecturer_id = u.id)";
+        $db = new database();
+        $data = $db->read($query);
+        if(!is_array($data) || empty($data)){
+            return false;
+        }
+        foreach ($data as $course){
+            $course->students = $this->getNumberOfStudentInACourse($course->id);
+        }
+        return $data;
+    }
+    //to do
+    private function getNumberOfStudentInACourse($id)
+    {
+        //This is Temporary
+        return 0;
     }
 }

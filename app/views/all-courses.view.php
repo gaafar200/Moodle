@@ -132,136 +132,31 @@
                 </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-b-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
-                                <h2>Apps Development</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                    <?php if(isset($coursesData) && is_array($coursesData)): ?>
+                    <?php foreach ($coursesData as $course): ?>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <div class="courses-inner res-mg-b-30">
+                                <div class="courses-title">
+                                    <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
+                                    <h2><?= $course->name ?></h2>
                                 </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/2.jpg" alt=""></a>
-                                <h2>Illustrator CC 2018</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                <div class="course-des">
+                                    <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> <?= $course->f_name . " " . $course->l_name ?></p>
+                                    <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> <?= $course->students ?></p>
                                 </div>
+                                <div>
+                                       <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
+                                       <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                    </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/3.jpg" alt=""></a>
-                                <h2>Indesign cs6 2018</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="container-fluid">
+                            <h3 style="margin-left: auto">No Courses To display</h3>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
-                                <h2>Web Development</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mg-b-15">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
-                                <h2>Apps Development</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/2.jpg" alt=""></a>
-                                <h2>Illustrator CC 2018</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/3.jpg" alt=""></a>
-                                <h2>Indesign cs6 2018</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
-                                <h2>Web Development</h2>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div>
-                                   <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                   <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                </div>
-                        </div>
-                    </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>

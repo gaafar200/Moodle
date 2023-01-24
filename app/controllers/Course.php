@@ -11,6 +11,7 @@ class Course extends Controller
 
     public function index(){
         $this->data["pageName"] = "All Courses";
+        $this->data["coursesData"] = $this->course->getCoursesData();
         $this->view("all-courses",$this->data);
     }
     public function edit(){
