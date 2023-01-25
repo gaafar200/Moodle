@@ -18,7 +18,7 @@ class Course extends Controller
         $this->data["pageName"] = "Edit Course";
         $this->view("edit-course",$this->data);
     }
-    public function Info(){
+    public function Info($id){
         $this->data["pageName"] = "Course Info";
         $this->view("course-info",$this->data);
     }

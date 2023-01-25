@@ -1,8 +1,10 @@
 <?php
 class Model{
-    public $Auth;
+    public Auth $Auth;
+    public database $db;
     public function __construct()
     {
+        $this->db = new database();
         $this->Auth = new Auth();
     }
     public function generateRandomString($len,$mode = "all"):string{

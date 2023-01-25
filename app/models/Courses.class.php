@@ -1,5 +1,12 @@
 <?php
-class Courses{
+class Courses extends Model{
+    public Image $image;
+    public lecturer $lecturer;
+    public function __construct(){
+        parent::__construct();
+        $this->image = new Image();
+        $this->lecturer = new lecturer();
+    }
 
     public function validateData($data,$image)
     {
@@ -18,7 +25,7 @@ class Courses{
         if(is_array($professorusername)){
             return $check;
         }
-        $check = $this->validateImage($image);
+        $check = $this->image->isValidImage($image);
         if(is_array($check)){
             return $check;
         }
@@ -50,29 +57,18 @@ class Courses{
 
     private function isValidLecturer($professorusername)
     {
-        $lect = new lecturer();
-        $check = $lect->isValidUserName($professorusername);
+        $check = $this->lecturer->isValidUserName($professorusername);
         if(is_array($check)){
             return $check;
         }
-        $check = $lect->checkIfProfessorExists($professorusername);
-        if($check == false){
+        $check = $this->lecturer->checkIfProfessorExists($professorusername);
+        if($check){
             return ["username"=>"this professor does not exists"];
         }
         return true;
     }
 
-    private function validateImage($image)
-    {
-        if ($image['image']['error'] !== UPLOAD_ERR_OK) {
-            return ["image"=>"Upload failed with error code " . $image['image']['error']];
-        }
-        $info = getimagesize($image['image']['tmp_name']);
-        if ($info === FALSE) {
-            return ["image"=>"please upload an image"];
-        }
-        return true;
-    }
+
 
     public function addCourse($data,$image,$creator_data)
     {
@@ -82,21 +78,20 @@ class Courses{
        $courseData["language"] = "English";
        $courseData["created_by"] = $creator_data->id;
        $courseData["name"] = $data["coursename"];
-       $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by)";
-       $db = new database();
-        return $db->write($query,$courseData);
+       $courseData["photo"] = $this->image->uploadToFileSystem($image,"course");
+       $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by,photo) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by,:photo)";
+       return $this->db->write($query,$courseData);
     }
 
-    private function getLecturerId(mixed $professorusername)
+    private function getLecturerId($username)
     {
-        $lect = new Lecturer();
-        $data = $lect->checkIfProfessorExists($professorusername);
+        $data = $this->lecturer->checkIfProfessorExists($username);
         return $data[0]->id;
     }
 
     public function getCoursesData()
     {
-        $query = "SELECT u.f_name,u.l_name,c.name,c.id From users u join course c ON(c.lecturer_id = u.id)";
+        $query = "SELECT u.f_name,u.l_name,c.name,c.id,c.photo,c.id From users u join course c ON(c.lecturer_id = u.id)";
         $db = new database();
         $data = $db->read($query);
         if(!is_array($data) || empty($data)){
@@ -107,10 +102,19 @@ class Courses{
         }
         return $data;
     }
-    //to do
+    //todo
     private function getNumberOfStudentInACourse($id)
     {
-        //This is Temporary
         return 0;
+    }
+
+
+    public function getCourseData($id)
+    {
+        $query = "SELECT * FROM course WHERE id = :id";
+        return $this->db->read($query,
+        [
+           "id" => $id
+        ]);
     }
 }

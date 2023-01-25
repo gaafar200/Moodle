@@ -2,7 +2,10 @@
 
 class lecturer extends User
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function validateProfData($data,$image)
     {
@@ -46,7 +49,7 @@ class lecturer extends User
         if(is_array($check)){
             return $check;
         }
-        if(!$this->isValidImage($image)){
+        if(!$this->image->isValidImage($image)){
             return ["image"=>"please upload an image"];
         }
 
@@ -56,16 +59,15 @@ class lecturer extends User
     public function registerNewProfessor($data,$image,$creator_data){
         if($this->Auth->hasRightPrivilege("techEmployee")){
             unset($data["confirmpassword"]);
+            $image = $this->image->uploadToFileSystem($image);
             $result = $this->addToDataBase($image,$data,$creator_data);
-            $check = $this->getFileSystemReady();
-            $result = $this->storeImageInTheFileSystem($data["username"],$image);
             return true;
         }
     }
 
     protected function addToDataBase($image,$data,$creator_data)
     {
-        $data["photo"] = $this->getImageServerPath($image);
+        $data["photo"] = $image;
         $data["password"] = sha1($data["password"]);
         $data["created_by"] = $this->getCreatorId();
         $data["rank"] = "lecturer";
@@ -99,7 +101,7 @@ class lecturer extends User
             if($checkIfProfessorExists === false){
                 return ["lecturer"=>"lecturer does not exists"];
             }
-            $photoDeleted = $this->deletephoto($checkIfProfessorExists[0]->photo);
+            $photoDeleted = $this->image->deletephoto($checkIfProfessorExists[0]->photo);
             $result = $this->delete($username);
             if($result !== true){
                 return ["lecturer"=>"failed to delete lecturer"];

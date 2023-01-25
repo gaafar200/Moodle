@@ -44,7 +44,7 @@ class Stud extends User
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isValidImage($image);
+        $check = $this->image->isValidImage($image);
         if(is_array($check)){
             return $check;
         }
@@ -55,9 +55,8 @@ class Stud extends User
     {
         if($this->Auth->hasRightPrivilege("techEmployee")){
             unset($data["confirmpassword"]);
+            $image = $this->image->uploadToFileSystem($image);
             $check = $this->addToDataBase($image,$data,$creator);
-            $check = $this->getFileSystemReady();
-            $result = $this->storeImageInTheFileSystem($data["username"],$image);
             return $check;
         }
 
@@ -66,7 +65,7 @@ class Stud extends User
 
     private function addToDataBase($image, $data, $creator)
     {
-        $data["photo"] = $this->getImageServerPath($image);
+        $data["photo"] = $image;
         $data["password"] = sha1($data["password"]);
         $data["created_by"] = $this->getCreatorId();
         $data["university_id"] = $this->createUniqueUniversityId($data["gender"]);
@@ -99,7 +98,7 @@ class Stud extends User
         [
             "username"=>$username
         ]);
-        $this->deletephoto($data[0]->photo);
+        $this->image->deletephoto($data[0]->photo);
         $this->deleteStudentFromDataBase($username);
     }
 

@@ -2,11 +2,10 @@
 
 class User extends Model
 {
-    public database $db;
-    public  $Auth;
+    public Image $image;
     public function __construct(){
-        $this->db = new database();
-        $this->Auth = new Auth();
+        parent::__construct();
+        $this->image = new Image();
     }
 
     public function validateLoginData($data)
@@ -125,7 +124,7 @@ class User extends Model
         }
         return false;
     }
-    protected function isValidImage($image){
+    /*protected function isValidImage($image){
         if ($image['image']['error'] !== UPLOAD_ERR_OK) {
             return ["image"=>"Upload failed with error code " . $image['image']['error']];
         }
@@ -173,7 +172,7 @@ class User extends Model
         $image_path = $this->getImageFinalDestination($image);
         $replacement_part = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
         return str_replace($_SERVER["DOCUMENT_ROOT"],$replacement_part,$image_path);
-    }
+    }*/
 
 
     protected function getCreatorId()
@@ -209,14 +208,14 @@ class User extends Model
         ]);
         return $data;
     }
-    protected function deletephoto($imagePath){
+    /*protected function deletephoto($imagePath){
         $path = $this->alterPathToSuitFileSystem($imagePath);
         if(file_exists($path)){
             unlink($path);
             return true;
         }
         return false;
-    }
+    }*/
     protected function getAllUsersWithRank($rank){
         $query = "SELECT * FROM users WHERE rank = :rank";
         return $this->db->read($query,
@@ -224,29 +223,17 @@ class User extends Model
             "rank"=>$rank
         ]);
     }
-    protected function changeImagePath($username,$image_new_path)
+   /* protected function changeImagePath($username,$image_new_path)
     {
         $query = "UPDATE users SET photo = :photo WHERE username = :username";
         $this->db->write($query,[
             "photo"=>$image_new_path,
             "username" => $username
         ]);
-    }
+    }*/
     public function changePhoto($username,$image)
     {
-        $check = $this->isValidImage($image);
-        if(is_array($check)){
-            return $check;
-        }
-        $data = $this->getUserDataFromUsername($username);
-        $image_Path = $data[0]->photo;
-        $this->deletephoto($image_Path);
-        $image_new_path = $this->getImageServerPath($image);
-        $this->changeImagePath($username,$image_new_path);
-        $check = $this->getFileSystemReady();
-        $result = $this->storeImageInTheFileSystem($username,$image);
-        return true;
-
+        return $this->image->changePhoto($username,$image);
     }
 
 }

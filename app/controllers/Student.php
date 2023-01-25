@@ -46,6 +46,7 @@ class Student extends  Controller
         $this->view("student-profile",$this->data);
     }
     public function add(){
+        $this->data["pageName"] = "Add Student";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $isValidData = $this->student->validateStudentData($_POST,$_FILES);
             if($isValidData === true){

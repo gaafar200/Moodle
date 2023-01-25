@@ -1,12 +1,10 @@
 <?php
-class Auth extends model
+class Auth
 {
-    public $db = null;
-    public function __construct()
-    {
+    public database $db;
+    public function __construct(){
         $this->db = new database();
     }
-
     public function is_logged_in()
     {
         if (isset($_SESSION["User"])) {

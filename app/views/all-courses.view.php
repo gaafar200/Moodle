@@ -137,7 +137,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                             <div class="courses-inner res-mg-b-30">
                                 <div class="courses-title">
-                                    <a href="#"><img src="<?= ASSETS ?>img/courses/1.jpg" alt=""></a>
+                                    <a href="#"><img src="<?= $course->photo ?>" alt=""></a>
                                     <h2><?= $course->name ?></h2>
                                 </div>
                                 <div class="course-des">
@@ -145,7 +145,7 @@
                                     <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> <?= $course->students ?></p>
                                 </div>
                                 <div>
-                                       <a href="#"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
+                                       <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
                                        <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
                                     </div>
                             </div>
