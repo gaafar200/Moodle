@@ -60,6 +60,7 @@ class Student extends  Controller
         $this->view("add-student",$this->data);
     }
     public function delete($username = ""){
+        $this->data["pageName"] = "All Students";
         if($username != ""){
             $data = $this->user->getUserDataFromUsername($username);
             if($data[0]->rank === "student"){

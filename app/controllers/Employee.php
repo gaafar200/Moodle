@@ -20,6 +20,7 @@ class Employee extends Controller
     }
 
     public function delete(){
+        $this->data["pageName"] = "All Employees";
         $this->view("all-employee");
     }
     public function profile(){
