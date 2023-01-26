@@ -65,6 +65,7 @@ class Professor extends Controller
         $this->view("add-professor",$this->data);
     }
     public function delete($username = ""){
+        $this->data["pageName"] = "All Professors";
         if($username != ""){
             $result = $this->prof->deleteProfessor($username);
             if($result === true){

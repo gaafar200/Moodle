@@ -1,4 +1,3 @@
-
 <?php $this->view("include/header",["pageName"=>$pageName]); ?>
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
@@ -123,6 +122,13 @@
                                                                         <?php if(isset($errors) && isset($errors["address"])): ?>
                                                                             <em for="address" class="invalid"><?= ucfirst($errors["address"]) ?></em>
                                                                         <?php endif; ?>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option>Select Gender</option>
+                                                                        <option value="male">Male</option>
+                                                                        <option value="female">Female</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"

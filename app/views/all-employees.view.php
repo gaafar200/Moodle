@@ -123,13 +123,13 @@
                                 <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30 pro-1">
                                     <div class="panel-body custom-panel-jw pro-2">
                                         <img alt="logo" class="img-rounded m-b pro-3" src="<?= $lecturer->photo ?>">
-                                        <h3><a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>">Prof.<?= ucfirst($lecturer->f_name) . " " . $lecturer->l_name ?></a></h3>
+                                        <h3><a href="<?= ROOT ?>Employee/profile<?= $lecturer->username ?>">Prof.<?= ucfirst($lecturer->f_name) . " " . $lecturer->l_name ?></a></h3>
                                         <p class="all-pro-ad"><?= $lecturer->email ?></p>
                                         <marquee class="pro-4">   <?= $lecturer->description  ?></marquee>
                                         <div>
-                                           <a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                           <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
-                                           <a href="<?= ROOT ?>Professor/edit/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                           <a href="<?= ROOT ?>Employee/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
+                                           <a href="<?= ROOT ?>Employee/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                           <a href="<?= ROOT ?>Employee/edit/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
 
 
@@ -140,7 +140,7 @@
                     <?php else: ?>
                         <div class="container-fluid">
                         <div class="container-fluid">
-                            <h3 style="margin-left: auto">No Lecturer To display</h3>
+                            <h3 style="margin-left: auto">No Technical Employees To display</h3>
                         </div>
                     <?php endif; ?>
                 </div>
