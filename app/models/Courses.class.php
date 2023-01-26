@@ -78,8 +78,9 @@ class Courses extends Model{
        $courseData["language"] = "English";
        $courseData["created_by"] = $creator_data->id;
        $courseData["name"] = $data["coursename"];
+       $courseData["description"] = $data["description"];
        $courseData["photo"] = $this->image->uploadToFileSystem($image,"course");
-       $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by,photo) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by,:photo)";
+       $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by,photo,description) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by,:photo,:description)";
        return $this->db->write($query,$courseData);
     }
 
@@ -111,7 +112,7 @@ class Courses extends Model{
 
     public function getCourseData($id)
     {
-        $query = "SELECT * FROM course WHERE id = :id";
+        $query = "SELECT u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.id = :id";
         return $this->db->read($query,
         [
            "id" => $id

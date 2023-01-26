@@ -49,10 +49,6 @@
                                             Courses</span></a></li>
                             <li><a title="Add Courses" href="<?= ROOT ?>Course/add"><span class="mini-sub-pro">Add
                                             Course</span></a></li>
-                            <li><a title="Edit Courses" href="<?= ROOT ?>Course/edit"><span class="mini-sub-pro">Edit
-                                            Course</span></a></li>
-                            <li><a title="Courses Profile" href="<?= ROOT ?>Course/info"><span
-                                        class="mini-sub-pro">Courses Info</span></a></li>
                         </ul>
                     </li>
 

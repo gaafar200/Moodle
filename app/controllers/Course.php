@@ -20,6 +20,7 @@ class Course extends Controller
     }
     public function Info($id){
         $this->data["pageName"] = "Course Info";
+        $this->data["courseDetails"] = $this->course->getCourseData($id);
         $this->view("course-info",$this->data);
     }
     public function add(){
@@ -37,6 +38,10 @@ class Course extends Controller
             }
         }
         $this->view("add-course",$this->data);
+    }
+    public function delete($id){
+        echo $id;die;
+        $this->view("all-courses",$this->data);
     }
 
 }

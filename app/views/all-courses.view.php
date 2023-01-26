@@ -119,10 +119,10 @@
                                     <div class="container-delete">
                                     <h1>Delete Course</h1>
                                     <p>Are you sure you want to delete course?</p>
-                                    
+
                                     <div class="clearfix">
                                         <button class="btn-delete cancelbtn" type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button>
-                                        <a href="#">
+                                        <a  href="">
                                              <button class="btn-delete deletebtn" type="button" onclick="document.getElementById('id01').style.display='none'">Delete</button>
                                         </a>
                                        
@@ -146,7 +146,7 @@
                                 </div>
                                 <div>
                                        <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                       <button type="button" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                       <button type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
                                     </div>
                             </div>
                         </div>
@@ -162,6 +162,7 @@
         </div>
     </div>
     <script>
+        
 // Get the modal
 var modal = document.getElementById('id01');
 
