@@ -1,5 +1,5 @@
 <?php $this->view("include/header",["pageName"=>$pageName]); ?>
-<?php $this->view("include/sidebar"); ?>
+<?php  $this->view("include/sidebar");?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
 
             <!-- Mobile Menu start -->
@@ -90,10 +90,10 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func" method="POST">
-                                                <input type="text" placeholder="Search..."
-                                                    class="search-int form-control" name="search">
-                                                <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
+                                            <form role="search" class="sr-input-func" action="<?= ROOT ?>Professor" method="POST">
+                                                <input type="text" name="search" placeholder="Search..."
+                                                    class="search-int form-control">
+                                               <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
                                             </form>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">All Students</span>
+                                            <li><span class="bread-blod">All Professors</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -113,56 +113,42 @@
             </div>
         </div>
         <div class="contacts-area mg-b-15">
-            <!-- delete button -->
-             <div id="id01" class="modal-delete">
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close-delete" title="Close Modal">×</span>
-                                <form class="modal-content" action="/action_page.php">
-                                    <div class="container-delete">
-                                    <h1>Delete Account</h1>
-                                    <p>Are you sure you want to delete account?</p>
-                                    
-                                    <div class="clearfix">
-                                        <button class="btn-delete cancelbtn" type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button>
-                                        <a href="#">
-                                             <button class="btn-delete deletebtn" type="button" onclick="document.getElementById('id01').style.display='none'">Delete</button>
-                                        </a>
-                                       
-                                    </div>
-                                    </div>
-                                </form>
-                </div>
-                 <!-- delete button -->
-
             <div class="container-fluid">
                 <div class="row">
-                    <?php if(is_array($students) && !empty($students)):  ?>
-                        <?php foreach ($students as $student): ?>
+
+
+                    <?php if(isset($lecturers) && is_array($lecturers)): ?>
+                        <?php foreach ($lecturers as $lecturer): ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <div class="student-inner-std res-mg-b-30 contact-panel contact-panel-cs pro-1">
-                                    <div class="student-img pro-2">
-                                        <img src="<?= $student->photo ?>" alt=""  class="pro-3 img-rounded "/>
-                                        <h4><?= $student->f_name ?> <?= $student->l_name ?></h4>
+                                <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30 pro-1">
+                                    <div class="panel-body custom-panel-jw pro-2">
+                                        <img alt="logo" class="img-rounded m-b pro-3" src="<?= $lecturer->photo ?>">
+                                        <h3><a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>">Prof.<?= ucfirst($lecturer->f_name) . " " . $lecturer->l_name ?></a></h3>
+                                        <p class="all-pro-ad"><?= $lecturer->email ?></p>
+                                        <marquee class="pro-4">   <?= $lecturer->description  ?></marquee>
                                         <div>
-                                           <a href="<?= ROOT ?>Student/profile/<?= $student->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                           <a href="<?= ROOT ?>Student/delete/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
-                                           <a href="<?= ROOT ?>Student/edit/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                           <a href="<?= ROOT ?>Professor/Profile/<?= $lecturer->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
+                                           <a href="<?= ROOT ?>Professor/delete/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                           <a href="<?= ROOT ?>Professor/edit/<?= $lecturer->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
+
+
                                     </div>
-                                   
                                 </div>
-                            </div>
+                            </div></a>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="container-fluid">
-                            <h3 style="margin-left: auto">No Students To display</h3>
+                        <div class="container-fluid">
+                            <h3 style="margin-left: auto">No Lecturer To display</h3>
                         </div>
                     <?php endif; ?>
-
                 </div>
             </div>
         </div>
     </div>
-    <script>
+    
+<script>
 // Get the modal
 var modal = document.getElementById('id01');
 
@@ -174,4 +160,3 @@ window.onclick = function(event) {
 }
 </script>
 <?php $this->view("include/footer"); ?>
-
