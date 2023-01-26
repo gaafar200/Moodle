@@ -1,7 +1,6 @@
 <?php $this->view("include/header",["pageName"=>$pageName]); ?>
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar",["user"=>$user]); ?>
-
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
                 <div class="container">
@@ -82,28 +81,74 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list" style="margin-top: 10vh;">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func" method="POST">
-                                                <input type="text" placeholder="Search..."
-                                                    class="search-int form-control" name="search">
-                                                <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
-                                            </form>
+        </div>
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-payment-inner-st" style="margin-top:100px ;">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Edit Basic Information</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad">
+                                                    <form action="#" method="POST" enctype="multipart/form-data"
+                                                        class="dropzone dropzone-custom needsclick add-professors"
+                                                        id="demo1-upload">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <input name="firstname" type="text"
+                                                                        class="form-control" placeholder="First Name" value="<?= displayLecturerFirstName($lectData) ?>" >
+                                                                </div>
+                                                                    <div class="form-group">
+                                                                    <input name="lastname" type="text"
+                                                                        class="form-control" placeholder="Last Name" value="<?= displayLecturerLastName($lectData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="address" type="text"
+                                                                        class="form-control" placeholder="Address" value="<?= displayLecturerAddress($lectData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="mobileno" type="number"
+                                                                        class="form-control" placeholder="Mobile no." value="<?= displayLecturerMobileNumber($lectData) ?>">
+                                                                </div>
+                                                                <div class="form-group alert-up-pd">
+                                                                    <label for="images" class="drop-container">
+                                                                    <span class="drop-title">Drop files here</span>
+                                                                    or
+                                                                    <input type="file" name="image" id="images" accept="image/*" >
+                                                                    </label>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" name="email"
+                                                                        placeholder="Email" value="<?= displayEmailAddress($lectData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="username" type="text"
+                                                                        class="form-control" placeholder="User Name" value="<?= displayUserName($lectData) ?>" <?= setUserName($lectData) ?>>
+                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">All Students</span>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -112,66 +157,5 @@
                 </div>
             </div>
         </div>
-        <div class="contacts-area mg-b-15">
-            <!-- delete button -->
-             <div id="id01" class="modal-delete">
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close-delete" title="Close Modal">×</span>
-                                <form class="modal-content" action="/action_page.php">
-                                    <div class="container-delete">
-                                    <h1>Delete Account</h1>
-                                    <p>Are you sure you want to delete account?</p>
-                                    
-                                    <div class="clearfix">
-                                        <button class="btn-delete cancelbtn" type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button>
-                                        <a href="#">
-                                             <button class="btn-delete deletebtn" type="button" onclick="document.getElementById('id01').style.display='none'">Delete</button>
-                                        </a>
-                                       
-                                    </div>
-                                    </div>
-                                </form>
-                </div>
-                 <!-- delete button -->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <?php if(is_array($students) && !empty($students)):  ?>
-                        <?php foreach ($students as $student): ?>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <div class="student-inner-std res-mg-b-30 contact-panel contact-panel-cs pro-1">
-                                    <div class="student-img pro-2">
-                                        <img src="<?= $student->photo ?>" alt=""  class="pro-3 img-rounded "/>
-                                        <h4><?= $student->f_name ?> <?= $student->l_name ?></h4>
-                                        <div>
-                                           <a href="<?= ROOT ?>Student/profile/<?= $student->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                           <a href="<?= ROOT ?>Student/delete/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
-                                           <a href="<?= ROOT ?>Student/edit/<?= $student->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="container-fluid">
-                            <h3 style="margin-left: auto">No Students To display</h3>
-                        </div>
-                    <?php endif; ?>
-
-                </div>
-            </div>
-        </div>
     </div>
-    <script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 <?php $this->view("include/footer"); ?>
-
