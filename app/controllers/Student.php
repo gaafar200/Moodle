@@ -22,7 +22,7 @@ class Student extends  Controller
         if($username != ""){
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if($_FILES["image"]["full_path"] !== ""){
-                    $isPhotoChanged = $this->student->changePhoto($username,$_FILES);
+                    $isPhotoChanged = $this->student->image->changePhoto($username,$_FILES);
                     if($isPhotoChanged !== true){
                         $this->data["errors"] = $isPhotoChanged;
                     }
@@ -50,7 +50,7 @@ class Student extends  Controller
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $isValidData = $this->student->validateStudentData($_POST,$_FILES);
             if($isValidData === true){
-                $isCreatedSuccessfully = $this->student->registerNewStudent($_POST,$_FILES,$this->data["user"]);
+                $isCreatedSuccessfully = $this->student->registerUser($_POST,$_FILES);
                 $this->redirect("Student");
             }
             else{
@@ -62,9 +62,9 @@ class Student extends  Controller
     public function delete($username = ""){
         $this->data["pageName"] = "All Students";
         if($username != ""){
-            $data = $this->user->getUserDataFromUsername($username);
+            $data = $this->student->getUserDataFromUsername($username);
             if($data[0]->rank === "student"){
-                $this->student->deleteStudentFromSystem($username);
+                $this->student->deleteUser($username);
             }
         }
         $this->data["students"] = $this->student->getAllStudent();

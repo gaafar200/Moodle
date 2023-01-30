@@ -50,33 +50,6 @@ class Stud extends User
         }
         return true;
     }
-
-    public function registerNewStudent($data,$image,$creator)
-    {
-        if($this->Auth->hasRightPrivilege("techEmployee")){
-            unset($data["confirmpassword"]);
-            $image = $this->image->uploadToFileSystem($image);
-            $check = $this->addToDataBase($image,$data,$creator);
-            return $check;
-        }
-
-
-    }
-
-    private function addToDataBase($image, $data, $creator)
-    {
-        $data["photo"] = $image;
-        $data["password"] = sha1($data["password"]);
-        $data["created_by"] = $this->getCreatorId();
-        $data["university_id"] = $this->createUniqueUniversityId($data["gender"]);
-        $data["rank"] = self::RANK;
-        $query = "INSERT INTO users (university_id,f_name,l_name,address,phone_number,username,password,gender,email,photo,rank,created_by) VALUES(:university_id,:firstname,:lastname,:address,:mobileno,:username,:password,:gender,:email,:photo,:rank,:created_by)";
-        if($this->db->write($query,$data)){
-            return true;
-        }
-        return false;
-    }
-
     private function createUniqueUniversityId($gender)
     {
         $universityid = "";
@@ -167,4 +140,20 @@ class Stud extends User
     }
 
 
+    function handleDataBase($data, $image): bool
+    {
+        $query = "INSERT INTO users (university_id,f_name,l_name,address,phone_number,username,password,gender,email,photo,rank,created_by) VALUES(:university_id,:firstname,:lastname,:address,:mobileno,:username,:password,:gender,:email,:photo,:rank,:created_by)";
+        return $this->db->write($query,$data);
+    }
+
+    /**
+     * @override
+     */
+    function getDataReady(array $data, string $image): array
+    {
+        $data = parent::getDataReady($data,$image);
+        $data["university_id"] = $this->createUniqueUniversityId($data["gender"]);
+        $data["rank"] = self::RANK;
+        return $data;
+    }
 }

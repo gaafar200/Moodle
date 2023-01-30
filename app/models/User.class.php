@@ -1,6 +1,5 @@
 <?php
-
-class User extends Model
+Abstract class User extends Model
 {
     public Image $image;
     public function __construct(){
@@ -19,6 +18,49 @@ class User extends Model
         $check = $this->validatePassword($password);
         if(is_array($check)){
             return $check;
+        }
+
+        return true;
+    }
+    public function validateBasicData($data,$image){
+        foreach ($data as $key => $value){
+            $$key = $value ?? false;
+        }
+        $image = isset($image) ? $image : false;
+        $check = $this->isVaildName($firstname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isVaildName($lastname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidAddress($address);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidMobilNo($mobileno);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidEmail($email);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidUserName($username);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->validatePassword($password);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->validateThePasswords($password,$confirmpassword);
+        if(is_array($check)) {
+            return $check;
+        }
+        if(!$this->image->isValidImage($image)){
+            return ["image"=>"please upload an image"];
         }
 
         return true;
@@ -107,74 +149,23 @@ class User extends Model
         if(is_array($check)){
             return $check;
         }
-        if($this->userNameAlreadyExists($username)){
+        if($this->checkIfUserExists($username)){
             return ["username"=>"username already exists"];
         }
         return true;
     }
 
-    private function userNameAlreadyExists($username)
+    private function checkIfUserExists($username)
     {
-        $query = "SELECT username FROM users WHERE username = :username LIMIT 1";
+        $query = "SELECT username,photo FROM users WHERE username = :username LIMIT 1";
         $data = $this->db->read($query,[
             "username"=>$username
         ]);
         if(is_array($data) && !empty($data)){
-            return true;
+            return $data;
         }
         return false;
     }
-    /*protected function isValidImage($image){
-        if ($image['image']['error'] !== UPLOAD_ERR_OK) {
-            return ["image"=>"Upload failed with error code " . $image['image']['error']];
-        }
-        $info = getimagesize($image['image']['tmp_name']);
-        if ($info === FALSE) {
-            return ["image"=>"please upload an image"];
-        }
-        return true;
-    }
-    protected function getFileSystemReady()
-    {
-        if(!file_exists($this->getImagePath())){
-            $check = $this->createImagePath();
-            if($check !== true){
-                return ["file-System" => "<div class='fail'>File System Error</div>"];
-            }
-        }
-        return true;
-    }
-    protected function getImagePath(){
-        return  $_SERVER["DOCUMENT_ROOT"] . "/model/public/assets/data/users/";
-    }
-    protected function createImagePath(){
-        $check = mkdir($this->getImagePath(),0777);
-        return $check;
-    }
-    private function getImageFinalDestination($image){
-        $imagePath = "";
-        $imageParts = explode(".",$image["image"]["name"]);
-        $imageName = $imageParts[0];
-        $ext = $imageParts[1];
-
-        $check = true;
-        while($check){
-            $imagePath = $this->getImagePath() . $imageName . $this->generateRandomString(4) . "." . $ext;
-            $query = "SELECT photo FROM users WHERE photo = :photo LIMIT 1";
-            $check = $this->db->read($query,
-            [
-                "photo"=>$imagePath
-            ]);
-        }
-        return $imagePath;
-    }
-    protected function getImageServerPath($image){
-        $image_path = $this->getImageFinalDestination($image);
-        $replacement_part = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
-        return str_replace($_SERVER["DOCUMENT_ROOT"],$replacement_part,$image_path);
-    }*/
-
-
     protected function getCreatorId()
     {
         $Auth = new Auth();
@@ -182,25 +173,6 @@ class User extends Model
         return $data[0]->id;
     }
 
-    protected function storeImageInTheFileSystem($username,$image)
-    {
-        $query = "SELECT photo FROM users WHERE username = :username LIMIT 1";
-        $destinationPath = $this->db->read($query,[
-            "username"=>$username
-        ]);
-        $destinationPath = $this->alterPathToSuitFileSystem($destinationPath[0]->photo);
-        $check =  move_uploaded_file($image["image"]["tmp_name"],$destinationPath);
-        if(!$check){
-            return ["file-system"=>"<div class='fail'>failed to write to file system</div>"];
-        }
-        return true;
-    }
-
-    private function alterPathToSuitFileSystem($path)
-    {
-        $replacement_parts = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"];
-        return str_replace($replacement_parts,$_SERVER["DOCUMENT_ROOT"],$path);
-    }
     public function getUserDataFromUsername($username){
         $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
         $data = $this->db->read($query,[
@@ -208,14 +180,6 @@ class User extends Model
         ]);
         return $data;
     }
-    /*protected function deletephoto($imagePath){
-        $path = $this->alterPathToSuitFileSystem($imagePath);
-        if(file_exists($path)){
-            unlink($path);
-            return true;
-        }
-        return false;
-    }*/
     protected function getAllUsersWithRank($rank){
         $query = "SELECT * FROM users WHERE rank = :rank";
         return $this->db->read($query,
@@ -223,17 +187,63 @@ class User extends Model
             "rank"=>$rank
         ]);
     }
-   /* protected function changeImagePath($username,$image_new_path)
-    {
-        $query = "UPDATE users SET photo = :photo WHERE username = :username";
-        $this->db->write($query,[
-            "photo"=>$image_new_path,
-            "username" => $username
-        ]);
-    }*/
-    public function changePhoto($username,$image)
-    {
-        return $this->image->changePhoto($username,$image);
+    public  function registerUser($data,$image): bool {
+        $check = $this->applyStrickPrivilege();
+        if($check === true) {
+            $image = $this->handleImage($image);
+            $data = $this->getDataReady($data,$image);
+            return $this->handleDataBase($data, $image);
+        }
+        return false;
     }
+    public function deleteUser($username) : bool | array
+    {
+        $check = $this->applyStrickPrivilege();
+        if($check === true){
+            $check = $this->checkIfUserExists($username);
+            if($check){
+                $photoDeleted = $this->image->deletephoto($check[0]->photo);
+                $result = $this->delete($username);
+                if($result !== true){
+                    return ["lecturer"=>"failed to delete lecturer"];
+                }
+                return true;
+            }
+            else{
+                return ["lecturer"=>"lecturer does not exists"];
+            }
+
+        }
+        else{
+            return ["user"=>"you don't have the right Privilege to perform this action"];
+        }
+    }
+    private function delete($username)
+    {
+        $query = "DELETE FROM users WHERE username = :username";
+        return $this->db->write($query,[
+            "username"=>$username
+        ]);
+    }
+
+    private function applyStrickPrivilege()
+    {
+        return $this->Auth->hasRightPrivilege("techEmployee");
+    }
+
+    private function handleImage($image):string
+    {
+        return $this->image->uploadToFileSystem($image);
+    }
+
+    abstract function handleDataBase($data,$image):bool;
+    public function getDataReady(array $data,string $image):array{
+        unset($data["confirmpassword"]);
+        $data["photo"] = $image;
+        $data["password"] = sha1($data["password"]);
+        $data["created_by"] = $this->getCreatorId();
+        return $data;
+    }
+
 
 }

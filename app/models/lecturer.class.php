@@ -1,6 +1,6 @@
 <?php
 
-class lecturer extends User
+class lecturer extends User implements Description
 {
     public function __construct()
     {
@@ -9,84 +9,42 @@ class lecturer extends User
 
     public function validateProfData($data,$image)
     {
-        foreach ($data as $key => $value){
-            $$key = $value ?? false;
-        }
-        $image = isset($image) ? $image : false;
-        $check = $this->isVaildName($firstname);
+        $check = $this->validateBasicData($data,$image);
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isVaildName($lastname);
+        $check = $this->isValidDescription($data["description"]);
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isValidAddress($address);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidMobilNo($mobileno);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidEmail($email);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidUserName($username);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->validatePassword($password);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->validateThePasswords($password,$confirmpassword);
-        if(is_array($check)) {
-            return $check;
-        }
-        $check = $this->validteDescription($description);
-        if(is_array($check)){
-            return $check;
-        }
-        if(!$this->image->isValidImage($image)){
-            return ["image"=>"please upload an image"];
-        }
-
         return true;
     }
 
-    public function registerNewProfessor($data,$image,$creator_data){
-        if($this->Auth->hasRightPrivilege("techEmployee")){
-            unset($data["confirmpassword"]);
-            $image = $this->image->uploadToFileSystem($image);
-            $result = $this->addToDataBase($image,$data,$creator_data);
-            return true;
-        }
+    /**
+     * @override
+     */
+    public function handleDataBase($data,$image):bool
+    {
+        $query = "INSERT INTO users (f_name,l_name,address,phone_number,gender,username,password,email,photo,rank,description,created_by) VALUES(:firstname,:lastname,:address,:mobileno,:username,:gender,:password,:email,:photo,:rank,:description,:created_by)";
+        return $this->db->write($query,$data);
     }
 
-    protected function addToDataBase($image,$data,$creator_data)
+    /**
+     * @override
+     */
+    function getDataReady(array $data,string $image): array
     {
-        $data["photo"] = $image;
-        $data["password"] = sha1($data["password"]);
-        $data["created_by"] = $this->getCreatorId();
+        $data = parent::getDataReady($data,$image);
         $data["rank"] = "lecturer";
-        $query = "INSERT INTO users (f_name,l_name,address,phone_number,username,password,email,photo,rank,description,created_by) VALUES(:firstname,:lastname,:address,:mobileno,:username,:password,:email,:photo,:rank,:description,:created_by)";
-        if($this->db->write($query,$data)){
-            return true;
-        }
-        return false;
+        return $data;
     }
 
     public function getAllLecturers()
     {
-        $query = "SELECT * FROM users WHERE rank = :rank";
-        return $this->db->read($query,[
-            "rank"=>"lecturer"
-        ]);
+        return $this->getAllUsersWithRank("lecturer");
     }
 
-    private function validteDescription($description)
+    public function isValidDescription($description): array | bool
     {
         if(strlen($description) < 6 && !preg_match("/^[a-zA-Z0-9 ]+$/",$description)){
             return ["description"=>"description must only contains characters and numbers"];
@@ -122,13 +80,7 @@ class lecturer extends User
         return false;
     }
 
-    private function delete($username)
-    {
-        $query = "DELETE FROM users WHERE username = :username";
-        return $this->db->write($query,[
-            "username"=>$username
-        ]);
-    }
+
 
     public function checkForEditData($data)
     {
@@ -178,6 +130,7 @@ class lecturer extends User
             "rank"=>"lecturer"
         ]);
     }
+
 
 
 }

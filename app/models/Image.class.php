@@ -102,7 +102,7 @@ class Image extends Model
     {
         switch($intended){
             case "users":
-                $user = new User();
+                $user = new Student();
                 $data = $user->getUserDataFromUsername($username);
                 $oldImagePath = $data[0]->photo;break;
             case "course":

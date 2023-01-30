@@ -96,7 +96,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="<?= ROOT ?>Professor/add" method="POST" enctype="multipart/form-data"
+                                                    <form action="<?= ROOT ?>Employee/add" method="POST" enctype="multipart/form-data"
                                                         class="dropzone dropzone-custom needsclick add-professors"
                                                         id="demo1-upload">
                                                         <div class="row">
@@ -179,10 +179,6 @@
                                                                         <em for="confirmpassword" class="invalid">Please enter confirm password</em>
                                                                     <?php endif; ?>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                <textarea name="description" class="form-control" placeholder="Enter The Lecturer description"></textarea>
-                                                                <em for="description" class="invalid">Please enter description</em>
-                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">

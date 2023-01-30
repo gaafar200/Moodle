@@ -23,7 +23,7 @@ class Professor extends Controller
         $this->data["pageName"] = "edit Professor";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_FILES["image"]["full_path"] !== ""){
-                $imageChangedSuccessfully = $this->prof->changePhoto($username,$_FILES);
+                $imageChangedSuccessfully = $this->prof->image->changePhoto($username,$_FILES);
                 if($imageChangedSuccessfully !== true){
                     $this->data["errors"] = $imageChangedSuccessfully;
                 }
@@ -56,7 +56,7 @@ class Professor extends Controller
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $result = $this->prof->validateProfData($_POST,$_FILES);
             if($result === true){
-                $result = $this->prof->registerNewProfessor($_POST,$_FILES,$this->data["user"]);
+                $result = $this->prof->registerUser($_POST,$_FILES);
             }
             else{
                 $this->data["errors"] = $result;
@@ -67,7 +67,7 @@ class Professor extends Controller
     public function delete($username = ""){
         $this->data["pageName"] = "All Professors";
         if($username != ""){
-            $result = $this->prof->deleteProfessor($username);
+            $result = $this->prof->deleteUser($username);
             if($result === true){
                 $this->data["success"] = ["lecturer"=> "Lecturer Deleted Successfully"];
             }

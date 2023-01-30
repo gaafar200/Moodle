@@ -24,7 +24,7 @@ create table if not exists course(
     date datetime not null default CURRENT_TIMESTAMP,
     status varchar(20) not null default "active",
     language varchar(25) not null default "english",
-    lecturer_id int(11) not null references users(id) ON DELETE set null ON UPDATE CASCADE,
+    lecturer_id int(11) references users(id) ON DELETE set null ON UPDATE CASCADE,
     created_by int(11),
     FOREIGN Key(created_by) references users(id) ON DELETE set null ON UPDATE CASCADE
 );
