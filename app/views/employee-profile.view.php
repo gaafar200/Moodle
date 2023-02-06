@@ -120,44 +120,44 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
                             <div class="profile-img">
-                                <img src="<?= $ProfProfile[0]->photo ?>" alt="" />
+                                <img src="<?= $EmployeeData[0]->photo ?>" alt="" />
                             </div>
                             <div class="profile-details-hr">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Name</b><br /><?=$ProfProfile[0]->f_name . " " . $ProfProfile[0]->l_name?></p>
+                                            <p><b>Name</b><br /><?=$EmployeeData[0]->f_name . " " . $EmployeeData[0]->l_name?></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>User Name</b><br /> <?= $ProfProfile[0]->username ?></p>
+                                            <p><b>User Name</b><br /> <?= $EmployeeData[0]->username ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Email ID</b><br /> <?= $ProfProfile[0]->email ?></p>
+                                            <p><b>Email ID</b><br /> <?= $EmployeeData[0]->email ?></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Phone</b><br /> <?= $ProfProfile[0]->phone_number ?></p>
+                                            <p><b>Phone</b><br /> <?= $EmployeeData[0]->phone_number ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="address-hr">
-                                            <p><b>Address</b><br /> <?= $ProfProfile[0]->address ?></p>
+                                            <p><b>Address</b><br /> <?= $EmployeeData[0]->address ?></p>
                                         </div>
                                     </div>
                                 </div>
                                  <div class="row">
                                     <div class="col-lg-12">
                                         <div class="address-hr">
-                                            <a href="<?= ROOT ?>Professor/edit/"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                            <a href="<?= ROOT ?>Employee/edit/<?= $EmployeeData[0]->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                         </div>
                                     </div>
                                 </div>

@@ -42,7 +42,7 @@ class Student extends  Controller
     }
     public function profile($username = ""){
         $this->data["pageName"] = "Student Profile";
-        $this->data["studProfile"] = $this->user->getUserDataFromUsername($username);
+        $this->data["studProfile"] = $this->student->getUserDataFromUsername($username);
         $this->view("student-profile",$this->data);
     }
     public function add(){

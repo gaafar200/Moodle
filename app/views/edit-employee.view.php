@@ -104,19 +104,19 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
-                                                                        class="form-control" placeholder="First Name" value="<?= displayLecturerFirstName($lectData) ?>" >
+                                                                        class="form-control" placeholder="First Name" value="" >
                                                                 </div>
                                                                     <div class="form-group">
                                                                     <input name="lastname" type="text"
-                                                                        class="form-control" placeholder="Last Name" value="<?= displayLecturerLastName($lectData) ?>">
+                                                                        class="form-control" placeholder="Last Name" value="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
-                                                                        class="form-control" placeholder="Address" value="<?= displayLecturerAddress($lectData) ?>">
+                                                                        class="form-control" placeholder="Address" value="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
-                                                                        class="form-control" placeholder="Mobile no." value="<?= displayLecturerMobileNumber($lectData) ?>">
+                                                                        class="form-control" placeholder="Mobile no." value="">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                     <label for="images" class="drop-container">
@@ -130,11 +130,11 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input type="text" class="form-control" name="email"
-                                                                        placeholder="Email" value="<?= displayEmailAddress($lectData) ?>">
+                                                                        placeholder="Email" value="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
-                                                                        class="form-control" placeholder="User Name" value="<?= displayUserName($lectData) ?>" <?= setUserName($lectData) ?>>
+                                                                        class="form-control" placeholder="User Name" value="">
                                                                 </div>
                                                         </div>
                                                         <div class="row">

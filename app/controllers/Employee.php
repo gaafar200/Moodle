@@ -38,7 +38,8 @@ class Employee extends Controller
         }
         $this->view("all-employees",$this->data);
     }
-    public function profile(){
+    public function profile($username){
+        $this->data["EmployeeData"] = $this->employee->getUserDataFromUsername($username);
         $this->data["pageName"] = "Employee Profile";
         $this->view("employee-profile",$this->data);
     }

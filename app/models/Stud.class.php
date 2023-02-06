@@ -142,6 +142,7 @@ class Stud extends User
 
     function handleDataBase($data, $image): bool
     {
+        show($data);
         $query = "INSERT INTO users (university_id,f_name,l_name,address,phone_number,username,password,gender,email,photo,rank,created_by) VALUES(:university_id,:firstname,:lastname,:address,:mobileno,:username,:password,:gender,:email,:photo,:rank,:created_by)";
         return $this->db->write($query,$data);
     }

@@ -4,7 +4,7 @@ class Login
 {
     public function index(){
         $data = array();
-        $user = new User();
+        $user = new stud();
         $Auth = new Auth();
         $data["pageName"] = "login";
         if($_SERVER["REQUEST_METHOD"] == "POST"){

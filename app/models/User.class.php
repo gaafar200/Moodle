@@ -218,7 +218,7 @@ Abstract class User extends Model
             return ["user"=>"you don't have the right Privilege to perform this action"];
         }
     }
-    private function delete($username)
+    public function delete($username)
     {
         $query = "DELETE FROM users WHERE username = :username";
         return $this->db->write($query,[

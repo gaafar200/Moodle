@@ -50,12 +50,13 @@ class Auth
 
     private function rememberMe($data)
     {
+        $model = new Model();
         $cookie = array();
         $cookie_name = "Login";
         $query = "SELECT token from user_tokens WHERE token = :token LIMIT 1";
         $result = true;
         while ($result) {
-            $cookie["value"] = sha1($data[0]->username) . $this->generateRandomString(40);
+            $cookie["value"] = sha1($data[0]->username) . $model->generateRandomString(40);
             $result = $this->db->read($query, [
                 "token" => $cookie["value"]
             ]);

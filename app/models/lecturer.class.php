@@ -25,7 +25,7 @@ class lecturer extends User implements Description
      */
     public function handleDataBase($data,$image):bool
     {
-        $query = "INSERT INTO users (f_name,l_name,address,phone_number,gender,username,password,email,photo,rank,description,created_by) VALUES(:firstname,:lastname,:address,:mobileno,:username,:gender,:password,:email,:photo,:rank,:description,:created_by)";
+        $query = "INSERT INTO users (f_name,l_name,address,phone_number,gender,username,password,email,photo,rank,description,created_by) VALUES(:firstname,:lastname,:address,:mobileno,:gender,:username,:password,:email,:photo,:rank,:description,:created_by)";
         return $this->db->write($query,$data);
     }
 

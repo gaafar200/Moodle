@@ -48,7 +48,7 @@ class Professor extends Controller
     }
     public function profile($username = ""){
         $this->data["pageName"] = "Professor Profile";
-        $this->data["ProfProfile"] = $this->user->getUserDataFromUsername($username);
+        $this->data["ProfProfile"] = $this->prof->getUserDataFromUsername($username);
         $this->view("professor-profile",$this->data);
     }
     public function add(){
