@@ -29,7 +29,7 @@ class Professor extends Controller
                 }
 
             }
-            $check =  $this->prof->checkForEditData($_POST);
+            $check =  $this->prof->validateEditBaseData($_POST);
             if($check !== true){
                 $this->data["errors"] = $check;
             }

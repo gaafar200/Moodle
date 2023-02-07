@@ -6,60 +6,66 @@ function show($data){
     echo "</pre>";
 }
 /* start Edit Lecturer Info part */
-function checkVaildLecturerData($lecturerData){
+function checkVaildData($lecturerData){
     if(isset($lecturerData) && is_array($lecturerData) && !empty($lecturerData)){
         return true;
     }
     return false;
 }
-function displayLecturerFirstName($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+function displayFirstName($lecturerData){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->f_name;
 }
-function displayLecturerLastName($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+function displayLastName($lecturerData){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->l_name;
 }
-function displayLecturerAddress($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+function displayAddress($lecturerData){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->address;
 }
-function displayLecturerMobileNumber($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+function displayMobileNumber($lecturerData){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->phone_number;
 }
 function displayEmailAddress($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->email;
 }
 function displayUserName($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return $lecturerData[0]->username;
 }
 
 function setUserName($lecturerData){
-    if(checkVaildLecturerData($lecturerData) === false){
+    if(checkVaildData($lecturerData) === false){
         return "";
     }
     return "readonly";
 }
 function displayGender($data,$gender){
-    if(checkVaildLecturerData($data) === false){
+    if(checkVaildData($data) === false){
         return "";
     }
     if($data[0]->gender == $gender){
         return "selected";
     }
+}
+function displayLecturerDiscription($data){
+    if(checkVaildData($data) === false){
+        return "";
+    }
+    return $data[0]->description;
 }

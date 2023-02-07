@@ -104,19 +104,26 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
-                                                                        class="form-control" placeholder="First Name" value="<?= displayLecturerFirstName($lectData) ?>" >
+                                                                        class="form-control" placeholder="First Name" value="<?= displayFirstName($lectData) ?>" >
                                                                 </div>
                                                                     <div class="form-group">
                                                                     <input name="lastname" type="text"
-                                                                        class="form-control" placeholder="Last Name" value="<?= displayLecturerLastName($lectData) ?>">
+                                                                        class="form-control" placeholder="Last Name" value="<?= displayLastName($lectData) ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
-                                                                        class="form-control" placeholder="Address" value="<?= displayLecturerAddress($lectData) ?>">
+                                                                        class="form-control" placeholder="Address" value="<?= displayAddress($lectData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option>Select Gender</option>
+                                                                        <option value="male" <?= displayGender($lectData,"male") ?>>Male</option>
+                                                                        <option value="female" <?= displayGender($lectData,"female") ?>>Female</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
-                                                                        class="form-control" placeholder="Mobile no." value="<?= displayLecturerMobileNumber($lectData) ?>">
+                                                                        class="form-control" placeholder="Mobile no." value="<?= displayMobileNumber($lectData) ?>">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                     <label for="images" class="drop-container">
@@ -135,6 +142,10 @@
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
                                                                         class="form-control" placeholder="User Name" value="<?= displayUserName($lectData) ?>" <?= setUserName($lectData) ?>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <textarea name="description" class="form-control" placeholder="Enter The Lecturer description"><?= displayLecturerDiscription($lectData) ?></textarea>
+                                                                    <em for="description" class="invalid">Please enter description</em>
                                                                 </div>
                                                         </div>
                                                         <div class="row">

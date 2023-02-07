@@ -17,13 +17,34 @@ class Employee extends Controller
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $check = $this->employee->ValidateData($_POST,$_FILES);
             if($check === true){
-                $this->employee->registerUser($_POST,$_FILES);
+                $result = $this->employee->registerUser($_POST,$_FILES);
+                if($result){
+                    $this->redirect("Employee");
+                }
             }
         }
         $this->view("add-employee",$this->data);
 
     }
-    public function edit(){
+    public function edit($username = ""){
+        if($username != ""){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                if($_FILES["image"]["full_path"] !== ""){
+                    $isPhotoChanged = $this->employee->image->changePhoto($username,$_FILES);
+                    if($isPhotoChanged !== true){
+                        $this->data["errors"] = $isPhotoChanged;
+                    }
+                }
+                $check = $this->employee->validateEditBaseData($_POST);
+                if($check === true){
+                    $isEdited = $this->employee->editUserData($_POST);
+                    if($isEdited){
+                        $this->redirect("Employee");
+                    }
+                }
+            }
+        }
+        $this->data["EmployeeData"] = $this->employee->getUserDataFromUsername($username);
         $this->data["pageName"] = "Edit Employee";
         $this->view("edit-employee",$this->data);
     }
@@ -36,6 +57,7 @@ class Employee extends Controller
                 $this->data["success"] = ["Employee"=> "employee Deleted Successfully"];
             }
         }
+        $this->data["technicals"] = $this->employee->getAllTechnicals();
         $this->view("all-employees",$this->data);
     }
     public function profile($username){

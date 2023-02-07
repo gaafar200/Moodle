@@ -88,7 +88,7 @@ class Stud extends User
     {
     }
 
-    public function checkForEditData($data)
+   /* public function checkForEditData($data)
     {
         foreach ($data as $key => $value){
             $$key = $value ?? false;
@@ -114,9 +114,9 @@ class Stud extends User
             return $check;
         }
         return true;
-    }
+    }*/
 
-    public function editStudentData($data)
+    /*public function editStudentData($data)
     {
         $query = "UPDATE users SET f_name = :firstname,
                  l_name = :lastname,
@@ -126,7 +126,7 @@ class Stud extends User
                  email = :email 
              WHERE username = :username";
         return $this->db->write($query,$data);
-    }
+    }*/
 
     public function searchForStudents($search)
     {
@@ -142,7 +142,6 @@ class Stud extends User
 
     function handleDataBase($data, $image): bool
     {
-        show($data);
         $query = "INSERT INTO users (university_id,f_name,l_name,address,phone_number,username,password,gender,email,photo,rank,created_by) VALUES(:university_id,:firstname,:lastname,:address,:mobileno,:username,:password,:gender,:email,:photo,:rank,:created_by)";
         return $this->db->write($query,$data);
     }

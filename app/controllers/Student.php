@@ -27,9 +27,9 @@ class Student extends  Controller
                         $this->data["errors"] = $isPhotoChanged;
                     }
                 }
-                $check =  $this->student->checkForEditData($_POST);
+                $check =  $this->student->validateEditBaseData($_POST);
                 if($check === true){
-                    $isEdited = $this->student->editStudentData($_POST);
+                    $isEdited = $this->student->editUserData($_POST);
                     if($isEdited){
                         $this->redirect("student");
                     }

@@ -19,6 +19,20 @@ class lecturer extends User implements Description
         }
         return true;
     }
+    /**
+     * @override
+     */
+    public function validateEditBaseData($data){
+        $check = parent::validateEditBaseData($data);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidDescription($data["description"]);
+        if(is_array($check)){
+            return $check;
+        }
+        return true;
+    }
 
     /**
      * @override
@@ -79,44 +93,16 @@ class lecturer extends User implements Description
         }
         return false;
     }
-
-
-
-    public function checkForEditData($data)
-    {
-        foreach ($data as $key => $value){
-            $$key = $value ?? false;
-        }
-        $check = $this->isVaildName($lastname);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidAddress($address);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidMobilNo($mobileno);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidEmail($email);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->validategender($gender);
-        if(is_array($check)){
-            return $check;
-        }
-        return true;
-    }
-
     public function EditProfessorData($data)
     {
         $query = "UPDATE users SET f_name = :firstname,
                  l_name = :lastname,
                  address = :address,
                  phone_number = :mobileno,
-                 email = :email WHERE username = :username";
+                 email = :email,
+                 gender = :gender,
+                 description = :description
+                 WHERE username = :username";
         $this->db->write($query,$data);
         return true;
     }

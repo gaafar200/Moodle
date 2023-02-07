@@ -104,38 +104,46 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input name="firstname" type="text"
-                                                                        class="form-control" placeholder="First Name" value="" >
+                                                                           class="form-control" placeholder="First Name" value="<?= displayFirstName($EmployeeData) ?>" >
                                                                 </div>
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
                                                                     <input name="lastname" type="text"
-                                                                        class="form-control" placeholder="Last Name" value="">
+                                                                           class="form-control" placeholder="Last Name" value="<?= displayLastName($EmployeeData) ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="address" type="text"
-                                                                        class="form-control" placeholder="Address" value="">
+                                                                           class="form-control" placeholder="Address" value="<?= displayAddress($EmployeeData) ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option>Select Gender</option>
+                                                                        <option value="male" <?= displayGender($EmployeeData,"male") ?>>Male</option>
+                                                                        <option value="female" <?= displayGender($EmployeeData,"female") ?>>Female</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="mobileno" type="number"
-                                                                        class="form-control" placeholder="Mobile no." value="">
+                                                                           class="form-control" placeholder="Mobile no." value="<?= displayMobileNumber($EmployeeData) ?>">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                     <label for="images" class="drop-container">
-                                                                    <span class="drop-title">Drop files here</span>
-                                                                    or
-                                                                    <input type="file" name="image" id="images" accept="image/*" >
+                                                                        <span class="drop-title">Drop files here</span>
+                                                                        or
+                                                                        <input type="file" name="image" id="images" accept="image/*" >
                                                                     </label>
-                                                                    
+
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <input type="text" class="form-control" name="email"
-                                                                        placeholder="Email" value="">
+                                                                           placeholder="Email" value="<?= displayEmailAddress($EmployeeData) ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="username" type="text"
-                                                                        class="form-control" placeholder="User Name" value="">
+                                                                           class="form-control" placeholder="User Name" value="<?= displayUserName($EmployeeData) ?> "<?= setUserName($EmployeeData) ?>>
                                                                 </div>
+                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">

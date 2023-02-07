@@ -65,6 +65,42 @@ Abstract class User extends Model
 
         return true;
     }
+    public function validateEditBaseData($data){
+        foreach ($data as $key => $value){
+            $$key = $value ?? false;
+        }
+        $check = $this->isVaildName($firstname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isVaildName($lastname);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidAddress($address);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidMobilNo($mobileno);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->isValidEmail($email);
+        if(is_array($check)){
+            return $check;
+        }
+        return true;
+    }
+    public function editUserData($data){
+        $query = "UPDATE users SET f_name = :firstname,
+                 l_name = :lastname,
+                 address = :address,
+                 phone_number = :mobileno,
+                 gender = :gender,
+                 email = :email 
+             WHERE username = :username";
+        return $this->db->write($query,$data);
+    }
 
     protected function validateusername($username)
     {
