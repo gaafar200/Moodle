@@ -134,19 +134,23 @@
                 <div class="row">
                     <?php if(isset($coursesData) && is_array($coursesData)): ?>
                     <?php foreach ($coursesData as $course): ?>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <div class="courses-inner res-mg-b-30">
-                                <div class="courses-title">
-                                    <a href="#"><img src="<?= $course->photo ?>" alt=""></a>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 center pro-1">
+                            <div class="courses-inner res-mg-b-30 pro-2">
+                                <div class="courses-title pro-2">
+                                    <a href="#"><img  class="img-rounded m-b pro-3" src="<?= $course->photo ?>" alt=""></a>
                                     <h2><?= $course->name ?></h2>
                                 </div>
-                                <div class="course-des">
+                                <div class="course-des pro-2">
                                     <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> <?= $course->f_name . " " . $course->l_name ?></p>
                                     <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> <?= $course->students ?></p>
                                 </div>
-                                <div>
-                                       <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Read More</button></a>
-                                       <button type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                <div class="btn1Courses">
+                                       <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-primary btnWidth">Read More</button></a>
+                                       <button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                    </div>
+                                <div class="btn1Courses">
+                                    <a href="<?= ROOT ?>students/list/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Add Students</button></a>
+                                    <a href="<?= ROOT ?>students/list/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-danger btnWidth">Remove Students</button></a>
                                     </div>
                             </div>
                         </div>

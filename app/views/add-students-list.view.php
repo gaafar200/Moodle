@@ -119,20 +119,55 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="<?= ASSETS ?>img/blog-details/1.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="blog-details blog-sig-details">
-                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> <?= ucwords($courseDetails[0]->name) ?></a></span>
-                                                <span><a href="#"><i class="fa fa-comments-o"></i> <b>Professor
-                                                            Name:</b> <?= ucfirst($courseDetails[0]->f_name) . " " . ucfirst($courseDetails[0]->l_name) ?></a></span>
+                                            <h4 class="m-3 "> Students List </h4>
+                                        <div class="table-flex">
+
+                                            <div class="tabel-thead">
+                                                <div class="td-id"> ID </div>
+                                                <div class="td"> Name </div>
+                                                <div class="td-flex">Email</div>
+                                                <div class="td-flex">Username</div>
+                                                <div class="td-last justify-content-center">Action</div>
                                             </div>
-                                            <h1><a class="blog-ht" href="#">Courses Description</a></h1>
-                                            <p><?= ucfirst($courseDetails[0]->description) ?></p>
-                                        </div>
-                                        <div>
+
+                                            <!-- ------- Here goes the loop -----  -->
+                                            <div class="table-tbody mt-2">
+                                                <div class="td-id">
+                                                    <span>1</span>
+                                                </div>
+                                                <div class="td">Ali</div>
+                                                <div class="td-flex">Ali2000@gmail.com</div>
+                                                <div class="td-flex">Student2000</div>
+                                                <div class="td-last justify-content-end">
+                                                    <button type="button" class="btn btn-danger">Remove
+                                                        Student</button>
+                                                    <button type="button" class="btn btn-success">Add Student</button>
+                                                </div>
+                                            </div>
+                                            <div class="table-tbody mt-2">
+                                                <div class="td-id">
+                                                    <span>1</span>
+                                                </div>
+                                                <div class="td">Ali</div>
+                                                <div class="td-flex">Ali2000@gmail.com</div>
+                                                <div class="td-flex">Student2000</div>
+                                                <div class="td-last justify-content-end">
+                                                    <button type="button" class="btn btn-danger">Remove
+                                                        Student</button>
+                                                    <button type="button" class="btn btn-success">Add Student</button>
+                                                </div>
+                                            </div>
+                                            <div class="table-tbody mt-2">
+                                                <div class="td-id">
+                                                    <span>1</span>
+                                                </div>
+                                                <div class="td">Ali</div>
+                                                <div class="td-flex">Ali2000@gmail.com</div>
+                                                <div class="td-flex">Student2000</div>
+                                                <div class="td-last justify-content-end">
+                                                    <button type="button" class="btn btn-success">Add Student</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -142,5 +177,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 <?php $this->view("include/footer"); ?>
