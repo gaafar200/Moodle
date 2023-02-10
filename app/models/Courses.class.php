@@ -104,8 +104,16 @@ class Courses extends Model{
         return $data;
     }
     //todo
-    private function getNumberOfStudentInACourse($id)
+    private function getNumberOfStudentInACourse($id): int
     {
+        $query = "SELECT count(student_id) as count FROM student_courses WHERE course_id = :id";
+        $data = $this->db->read($query,
+        [
+           "id"=>$id
+        ]);
+        if(is_array($data) && !empty($data)){
+            return $data[0]->count;
+        }
         return 0;
     }
 
@@ -116,6 +124,42 @@ class Courses extends Model{
         return $this->db->read($query,
         [
            "id" => $id
+        ]);
+    }
+
+    public function delete($id): bool | array
+    {
+        $check = $this->DoesCourseExists($id);
+        if(!$check){
+            return ["course"=>"course is not found"];
+        }
+        $this->removeAllStudentsFromThisCourse($id);
+        $query = "DELETE FROM course WHERE id = :id";
+        return $this->db->write($query,
+        [
+           "id"=>$id
+        ]);
+    }
+
+    private function DoesCourseExists($id): bool
+    {
+        $query = "SELECT id FROM course WHERE id = :id";
+        $data = $this->db->read($query,
+        [
+           "id"=>$id
+        ]);
+        if(is_array($data) && !empty($data)){
+            return true;
+        }
+        return false;
+    }
+
+    private function removeAllStudentsFromThisCourse($id)
+    {
+        $query = "DELETE FROM student_courses WHERE course_id = :id";
+        return $this->db->write($query,
+        [
+           "id"=>$id
         ]);
     }
 }

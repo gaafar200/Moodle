@@ -57,6 +57,7 @@ class Professor extends Controller
             $result = $this->prof->validateProfData($_POST,$_FILES);
             if($result === true){
                 $result = $this->prof->registerUser($_POST,$_FILES);
+                $this->redirect("Professor");
             }
             else{
                 $this->data["errors"] = $result;

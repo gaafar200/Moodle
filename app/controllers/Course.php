@@ -40,8 +40,22 @@ class Course extends Controller
         $this->view("add-course",$this->data);
     }
     public function delete($id){
-        echo $id;die;
+        $this->data["pageName"] = "All Courses";
+        $result = $this->course->delete($id);
+        if($result){
+            $this->errors = $result;
+        }
+        $this->data["coursesData"] = $this->course->getCoursesData();
+        $this->data["errors"] = $this->errors;
         $this->view("all-courses",$this->data);
+    }
+    public function addStudents($id){
+        $this->data["pageName"] = "add students";
+        //$this->view("add-students-list",$this->data);
+    }
+    public function removeStudents($id){
+        $this->data["pageName"] = "remove students";
+       //$this->view("remove-students-list",$this->data);
     }
 
 }

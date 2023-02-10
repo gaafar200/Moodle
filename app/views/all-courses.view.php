@@ -146,11 +146,11 @@
                                 </div>
                                 <div class="btn1Courses">
                                        <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-primary btnWidth">Read More</button></a>
-                                       <button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                                       <a href="<?= ROOT ?>Course/delete/<?= $course->id ?>"><button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth">Delete</button></a>
                                     </div>
                                 <div class="btn1Courses">
-                                    <a href="<?= ROOT ?>students/list/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Add Students</button></a>
-                                    <a href="<?= ROOT ?>students/list/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-danger btnWidth">Remove Students</button></a>
+                                    <a href="<?= ROOT ?>Course/addStudents/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Add Students</button></a>
+                                    <a href="<?= ROOT ?>Course/removeStudents/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-danger btnWidth">Remove Students</button></a>
                                     </div>
                             </div>
                         </div>
