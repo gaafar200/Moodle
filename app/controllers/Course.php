@@ -67,11 +67,11 @@ class Course extends Controller
     }
     public function addStudents($id){
         $this->data["pageName"] = "add students";
-        //$this->view("add-students-list",$this->data);
+        $this->view("add-students-list",$this->data);
     }
     public function removeStudents($id){
         $this->data["pageName"] = "remove students";
-       //$this->view("remove-students-list",$this->data);
+       $this->view("remove-students-list",$this->data);
     }
 
 
