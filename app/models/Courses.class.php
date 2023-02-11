@@ -92,7 +92,7 @@ class Courses extends Model{
 
     public function getCoursesData()
     {
-        $query = "SELECT u.f_name,u.l_name,c.name,c.id,c.photo,c.id From users u join course c ON(c.lecturer_id = u.id)";
+        $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id From users u join course c ON(c.lecturer_id = u.id)";
         $db = new database();
         $data = $db->read($query);
         if(!is_array($data) || empty($data)){
@@ -120,7 +120,7 @@ class Courses extends Model{
 
     public function getCourseData($id)
     {
-        $query = "SELECT u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.id = :id";
+        $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.id = :id";
         return $this->db->read($query,
         [
            "id" => $id
@@ -141,7 +141,7 @@ class Courses extends Model{
         ]);
     }
 
-    private function DoesCourseExists($id): bool
+    public function DoesCourseExists($id): bool
     {
         $query = "SELECT id FROM course WHERE id = :id";
         $data = $this->db->read($query,
@@ -161,5 +161,10 @@ class Courses extends Model{
         [
            "id"=>$id
         ]);
+    }
+
+    public function editCourseData($id)
+    {
+
     }
 }

@@ -14,8 +14,24 @@ class Course extends Controller
         $this->data["coursesData"] = $this->course->getCoursesData();
         $this->view("all-courses",$this->data);
     }
-    public function edit(){
+    public function edit($id){
         $this->data["pageName"] = "Edit Course";
+        $check = $this->course->DoesCourseExists($id);
+        if($check) {
+            $this->data["CourseData"] = $this->course->getCourseData($id);
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($_FILES["image"]["full_path"] !== "") {
+                    $isPhotoChanged = $this->course->image->changePhoto($id, $_FILES, "course");
+                    if ($isPhotoChanged !== true) {
+                        $this->data["errors"] = $isPhotoChanged;
+                    }
+                }
+                $check = $this->course->editCourseData($id);
+            }
+        }
+        else{
+            $this->redirect("Course");
+        }
         $this->view("edit-course",$this->data);
     }
     public function Info($id){
@@ -57,5 +73,7 @@ class Course extends Controller
         $this->data["pageName"] = "remove students";
        //$this->view("remove-students-list",$this->data);
     }
+
+
 
 }

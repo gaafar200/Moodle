@@ -146,6 +146,7 @@
                                 </div>
                                 <div class="btn1Courses">
                                        <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-primary btnWidth">Read More</button></a>
+                                    <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
                                        <a href="<?= ROOT ?>Course/delete/<?= $course->id ?>"><button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth">Delete</button></a>
                                     </div>
                                 <div class="btn1Courses">

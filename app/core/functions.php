@@ -5,7 +5,10 @@ function show($data){
     print_r($data);
     echo "</pre>";
 }
-/* start Edit Lecturer Info part */
+
+/**
+ * start User Info part
+ */
 function checkVaildData($lecturerData){
     if(isset($lecturerData) && is_array($lecturerData) && !empty($lecturerData)){
         return true;
@@ -68,4 +71,35 @@ function displayLecturerDiscription($data){
         return "";
     }
     return $data[0]->description;
+}
+/**
+ * end user Info Part
+ */
+
+/**
+ * start Course Info part
+ */
+function checkValidCourseData($data){
+    if(is_array($data) && !empty($data)){
+        return true;
+    }
+    return false;
+}
+function displayCourseName($data){
+    if(checkValidCourseData($data)){
+        return $data[0]->name;
+    }
+    return "";
+}
+function displayCourseDescription($data){
+    if(checkValidCourseData($data)){
+        return $data[0]->description;
+    }
+    return "";
+}
+function displayCourseLecturerUsername($data){
+    if(checkValidCourseData($data)){
+        return $data[0]->username;
+    }
+    return "";
 }
