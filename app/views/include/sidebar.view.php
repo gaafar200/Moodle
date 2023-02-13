@@ -19,6 +19,19 @@
                         </ul>
                     </li>
                     <li>
+                        <a class="has-arrow" href="<?= ROOT ?>Employee" aria-expanded="false"><span
+                                    class="educate-icon educate-professor icon-wrap"></span> <span
+                                    class="mini-click-non">Employees</span></a>
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li><a title="All Employee" href="<?= ROOT ?>Employee"><span class="mini-sub-pro">All
+                            Employees</span></a></li>
+                            <?php if(checkAuthorization("admin")): ?>
+                                <li><a title="Add Employee" href="<?= ROOT ?>Employee/add"><span class="mini-sub-pro">Add
+                                 Employee</span></a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <li>
                         <a class="has-arrow" href="<?= ROOT ?>Professor" aria-expanded="false"><span
                                 class="educate-icon educate-professor icon-wrap"></span> <span
                                 class="mini-click-non">Professors</span></a>
@@ -29,17 +42,7 @@
                                             Professor</span></a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow" href="<?= ROOT ?>Employee" aria-expanded="false"><span
-                                class="educate-icon educate-professor icon-wrap"></span> <span
-                                class="mini-click-non">Employees</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Employee" href="<?= ROOT ?>Employee"><span class="mini-sub-pro">All
-                            Employees</span></a></li>
-                            <li><a title="Add Employee" href="<?= ROOT ?>Employee/add"><span class="mini-sub-pro">Add
-                             Employee</span></a></li>
-                        </ul>
-                    </li>
+
                     <li>
                         <a class="has-arrow" href="<?= ROOT ?>Student" aria-expanded="false"><span
                                 class="educate-icon educate-student icon-wrap"></span> <span

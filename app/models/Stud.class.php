@@ -59,9 +59,9 @@ class Stud extends User
         return $universityid;
     }
 
-    public function getAllStudent()
+    public function getAllStudent($username)
     {
-        return $this->getAllUsersWithRank(self::RANK);
+        return $this->getAllUsersWithRank(self::RANK,$username);
     }
 
     public function deleteStudentFromSystem($username)

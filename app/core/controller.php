@@ -29,5 +29,11 @@ class Controller
         header("Location: " . ROOT . $path);
         die;
     }
+    public function forbidden(){
+        $response = new Response();
+        $response->setStatusCode(403);
+        $this->data["pageName"] = "Access Denied";
+        $this->view("Forbidden",$this->data);
+    }
 
 }

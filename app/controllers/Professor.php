@@ -77,7 +77,7 @@ class Professor extends Controller
         $this->view("all-professors",$this->data);
     }
     public function getMissingData(){
-        $lecturers = $this->prof->getAllLecturers();
+        $lecturers = $this->prof->getAllLecturers($this->data["user"]->username);
         $this->data["lecturers"] = $lecturers;
     }
 }

@@ -8,7 +8,7 @@ class Courses extends Model{
         $this->lecturer = new lecturer();
     }
 
-    public function validateData($data,$image)
+    public function validateData($data,$image = "")
     {
         foreach ($data as $key => $value){
             $$key = $value ?? false;
@@ -25,10 +25,13 @@ class Courses extends Model{
         if(is_array($professorusername)){
             return $check;
         }
-        $check = $this->image->isValidImage($image);
-        if(is_array($check)){
-            return $check;
+        if($image != ""){
+            $check = $this->image->isValidImage($image);
+            if(is_array($check)){
+                return $check;
+            }
         }
+
         return true;
 
     }
@@ -104,7 +107,7 @@ class Courses extends Model{
         return $data;
     }
     //todo
-    private function getNumberOfStudentInACourse($id): int
+    public function getNumberOfStudentInACourse($id): int
     {
         $query = "SELECT count(student_id) as count FROM student_courses WHERE course_id = :id";
         $data = $this->db->read($query,
@@ -163,8 +166,52 @@ class Courses extends Model{
         ]);
     }
 
-    public function editCourseData($id)
+    public function editCourseData(array $data,int $courseId)
     {
+        $check = $this->validateData($data);
+        if(is_array($check)){
+            return $check;
+        }
+        $data["lecturer_id"] = $this->getLecturerId($data["professorusername"]);
+        unset($data["professorusername"]);
+        $data["course_id"] = $courseId;
+        $query = "UPDATE course SET name = :coursename,lecturer_id = :lecturer_id,description = :description WHERE id = :course_id";
+        return $this->db->write($query,$data);
+    }
+    public function getCourseStudents($id){
+        $query = "SELECT u.id studentId, u.f_name,u.l_name,u.email,u.username FROM users u INNER JOIN student_courses c ON(u.id = c.student_id) WHERE c.course_id = :id && u.rank = :rank";
+        return $this->db->read($query,[
+            "id"=>$id,
+            "rank"=>"student"
+        ]);
+    }
+    public function getStudentsNotInTheCourse($id){
+        $query = "SELECT id, f_name,l_name,email,username FROM users WHERE id NOT IN (SELECT student_id FROM student_courses WHERE course_id = :course_id) && rank = :rank";
+        return $this->db->read($query,
+        [
+           "course_id"=>$id,
+            "rank"=>"student"
+        ]);
+    }
 
+    public function addStudentToACourse(int $studentId,int $courseId)
+    {
+        $query = "INSERT INTO student_courses (student_id,course_id) VALUES(:student_id,:course_id)";
+        return $this->db->write($query,
+            [
+                "student_id"=>$studentId,
+                "course_id"=>$courseId
+            ]
+        );
+    }
+
+    public function removeStudentFromACourse(int $student_id, int $course_id)
+    {
+        $query = "DELETE FROM student_courses WHERE student_id = :student_id AND course_id = :course_id";
+        return $this->db->write($query,
+        [
+           "student_id"=>$student_id,
+           "course_id" =>$course_id
+        ]);
     }
 }

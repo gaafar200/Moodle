@@ -127,8 +127,10 @@
                                         <p class="all-pro-ad"><?= $technical->email ?></p>
                                         <div>
                                            <a href="<?= ROOT ?>Employee/Profile/<?= $technical->username ?>"> <button type="button" class="btn btn-custon-rounded-four btn-primary">Profile</button></a>
-                                           <a href="<?= ROOT ?>Employee/delete/<?= $technical->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
-                                           <a href="<?= ROOT ?>Employee/edit/<?= $technical->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                            <?php if(checkAuthorization("admin")): ?>
+                                               <a href="<?= ROOT ?>Employee/delete/<?= $technical->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-danger">Delete</button></a>
+                                               <a href="<?= ROOT ?>Employee/edit/<?= $technical->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                            <?php endif; ?>
                                         </div>
 
 

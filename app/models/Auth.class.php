@@ -84,8 +84,8 @@ class Auth
 
     public function hasRightPrivilege($privilegeRequired){
         $data = $this->is_logged_in();
-        $RANK["admin"] = ["admin","techEmployee","lecturer","student"];
-        $RANK["techEmployeed"] = ["techEmployee","lecturer","student"];
+        $RANK["admin"] = ["admin","technical","lecturer","student"];
+        $RANK["technical"] = ["technical","lecturer","student"];
         $RANK["lecturer"] = ["lecturer","student"];
         $RANK["student"] = ["student"];
         if(in_array($privilegeRequired,$RANK[$data[0]->rank])){
@@ -95,6 +95,8 @@ class Auth
             return false;
         }
     }
+
+
 }
 
 

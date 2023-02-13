@@ -53,9 +53,9 @@ class lecturer extends User implements Description
         return $data;
     }
 
-    public function getAllLecturers()
+    public function getAllLecturers($username)
     {
-        return $this->getAllUsersWithRank("lecturer");
+        return $this->getAllUsersWithRank("lecturer",$username);
     }
 
     public function isValidDescription($description): array | bool

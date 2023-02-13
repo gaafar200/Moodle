@@ -21,7 +21,7 @@ class Employees extends User
         $data["rank"] = self::RANK;
         return $data;
     }
-    public function getAllTechnicals(){
-       return $this->getAllUsersWithRank("technical");
+    public function getAllTechnicals($username){
+       return $this->getAllUsersWithRank("technical",$username);
     }
 }

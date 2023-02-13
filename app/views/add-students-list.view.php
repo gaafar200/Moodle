@@ -131,39 +131,25 @@
                                             </div>
 
                                             <!-- ------- Here goes the loop -----  -->
-                                            <div class="table-tbody mt-2">
-                                                <div class="td-id">
-                                                    <span>1</span>
+                                            <?php if(isset($courseStudents) && is_array($courseStudents)):
+                                                $count = 1;
+                                            ?>
+                                            <?php foreach ($courseStudents as $student): ?>
+                                            <form method="POST">
+                                                <div class="table-tbody mt-2">
+                                                    <div class="td-id">
+                                                        <span><?= $count++ ?></span>
+                                                    </div>
+                                                    <div class="td"><?= $student->f_name ." " . $student->l_name?></div>
+                                                    <div class="td-flex"><?= $student->email ?></div>
+                                                    <div class="td-flex"><?= $student->username ?></div>
+                                                    <div class="td-last justify-content-end">
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Add Student</button>
+                                                    </div>
                                                 </div>
-                                                <div class="td">Ali</div>
-                                                <div class="td-flex">Ali2000@gmail.com</div>
-                                                <div class="td-flex">Student2000</div>
-                                                <div class="td-last justify-content-end">
-                                                    <button type="button" class="btn btn-success">Add Student</button>
-                                                </div>
-                                            </div>
-                                            <div class="table-tbody mt-2">
-                                                <div class="td-id">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="td">Ali</div>
-                                                <div class="td-flex">Ali2000@gmail.com</div>
-                                                <div class="td-flex">Student2000</div>
-                                                <div class="td-last justify-content-end">
-                                                    <button type="button" class="btn btn-success">Add Student</button>
-                                                </div>
-                                            </div>
-                                            <div class="table-tbody mt-2">
-                                                <div class="td-id">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="td">Ali</div>
-                                                <div class="td-flex">Ali2000@gmail.com</div>
-                                                <div class="td-flex">Student2000</div>
-                                                <div class="td-last justify-content-end">
-                                                    <button type="button" class="btn btn-success">Add Student</button>
-                                                </div>
-                                            </div>
+                                            </form>
+                                            <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

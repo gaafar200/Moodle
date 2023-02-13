@@ -215,8 +215,6 @@ drop table lecturer_degree;
 
 ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(10) NOT NULL;
 Alter table users add gender ENUM ("male","female") not null after password;
-ALTER TABLE course ADD FOREIGN KEY(lecturer_id) REFERENCES users(id);
-Alter table course add COLUMN image varchar(250) not null;
 ALTER Table Course ADD COLUMN description varchar(255) not null;
 
    

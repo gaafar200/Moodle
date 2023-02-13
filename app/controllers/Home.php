@@ -11,6 +11,5 @@ class Home extends Controller
         else{
             $this->redirect("Login");
         }
-
     }
 }

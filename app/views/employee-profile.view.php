@@ -156,9 +156,11 @@
                                 </div>
                                  <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="address-hr">
-                                            <a href="<?= ROOT ?>Employee/edit/<?= $EmployeeData[0]->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
-                                        </div>
+                                        <?php if(checkAuthorization("admin")): ?>
+                                            <div class="address-hr">
+                                                <a href="<?= ROOT ?>Employee/edit/<?= $EmployeeData[0]->username ?>"><button type="button" class="btn btn-custon-rounded-four btn-success">Edit</button></a>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

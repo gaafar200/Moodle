@@ -26,7 +26,10 @@ class Course extends Controller
                         $this->data["errors"] = $isPhotoChanged;
                     }
                 }
-                $check = $this->course->editCourseData($id);
+                $check = $this->course->editCourseData($_POST,$id);
+                if($check){
+                    $this->redirect("Course");
+                }
             }
         }
         else{
@@ -66,14 +69,19 @@ class Course extends Controller
         $this->view("all-courses",$this->data);
     }
     public function addStudents($id){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $result = $this->course->addStudentToACourse($_POST["addStudent"],$id);
+        }
+        $this->data["courseStudents"] = $this->course->getStudentsNotInTheCourse($id);
         $this->data["pageName"] = "add students";
         $this->view("add-students-list",$this->data);
     }
     public function removeStudents($id){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $result = $this->course->removeStudentFromACourse($_POST["delete"],$id);
+        }
+        $this->data["courseStudents"] = $this->course->getCourseStudents($id);
         $this->data["pageName"] = "remove students";
        $this->view("remove-students-list",$this->data);
     }
-
-
-
 }

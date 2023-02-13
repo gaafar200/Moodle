@@ -97,7 +97,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad addcoursepro">
-                                            <form action="#" method="POST" enctype="multipart/form-data"
+                                            <form action="" method="POST" enctype="multipart/form-data"
                                                   class="dropzone dropzone-custom needsclick addcourse"
                                                   id="demo1-upload">
                                                 <div class="row">
@@ -107,15 +107,15 @@
                                                                    class="form-control" placeholder="Course Name">
                                                         </div>
                                                         <div class="form-group alert-up-pd">
-
                                                             <label for="images" class="drop-container">
                                                                 <span class="drop-title">Drop files here</span>
                                                                 or
-                                                                <input name="image" type="file" id="images" accept="image/*" required>
+                                                                <input type="file" name="image" id="images" accept="image/*" >
                                                                 <?php if(isset($errors) && isset($errors["image"])): ?>
                                                                     <em for="image" class="invalid"><?= ucfirst($errors["image"]) ?></em>
                                                                 <?php endif; ?>
                                                             </label>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

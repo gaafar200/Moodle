@@ -13,7 +13,7 @@ class Student extends  Controller
             $this->data["students"] = $this->student->searchForStudents($_POST["search"]);
         }
         else{
-            $this->data["students"] = $this->student->getAllStudent();
+            $this->data["students"] = $this->student->getAllStudent($this->data["user"]->username);
         }
         $this->view("all-students",$this->data);
     }
@@ -67,7 +67,7 @@ class Student extends  Controller
                 $this->student->deleteUser($username);
             }
         }
-        $this->data["students"] = $this->student->getAllStudent();
+        $this->data["students"] = $this->student->getAllStudent($this->data["user"]->username);
         $this->view("all-students",$this->data);
     }
 

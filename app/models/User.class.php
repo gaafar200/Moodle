@@ -216,11 +216,12 @@ Abstract class User extends Model
         ]);
         return $data;
     }
-    protected function getAllUsersWithRank($rank){
-        $query = "SELECT * FROM users WHERE rank = :rank";
+    protected function getAllUsersWithRank($rank,$username){
+        $query = "SELECT * FROM users WHERE rank = :rank AND username != :username";
         return $this->db->read($query,
         [
-            "rank"=>$rank
+            "rank"=>$rank,
+            "username"=>$username
         ]);
     }
     public  function registerUser($data,$image): bool {

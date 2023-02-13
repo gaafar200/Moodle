@@ -103,3 +103,10 @@ function displayCourseLecturerUsername($data){
     }
     return "";
 }
+/**
+ * Authorization Section
+ */
+function checkAuthorization($requiredAuthoriztion){
+    $Auth = new Auth();
+    return $Auth->hasRightPrivilege($requiredAuthoriztion);
+}

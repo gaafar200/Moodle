@@ -9,56 +9,71 @@ class Employee extends Controller
     }
     public function index(){
         $this->data["pageName"] = "All Employees";
-        $this->data["technicals"] = $this->employee->getAllTechnicals();
+        $this->data["technicals"] = $this->employee->getAllTechnicals($this->data["user"]->username);
         $this->view("all-employees",$this->data);
     }
     public function add(){
-        $this->data["pageName"] = "Add Employee";
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $check = $this->employee->ValidateData($_POST,$_FILES);
-            if($check === true){
-                $result = $this->employee->registerUser($_POST,$_FILES);
-                if($result){
-                    $this->redirect("Employee");
-                }
-            }
-        }
-        $this->view("add-employee",$this->data);
-
-    }
-    public function edit($username = ""){
-        if($username != ""){
+        if($this->Auth->hasRightPrivilege("admin")){
+            $this->data["pageName"] = "Add Employee";
             if($_SERVER["REQUEST_METHOD"] == "POST"){
-                if($_FILES["image"]["full_path"] !== ""){
-                    $isPhotoChanged = $this->employee->image->changePhoto($username,$_FILES);
-                    if($isPhotoChanged !== true){
-                        $this->data["errors"] = $isPhotoChanged;
-                    }
-                }
-                $check = $this->employee->validateEditBaseData($_POST);
+                $check = $this->employee->ValidateData($_POST,$_FILES);
                 if($check === true){
-                    $isEdited = $this->employee->editUserData($_POST);
-                    if($isEdited){
+                    $result = $this->employee->registerUser($_POST,$_FILES);
+                    if($result){
                         $this->redirect("Employee");
                     }
                 }
             }
+            $this->view("add-employee",$this->data);
         }
-        $this->data["EmployeeData"] = $this->employee->getUserDataFromUsername($username);
-        $this->data["pageName"] = "Edit Employee";
-        $this->view("edit-employee",$this->data);
+        else{
+            $this->forbidden();
+        }
+    }
+    public function edit($username = ""){
+        if($this->Auth->hasRightPrivilege("admin")){
+            if($username != ""){
+                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                    if($_FILES["image"]["full_path"] !== ""){
+                        $isPhotoChanged = $this->employee->image->changePhoto($username,$_FILES);
+                        if($isPhotoChanged !== true){
+                            $this->data["errors"] = $isPhotoChanged;
+                        }
+                    }
+                    $check = $this->employee->validateEditBaseData($_POST);
+                    if($check === true){
+                        $isEdited = $this->employee->editUserData($_POST);
+                        if($isEdited){
+                            $this->redirect("Employee");
+                        }
+                    }
+                }
+            }
+            $this->data["EmployeeData"] = $this->employee->getUserDataFromUsername($username);
+            $this->data["pageName"] = "Edit Employee";
+            $this->view("edit-employee",$this->data);
+        }
+        else{
+            $this->forbidden();
+        }
     }
 
     public function delete($username = ""){
-        $this->data["pageName"] = "All Employees";
-        if($username != ""){
-            $result = $this->employee->deleteUser($username);
-            if($result === true){
-                $this->data["success"] = ["Employee"=> "employee Deleted Successfully"];
+        if($this->Auth->hasRightPrivilege("admin")){
+            $this->data["pageName"] = "All Employees";
+            if($username != ""){
+                $result = $this->employee->deleteUser($username);
+                if($result === true){
+                    $this->data["success"] = ["Employee"=> "employee Deleted Successfully"];
+                }
             }
+            $this->data["technicals"] = $this->employee->getAllTechnicals($this->data["user"]->username);
+            $this->view("all-employees",$this->data);
         }
-        $this->data["technicals"] = $this->employee->getAllTechnicals();
-        $this->view("all-employees",$this->data);
+        else{
+            $this->forbidden();
+        }
+
     }
     public function profile($username){
         $this->data["EmployeeData"] = $this->employee->getUserDataFromUsername($username);
