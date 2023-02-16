@@ -155,6 +155,7 @@
                                     <div class="btn1Courses">
 
                                         <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Edit</button></a>
+                                        <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
                                     </div>
                             </div>
                         </div>
