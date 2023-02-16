@@ -1,3 +1,4 @@
+/** My database */
 CREATE DATABASE IF NOT EXISTS university_model;
 use university_model;
 create table if not exists users(

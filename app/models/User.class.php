@@ -265,7 +265,7 @@ Abstract class User extends Model
 
     private function applyStrickPrivilege()
     {
-        return $this->Auth->hasRightPrivilege("techEmployee");
+        return $this->Auth->hasRightPrivilege("technical");
     }
 
     private function handleImage($image):string
