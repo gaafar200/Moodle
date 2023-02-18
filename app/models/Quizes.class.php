@@ -150,5 +150,34 @@ class Quizes extends model
         return true;
     }
 
+    public function getAllQuizes(int $id)
+    {
+        $query = "SELECT id,name,quiz_date as date,time,mark_value as mark FROM quiz where course_id = :id";
+        return $this->db->read($query,
+        [
+           "id"=>$id
+        ]);
+
+    }
+
+    public function deleteQuiz(int $id):void
+    {
+        $this->deleteAllRelatedQuestions($id);
+        $query = "DELETE FROM quiz WHERE id = :id";
+        $this->db->write($query,
+        [
+            "id"=>$id
+        ]);
+    }
+
+    private function deleteAllRelatedQuestions(int $id):void
+    {
+        $query = "DELETE FROM quiz_questions WHERE quiz_id = :id";
+        $this->db->write($query,
+        [
+           "id"=>$id
+        ]);
+    }
+
 
 }

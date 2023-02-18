@@ -120,7 +120,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="btn1Courses">
-                                        <a href="<?= ROOT ?>Quiz/setQuiz/<?= $course_id?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
+                                        <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
                                         <h4 class="m-3 "> Quizes List </h4>
                                     </div>
                                         <div class="table-flex">
@@ -135,23 +135,25 @@
                                             </div>
 
                                             <!-- ------- Here goes the loop -----  -->
-                                            <?php if(isset($courseStudents) && is_array($courseStudents)):
+                                            <?php if($quizes_data):
                                                 $count = 1;
                                             ?>
-                                            <?php foreach ($courseStudents as $student): ?>
+                                            <?php foreach ($quizes_data as $quiz): ?>
                                             <form method="POST">
                                                 <div class="table-tbody mt-2">
                                                     <div class="td-id">
                                                         <span><?= $count++ ?></span>
                                                     </div>
-                                                    <div class="td">Quiz Name</div>
-                                                    <div class="td-flex">Quiz Date</div>
-                                                    <div class="td-flex">Quiz Time</div>
-                                                    <div class="td-flex">Quiz Mark</div>
+                                                    <div class="td"><?= $quiz->name ?></div>
+                                                    <div class="td-flex"><?= $quiz->date ?></div>
+                                                    <div class="td-flex"><?= $quiz->time ?></div>
+                                                    <div class="td-flex"><?= $quiz->mark ?></div>
                                                     <div class="td-last justify-content-end">
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Add Question</button>
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Edit Quiz</button>
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-danger">Delete Quiz</button>
+                                                        <a href="<?= ROOT ?>Quiz/addQuestions/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
+                                                        <a href="<?= ROOT ?>َQuiz/EditQuiz/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
+                                                        <form action="#" method="DELETE">
+                                                            <button type="submit" value="<?= $quiz->id  ?>" class="btn btn-danger">Delete Quiz</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </form>

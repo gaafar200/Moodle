@@ -12,18 +12,24 @@ class Quiz extends Controller
     public function index(int $id){
         $this->data["pageName"] = "Quizes";
         $this->data["course_id"] = $id;
+        $this->data["quizes_data"] = $this->quiz->getAllQuizes($id);
         $this->view("quizzes-list",$this->data);
     }
-    public function setQuiz(int $id){
+    public function set(int $id){
         $this->data["pageName"] = "Set Quiz";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $result = $this->quiz->setQuiz($_POST,$id);
             if($result === true){
-                $this->redirect("Quiz");
+                $this->redirect("Quiz/" . $id);
             }
             $this->data["errors"] = $result;
         }
         $this->view("set-quiz",$this->data);
+    }
+    public function delete(int $id){
+        $this->data["pageName"] = "Quizes";
+        $this->quiz->deleteQuiz($id);
+        $this->view("quizzes-list",$this->data);
     }
 
 }
