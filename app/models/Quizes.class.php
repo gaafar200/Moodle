@@ -1,6 +1,6 @@
 <?php
 
-class quiz extends model
+class Quizes extends model
 {
     public description $description;
     public function __construct(){

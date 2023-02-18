@@ -146,7 +146,7 @@
                                                         Course Actions
                                                     </button>
                                                     <div  class=" dropdown-menu ">
-                                                        <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">List Of Quizzes</button></a>
+                                                        <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">List Of Quizzes</button></a>
                                                         <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Add Student</button></a>
                                                         <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Remove Student</button></a>
                                                     </div>

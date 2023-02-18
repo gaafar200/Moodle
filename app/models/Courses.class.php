@@ -8,7 +8,6 @@ class Courses extends Model{
         parent::__construct();
         $this->image = new Image();
         $this->lecturer = new lecturer();
-        $this->quiz = new quiz();
         $this->description = new description();
     }
 
@@ -79,13 +78,6 @@ class Courses extends Model{
     {
         $data = $this->lecturer->checkIfProfessorExists($username);
         return $data[0]->id;
-    }
-    public function setQuiz(array $data,int $id): bool | array
-    {
-        if(!$this->DoesCourseExists($id)){
-            return ["Course"=>"Course does not exists"];
-        }
-        return $this->quiz->setQuiz($data,$id);
     }
     public function getCoursesData()
     {

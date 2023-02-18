@@ -84,15 +84,5 @@ class Course extends Controller
         $this->data["pageName"] = "remove students";
        $this->view("remove-students-list",$this->data);
     }
-    public function setQuiz($id){
-        $this->data["pageName"] = "Set Quiz";
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $result = $this->course->setQuiz($_POST,$id);
-            if($result === true){
-                $this->redirect("Course");
-            }
-            $this->data["errors"] = $result;
-        }
-        $this->view("set-quiz",$this->data);
-    }
+
 }
