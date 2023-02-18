@@ -42,6 +42,7 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
                                                     class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="democrou" class="collapse dropdown-header-top">
@@ -120,15 +121,14 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="btn1Courses">
-<<<<<<< HEAD
-                                        
->>>>>>> a5c68937b82675dcc139ac5be0b2f9ca4bdfd67e
+                                        <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Add Question</button></a>
+                                        <h4 class="m-3 "> Questions List </h4>
                                     </div>
                                         <div class="table-flex">
 
                                             <div class="tabel-thead">
                                                 <div class="td-id"> ID </div>
-                                                <div class="td"> Quiz Name </div>
+                                                <div class="td"> Question Name </div>
                                                 <div class="td-flex">Quiz Date</div>
                                                 <div class="td-flex">Quiz Time</div>
                                                 <div class="td-flex">Quiz Mark</div>
@@ -136,25 +136,23 @@
                                             </div>
 
                                             <!-- ------- Here goes the loop -----  -->
-                                            <?php if($quizes_data):
+                                            <?php if(isset($courseStudents) && is_array($courseStudents)):
                                                 $count = 1;
                                             ?>
-                                            <?php foreach ($quizes_data as $quiz): ?>
+                                            <?php foreach ($courseStudents as $student): ?>
                                             <form method="POST">
                                                 <div class="table-tbody mt-2">
                                                     <div class="td-id">
                                                         <span><?= $count++ ?></span>
                                                     </div>
-                                                    <div class="td"><?= $quiz->name ?></div>
-                                                    <div class="td-flex"><?= $quiz->date ?></div>
-                                                    <div class="td-flex"><?= $quiz->time ?></div>
-                                                    <div class="td-flex"><?= $quiz->mark ?></div>
+                                                    <div class="td">Quiz Name</div>
+                                                    <div class="td-flex">Quiz Date</div>
+                                                    <div class="td-flex">Quiz Time</div>
+                                                    <div class="td-flex">Quiz Mark</div>
                                                     <div class="td-last justify-content-end">
-                                                        <a href="<?= ROOT ?>Quiz/addQuestions/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
-                                                        <a href="<?= ROOT ?>َQuiz/EditQuiz/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
-                                                        <form action="#" method="DELETE">
-                                                            <button type="submit" value="<?= $quiz->id ?>" class="btn btn-danger">Delete Quiz</button>
-                                                        </form>
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Add Question</button>
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Edit Quiz</button>
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-danger">Delete Quiz</button>
                                                     </div>
                                                 </div>
                                             </form>
