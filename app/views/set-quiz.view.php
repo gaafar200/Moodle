@@ -1,26 +1,7 @@
 <?php $this->view("include/header", ["pageName" => $pageName]); ?>
 <?php $this->view("include/sidebar"); ?>
 <?php $this->view("include/upbar", ["user" => $user]); ?>
-<style>
-    .myDiv {
-        display: none;
-        padding: 10px;
-        margin-top: 20px;
-    }
 
-    #showOne {
-        border: 1px solid green;
-    }
-
-
-    #showTwo {
-        border: 1px solid green;
-    }
-
-    #showThree {
-        border: 1px solid green;
-    }
-</style>
 <!-- Mobile Menu start -->
 <div class="mobile-menu-area">
     <div class="container">
@@ -97,11 +78,11 @@
 </div>
 <!-- Single pro tab review Start-->
 <div class="single-pro-review-area mt-t-30 mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid " >
+        <div class="row " style="margin-top:100px ;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
-                    <form action="" method="POST" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                    <form action="" method="POST" class="dropzone-custom needsclick add-professors" id="demo1-upload">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
@@ -197,14 +178,6 @@
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#myselection').on('change', function() {
-            var demovalue = $(this).val();
-            $("div.myDiv").hide();
-            $("#show" + demovalue).show();
-        });
-    });
-</script>
+
 
 <?php $this->view("include/footer"); ?>

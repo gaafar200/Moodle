@@ -333,6 +333,14 @@ textarea {
     margin: 2px 8px;
 }
 
+.top-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
 .btn2Courses {
     display: flex;
     align-items: center;
