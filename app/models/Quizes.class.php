@@ -179,5 +179,15 @@ class Quizes extends model
         ]);
     }
 
+    public function getQuizData(int $id):array | bool
+    {
+        $query = "SELECT * FROM quiz WHERE id = :id";
+        return $this->db->read($query,
+        [
+           "id"=>$id
+        ]);
+
+    }
+
 
 }

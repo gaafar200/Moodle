@@ -110,3 +110,52 @@ function checkAuthorization($requiredAuthoriztion){
     $Auth = new Auth();
     return $Auth->hasRightPrivilege($requiredAuthoriztion);
 }
+
+/**
+ * Quiz Data Section
+ */
+function checkQuizDataIsValid($data){
+    if(is_array($data)){
+        return true;
+    }
+    return false;
+}
+function displayQuizName($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->name;
+    }
+    return " ";
+}
+function displayQuizDate($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->quiz_date;
+    }
+    return " ";
+}
+function displayQuizStartTime($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->start_time;
+    }
+    return " ";
+}
+function displayQuizEndTime($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->end_time;
+    }
+    return " ";
+}
+function displayQuizNumberOfQuestions($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->number_of_questions;
+    }
+    return " ";
+}
+function displayQuizTime($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->time;
+    }
+    return " ";
+}
+function displayQuizMark($data){
+    
+}

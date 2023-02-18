@@ -106,31 +106,31 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="quiz-name">Quiz Name</label>
-                                    <input required name="quiz_name" type="text" id="quiz-name" class="form-control" placeholder="Quiz Name">
+                                    <input required name="quiz_name" value="<?= displayQuizName($quiz_date) ?>" type="text" id="quiz-name" class="form-control" placeholder="Quiz Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="date">Date</label>
-                                    <input required name="date" type="date" class="form-control" placeholder="Date">
+                                    <input required name="date" value="<?= displayQuizDate($quiz_date) ?>" type="date" class="form-control" placeholder="Date">
                                 </div>
                                 <div class="form-group">
                                     <label for="start-time">Start Time</label>
-                                    <input required name="start_time" type="time" id="start-time" class="form-control" placeholder="Start Time">
+                                    <input required name="start_time" <?= displayQuizStartTime($quiz_date) ?> type="time" id="start-time" class="form-control" placeholder="Start Time">
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">End Time</label>
-                                    <input required name="end_time" type="time" id="end-time" class="form-control" placeholder="End Time">
+                                    <input required name="end_time" <?= displayQuizEndTime($quiz_date) ?> type="time" id="end-time" class="form-control" placeholder="End Time">
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">Number Of Questions</label>
-                                    <input required name="number_of_questions" type="number" id="number-of-questions" class="form-control" placeholder="Number Of Questions">
+                                    <input required name="number_of_questions" value="<?= displayQuizNumberOfQuestions($quiz_date) ?>" type="number" id="number-of-questions" class="form-control" placeholder="Number Of Questions">
                                 </div>
                                 <div class="form-group">
                                     <label for="final-mark">Quiz Time</label>
-                                    <input required name="time" type="number"  id="final-mark" class="form-control" placeholder="Enter the Number of minutes for the quiz">
+                                    <input required name="time" value="<?= displayQuizTime($quiz_date) ?>" type="number"  id="final-mark" class="form-control" placeholder="Enter the Number of minutes for the quiz">
                                 </div>
                                 <div class="form-group">
                                     <label for="final-mark">Mark Value</label>
-                                    <input required name="mark_value"  type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
+                                    <input required name="mark_value" value="<?= displayQuizMark($quiz_date) ?>" type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
                                 </div>
 
                             </div>
@@ -138,7 +138,7 @@
                                 <div class="form-group">
                                     <label for="number-of-attempts">Number Of
                                         Attempts</label>
-                                    <input required name="max_attempts" type="number" id="number-of-attempts" class="form-control" placeholder="Number Of Attempts">
+                                    <input required name="max_attempts" value="<?= displayQuizMaxAttempts($quiz_date) ?>" type="number" id="number-of-attempts" class="form-control" placeholder="Number Of Attempts">
                                 </div>
                                 <div class="form-group">
                                     <label for="move-between-questions">Move Between
@@ -146,8 +146,8 @@
                                     <select required name="is_recursive" id="move-between-questions" class="form-control">
                                         <option value="none" selected="" disabled="">
                                             Move between questions</option>
-                                        <option value="no">No</option>
-                                        <option value="yes">Yes</option>
+                                        <option value="no" <?= checkQuizMoveBetweenQuestions($quiz_date,"no") ?>>No</option>
+                                        <option value="yes" <?= checkQuizMoveBetweenQuestions($quiz_date,"yes")?> >Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -155,8 +155,8 @@
                                     <select required name="is_auto_correct" class="form-control" id="auto-correct">
                                         <option value="none" selected="" disabled="">
                                             Auto Correct</option>
-                                        <option value="no">No</option>
-                                        <option value="yes">>Yes</option>
+                                        <option value="no" <?= checkQuizAutoCorrect($quiz_date,"no") ?>>No</option>
+                                        <option value="yes"><?= checkQuizAutoCorrect($quiz_date,"yes") ?>></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -164,8 +164,8 @@
                                     <select required name="is_shuffled" class="form-control" id="auto-correct">
                                         <option value="none" selected="" disabled="">
                                             Are Questions Shuffled</option>
-                                        <option value="no">No</option>
-                                        <option value="yes" >Yes</option>
+                                        <option value="no" <?= checkQuizShuffled($quiz_date,"no") ?>>No</option>
+                                        <option value="yes" <?= checkQuizShuffled($quiz_date,"yes")?>>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -173,13 +173,13 @@
                                     <select required name="is_disclosed" class="form-control" id="auto-correct">
                                         <option value="none" selected="" disabled="">
                                             Are Marks Disclosed</option>
-                                        <option value="no" >No</option>
-                                        <option value="yes" >Yes</option>
+                                        <option value="no" <?= checkQuizDisclosed($quiz_date,"no") ?>>No</option>
+                                        <option value="yes" <?= checkQuizDisclosed($quiz_date,"no")  ?>>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group res-mg-t-15">
                                     <label for="description-quiz">Description</label>
-                                    <textarea required name="description" id="description-quiz" placeholder="Description"></textarea>
+                                    <textarea required name="description" id="description-quiz" placeholder="Description"><?= DisplayQuizDescription($quiz_date) ?></textarea>
                                 </div>
                             </div>
                         </div>
