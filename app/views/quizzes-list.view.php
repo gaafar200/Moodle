@@ -119,43 +119,44 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="<?= ASSETS ?>img/blog-details/1.jpg" alt="" />
-                                            </a>
-                                            
-                                        </div>
-                                                <div class="btn-group">
-                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Right-aligned menu
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <button class="dropdown-item" type="button">Action</button>
-                                                    <button class="dropdown-item" type="button">Another action</button>
-                                                    <button class="dropdown-item" type="button">Something else here</button>
-                                                </div>
-                                                </div>
+                                    <div class="btn1Courses">
+                                        <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
+                                        <h4 class="m-3 "> Students List </h4>
+                                    </div>
+                                        <div class="table-flex">
 
-                                        <div class="blog-details blog-sig-details">
-                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> <?= ucwords($courseDetails[0]->name) ?></a></span>
-                                                <span><a href="#"><i class="fa fa-comments-o"></i> <b>Professor
-                                                            Name:</b> <?= ucfirst($courseDetails[0]->f_name) . " " . ucfirst($courseDetails[0]->l_name) ?></a></span>
-                                                
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Course Actions
-                                                    </button>
-                                                    <div  class=" dropdown-menu ">
-                                                        <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">List Of Quizzes</button></a>
-                                                        <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Add Student</button></a>
-                                                        <a ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Remove Student</button></a>
+                                            <div class="tabel-thead">
+                                                <div class="td-id"> ID </div>
+                                                <div class="td"> Quiz Name </div>
+                                                <div class="td-flex">Quiz Date</div>
+                                                <div class="td-flex">Quiz Time</div>
+                                                <div class="td-flex">Quiz Mark</div>
+                                                <div class="td-last justify-content-center">Actions</div>
+                                            </div>
+
+                                            <!-- ------- Here goes the loop -----  -->
+                                            <?php if(isset($courseStudents) && is_array($courseStudents)):
+                                                $count = 1;
+                                            ?>
+                                            <?php foreach ($courseStudents as $student): ?>
+                                            <form method="POST">
+                                                <div class="table-tbody mt-2">
+                                                    <div class="td-id">
+                                                        <span><?= $count++ ?></span>
+                                                    </div>
+                                                    <div class="td">Quiz Name</div>
+                                                    <div class="td-flex">Quiz Date</div>
+                                                    <div class="td-flex">Quiz Time</div>
+                                                    <div class="td-flex">Quiz Mark</div>
+                                                    <div class="td-last justify-content-end">
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Add Question</button>
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Edit Quiz</button>
+                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-danger">Delete Quiz</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <h1><a class="blog-ht" href="#">Courses Description</a></h1>
-                                            <p><?= ucfirst($courseDetails[0]->description) ?></p>
-                                        </div>
-                                        <div>
+                                            </form>
+                                            <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -165,5 +166,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 <?php $this->view("include/footer"); ?>

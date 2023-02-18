@@ -328,6 +328,11 @@ textarea {
     width: 130px;
 }
 
+.style-btn {
+    width: 90%;
+    margin: 2px 8px;
+}
+
 .btn2Courses {
     display: flex;
     align-items: center;
