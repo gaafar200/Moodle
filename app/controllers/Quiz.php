@@ -11,6 +11,9 @@ class Quiz extends Controller
 
     public function index(int $id){
         $this->data["pageName"] = "Quizes";
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->quiz->deleteQuiz($_POST["quiz_id"]);
+        }
         $this->data["course_id"] = $id;
         $this->data["quizes_data"] = $this->quiz->getAllQuizes($id);
         $this->view("quizzes-list",$this->data);
@@ -26,10 +29,9 @@ class Quiz extends Controller
         }
         $this->view("set-quiz",$this->data);
     }
-    public function delete(int $id){
-        $this->data["pageName"] = "Quizes";
-        $this->quiz->deleteQuiz($id);
-        $this->view("quizzes-list",$this->data);
+    public function edit(int $id){
+        $this->data["pageName"] = "Edit Quiz";
+        $this->view("set-quiz",$this->data);
     }
 
 }

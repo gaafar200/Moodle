@@ -151,8 +151,9 @@
                                                     <div class="td-last justify-content-end">
                                                         <a href="<?= ROOT ?>Quiz/addQuestions/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
                                                         <a href="<?= ROOT ?>َQuiz/EditQuiz/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
-                                                        <form action="#" method="DELETE">
-                                                            <button type="submit" value="<?= $quiz->id ?>" class="btn btn-danger">Delete Quiz</button>
+                                                        <form action="#" method="POST">
+                                                            <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
+                                                            <button type="submit" class="btn btn-danger">Delete Quiz</button>
                                                         </form>
                                                     </div>
                                                 </div>
