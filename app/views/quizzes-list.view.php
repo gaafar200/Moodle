@@ -121,7 +121,7 @@
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="btn1Courses">
 <<<<<<< HEAD
-                                        
+
 >>>>>>> a5c68937b82675dcc139ac5be0b2f9ca4bdfd67e
                                     </div>
                                         <div class="table-flex">
