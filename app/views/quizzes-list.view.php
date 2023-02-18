@@ -121,7 +121,7 @@
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="btn1Courses">
                                         <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
-                                        <h4 class="m-3 "> Students List </h4>
+                                        <h4 class="m-3 "> Quizzes List </h4>
                                     </div>
                                         <div class="table-flex">
 
