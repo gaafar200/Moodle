@@ -32,7 +32,8 @@ class Quiz extends Controller
     public function edit(int $id){
         $this->data["pageName"] = "Edit Quiz";
         $this->data["quiz_date"] = $this->quiz->getQuizData($id);
-        $this->view("set-quiz",$this->data);
+        $this->view("edit-quiz",$this->data);
     }
+
 
 }

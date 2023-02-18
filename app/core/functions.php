@@ -157,5 +157,52 @@ function displayQuizTime($data){
     return " ";
 }
 function displayQuizMark($data){
-    
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->mark_value;
+    }
+    return " ";
+}
+function displayQuizMaxAttempts($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->max_attempts;
+    }
+    return " ";
+}
+function checkQuizMoveBetweenQuestions($data,$value){
+    if(checkQuizDataIsValid($data)){
+        if($data[0]->is_recursive == $value){
+            return "selected";
+        }
+    }
+    return " ";
+}
+function checkQuizAutoCorrect($data,$value){
+    if(checkQuizDataIsValid($data)){
+        if($data[0]->is_auto_correct == $value){
+            return "selected";
+        }
+    }
+    return " ";
+}
+function checkQuizShuffled($data,$value){
+    if(checkQuizDataIsValid($data)){
+        if($data[0]->is_shuffled == $value){
+            return "selected";
+        }
+    }
+    return " ";
+}
+function checkQuizDisclosed($data,$value){
+    if(checkQuizDataIsValid($data)){
+        if($data[0]->is_disclosed == $value){
+            return "selected";
+        }
+    }
+    return " ";
+}
+function DisplayQuizDescription($data){
+    if(checkQuizDataIsValid($data)){
+        return $data[0]->description;
+    }
+    return " ";
 }
