@@ -1,6 +1,6 @@
-<?php $this->view("include/header", ["pageName" => $pageName]); ?>
-<?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar", ["user" => $user]); ?>
+<?php $this->view('include/header', ['pageName' => $pageName]); ?>
+<?php $this->view('include/sidebar'); ?>
+<?php $this->view('include/upbar', ['user' => $user]); ?>
 <style>
     .myDiv {
         display: none;
@@ -11,7 +11,6 @@
     #showOne {
         border: 1px solid green;
     }
-
 
     #showTwo {
         border: 1px solid green;
@@ -101,92 +100,89 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
-                    <form action="" method="POST" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label for="quiz-name">Quiz Name</label>
-                                    <input required name="quiz_name" type="text" id="quiz-name" class="form-control" placeholder="Quiz Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input required name="date" type="date" class="form-control" placeholder="Date">
-                                </div>
-                                <div class="form-group">
-                                    <label for="start-time">Start Time</label>
-                                    <input required name="start_time" type="time" id="start-time" class="form-control" placeholder="Start Time">
-                                </div>
-                                <div class="form-group">
-                                    <label for="end-time">End Time</label>
-                                    <input required name="end_time" type="time" id="end-time" class="form-control" placeholder="End Time">
-                                </div>
-                                <div class="form-group">
-                                    <label for="end-time">Number Of Questions</label>
-                                    <input required name="number_of_questions" type="number" id="number-of-questions" class="form-control" placeholder="Number Of Questions">
-                                </div>
-                                <div class="form-group">
-                                    <label for="final-mark">Quiz Time</label>
-                                    <input required name="time" type="number" id="final-mark" class="form-control" placeholder="Enter the Number of minutes for the quiz">
-                                </div>
-                                <div class="form-group">
-                                    <label for="final-mark">Mark Value</label>
-                                    <input required name="mark_value" type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
-                                </div>
+                    <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                        <div class="devit-card-custom">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Question">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" placeholder="Grade">
+                            </div>
+                            <select id="myselection" required name="myselection" class="form-control">
+                                <option value="none" selected="" disabled="">
+                                    Type Question</option>
+                                <option value="One"> True Or False
+                                </option>
+                                <option value="Two">Multiple Choice
+                                </option>
+                                <option value="Three">Essay Question
+                                </option>
+                            </select>
 
+                            <div id="showOne" class="myDiv">
+                                <select required name="Correct-answer" id="Correct-answer" class="form-control">
+                                    <option value="none" selected="" disabled="">
+                                        Correct Answer</option>
+                                    <option value="0">False</option>
+                                    <option value="1">True</option>
+                                </select>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div id="showTwo" class="myDiv">
+                                <select required name="multiple-answer" id="multiple-answer" class="form-control">
+                                    <option value="none" selected="" disabled="">
+                                        multiple-answer</option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                </select>
                                 <div class="form-group">
-                                    <label for="number-of-attempts">Number Of
-                                        Attempts</label>
-                                    <input required name="max_attempts" type="number" id="number-of-attempts" class="form-control" placeholder="Number Of Attempts">
+                                    <input name="choice1" type="text" class="form-control" placeholder="Choice One">
                                 </div>
                                 <div class="form-group">
-                                    <label for="move-between-questions">Move Between
-                                        Questions</label>
-                                    <select required name="is_recursive" id="move-between-questions" class="form-control">
-                                        <option value="none" selected="" disabled="">
-                                            Move between questions</option>
-                                        <option value="no">NO</option>
-                                        <option value="yes">Yes</option>
-                                    </select>
+                                    <input name="choice2" type="text" class="form-control" placeholder="Choice Tow">
                                 </div>
                                 <div class="form-group">
-                                    <label for="auto-correct">Auto Correct</label>
-                                    <select required name="is_auto_correct" class="form-control" id="auto-correct">
-                                        <option value="none" selected="" disabled="">
-                                            Auto Correct</option>
-                                        <option value="no">NO</option>
-                                        <option value="yes">Yes</option>
-                                    </select>
+                                    <input name="choice3" type="text" class="form-control" placeholder="Choice Three">
                                 </div>
                                 <div class="form-group">
-                                    <label for="auto-correct">Are Questions Shuffled</label>
-                                    <select required name="is_shuffled" class="form-control" id="auto-correct">
-                                        <option value="none" selected="" disabled="">
-                                            Are Questions Shuffled</option>
-                                        <option value="no">NO</option>
-                                        <option value="yes">Yes</option>
-                                    </select>
+                                    <input name="choice4" type="text" class="form-control" placeholder="Choice Four">
                                 </div>
                                 <div class="form-group">
-                                    <label for="auto-correct">Are Marks Disclosed</label>
-                                    <select required name="is_disclosed" class="form-control" id="auto-correct">
-                                        <option value="none" selected="" disabled="">
-                                            Are Marks Disclosed</option>
-                                        <option value="no">NO</option>
-                                        <option value="yes">Yes</option>
-                                    </select>
+                                    <input name="correct-answer" type="text" class="form-control" placeholder="Correct Answer">
                                 </div>
+                            </div>
+                            <div id="showThree" class="myDiv">
                                 <div class="form-group res-mg-t-15">
-                                    <label for="description-quiz">Description</label>
-                                    <textarea required name="description" id="description-quiz" placeholder="Description"></textarea>
+                                    <textarea name="correct-answer" placeholder="Correct Answer"></textarea>
                                 </div>
                             </div>
+
                         </div>
-                        <div class="row">
+                        <div class="form-group alert-up-pd">
+
+                            <label for="images" class="drop-container">
+                                <span class="drop-title">Drop image here</span>
+                                or
+                                <input name="image" type="file" id="images" accept="image/*">
+                                <?php if (
+                                    isset(
+                                        $errors
+                                    ) &&
+                                    isset(
+                                        $errors['image']
+                                    )
+                                ) : ?>
+                                    <em for="image" class="invalid"><?= ucfirst(
+                                                                        $errors['image']
+                                                                    ) ?></em>
+                                <?php endif; ?>
+                            </label>
+                        </div>
+
+                        <div class="row" style="margin: 100px;">
                             <div class="col-lg-12">
                                 <div class="payment-adress">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Set Quiz</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -207,4 +203,4 @@
     });
 </script>
 
-<?php $this->view("include/footer"); ?>
+<?php $this->view('include/footer'); ?>
