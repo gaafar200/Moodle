@@ -91,6 +91,7 @@ class Course extends Controller
             if($result === true){
                 $this->redirect("Course");
             }
+            $this->data["errors"] = $result;
         }
         $this->view("set-quiz",$this->data);
     }
