@@ -152,7 +152,7 @@
                                                         <a href="<?= ROOT ?>Quiz/addQuestions/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
                                                         <a href="<?= ROOT ?>َQuiz/EditQuiz/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
                                                         <form action="#" method="DELETE">
-                                                            <button type="submit" value="<?= $quiz->id  ?>" class="btn btn-danger">Delete Quiz</button>
+                                                            <button type="submit" value="<?= $quiz->id ?>" class="btn btn-danger">Delete Quiz</button>
                                                         </form>
                                                     </div>
                                                 </div>
