@@ -42,6 +42,7 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
                                                     class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="democrou" class="collapse dropdown-header-top">
