@@ -42,7 +42,6 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
                                                     class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="democrou" class="collapse dropdown-header-top">
@@ -120,44 +119,44 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                    <div class="btn1Courses">
-                                        <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Add Question</button></a>
+                                    <div class="top-btn">
                                         <h4 class="m-3 "> Questions List </h4>
+                                        <a href="Course/edit/"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Questions</button></a>
                                     </div>
-                                        <div class="table-flex">
-
-                                            <div class="tabel-thead">
-                                                <div class="td-id"> ID </div>
-                                                <div class="td"> Question Name </div>
-                                                <div class="td-flex">Quiz Date</div>
-                                                <div class="td-flex">Quiz Time</div>
-                                                <div class="td-flex">Quiz Mark</div>
-                                                <div class="td-last justify-content-center">Actions</div>
+                                    <div class="checkbox-container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">ID</th>
+                                                        <th scope="col">Question</th>
+                                                        <th scope="col">Correct Answer</th>
+                                                        <th scope="col">Mark</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                                                    <label class="custom-control-label" for="customCheck1">1</label>
+                                                                </div>
+                                                                </td>
+                                                                <td>Bootstrap 4 CDN and Starter Template</td>
+                                                                <td>Cristina</td>
+                                                                <td>913</td>
+                                                                <td>
+                                                                <div class="td-last justify-content-end">
+                                                                    <button type="submit" name="addStudent" class="btn btn-success">Edit Question</button>
+                                                                    <button type="submit" name="addStudent" class="btn btn-danger">Delete Question</button>
+                                                                </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                </table>
                                             </div>
-
-                                            <!-- ------- Here goes the loop -----  -->
-                                            <?php if(isset($courseStudents) && is_array($courseStudents)):
-                                                $count = 1;
-                                            ?>
-                                            <?php foreach ($courseStudents as $student): ?>
-                                            <form method="POST">
-                                                <div class="table-tbody mt-2">
-                                                    <div class="td-id">
-                                                        <span><?= $count++ ?></span>
-                                                    </div>
-                                                    <div class="td">Quiz Name</div>
-                                                    <div class="td-flex">Quiz Date</div>
-                                                    <div class="td-flex">Quiz Time</div>
-                                                    <div class="td-flex">Quiz Mark</div>
-                                                    <div class="td-last justify-content-end">
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Add Question</button>
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-success">Edit Quiz</button>
-                                                        <button type="submit" name="addStudent" value="<?= $student->id ?>" class="btn btn-danger">Delete Quiz</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <?php endforeach; ?>
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -167,6 +166,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 <?php $this->view("include/footer"); ?>

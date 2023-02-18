@@ -23,7 +23,7 @@
 <!-- Mobile Menu start -->
 <div class="mobile-menu-area">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top:100px ;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mobile-menu">
                     <nav id="dropdown">
@@ -100,7 +100,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
-                    <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                    <form action="/upload" class=" dropzone-custom needsclick add-professors" id="demo1-upload">
                         <div class="devit-card-custom">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Question">
