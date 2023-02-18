@@ -120,7 +120,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="top-btn">
-                                        <h4 class="m-3 "> Questions List </h4>
+                                        <h4 class=""> Questions List </h4>
                                         <a href="<?= ROOT ?>Question/set"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Questions</button></a>
                                     </div>
                                     <div class="checkbox-container">

@@ -95,11 +95,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="start-time">Start Time</label>
-                                    <input required name="start_time" <?= displayQuizStartTime($quiz_date) ?> type="time" id="start-time" class="form-control" placeholder="Start Time">
+                                    <input required name="start_time" value="<?= displayQuizStartTime($quiz_date) ?>" type="time" id="start-time" class="form-control" placeholder="Start Time">
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">End Time</label>
-                                    <input required name="end_time" <?= displayQuizEndTime($quiz_date) ?> type="time" id="end-time" class="form-control" placeholder="End Time">
+                                    <input required name="end_time" value="<?= displayQuizEndTime($quiz_date) ?>" type="time" id="end-time" class="form-control" placeholder="End Time">
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">Number Of Questions</label>
@@ -137,7 +137,7 @@
                                         <option value="none" selected="" disabled="">
                                             Auto Correct</option>
                                         <option value="no" <?= checkQuizAutoCorrect($quiz_date,"no") ?>>No</option>
-                                        <option value="yes"><?= checkQuizAutoCorrect($quiz_date,"yes") ?>></option>
+                                        <option value="yes" <?= checkQuizAutoCorrect($quiz_date,"yes") ?>>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -155,7 +155,7 @@
                                         <option value="none" selected="" disabled="">
                                             Are Marks Disclosed</option>
                                         <option value="no" <?= checkQuizDisclosed($quiz_date,"no") ?>>No</option>
-                                        <option value="yes" <?= checkQuizDisclosed($quiz_date,"no")  ?>>Yes</option>
+                                        <option value="yes" <?= checkQuizDisclosed($quiz_date,"yes")  ?>>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group res-mg-t-15">
@@ -167,7 +167,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="payment-adress">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Set Quiz</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Edit Quiz</button>
                                 </div>
                             </div>
                         </div>

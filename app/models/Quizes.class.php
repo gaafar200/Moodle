@@ -189,5 +189,18 @@ class Quizes extends model
 
     }
 
+    public function editQuiz(array $data, int $id):bool | array
+    {
+        $result = $this->validateQuizData($data);
+        if(is_array($result)){
+            return $result;
+        }
+        show($data);
+        $sql = "UPDATE quiz SET name = :quiz_name,quiz_date = :date,start_time = :start_time,end_time = :end_time,number_of_questions = :number_of_questions,time = :time,mark_value = :mark_value,max_attempts = :max_attempts,is_recursive = :is_recursive,is_auto_correct = :is_auto_correct,is_shuffled = :is_shuffled,is_disclosed = :is_disclosed,description = :description WHERE id = :id";
+        $data["id"] = $id;
+        echo $sql;
+        return $this->db->write($sql,$data);
+    }
+
 
 }

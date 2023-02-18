@@ -29,9 +29,16 @@ class Quiz extends Controller
         }
         $this->view("set-quiz",$this->data);
     }
-    public function edit(int $id){
+    public function edit(int $quizId,int $courseId){
         $this->data["pageName"] = "Edit Quiz";
-        $this->data["quiz_date"] = $this->quiz->getQuizData($id);
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $result = $this->quiz->editQuiz($_POST,$quizId);
+            if($result === true){
+                $this->redirect("Quiz/" . $courseId);
+            }
+            $this->data["errors"] = $result;
+         }
+        $this->data["quiz_date"] = $this->quiz->getQuizData($quizId);
         $this->view("edit-quiz",$this->data);
     }
 

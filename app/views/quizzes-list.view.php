@@ -150,7 +150,7 @@
                                                     <div class="td-flex"><?= $quiz->mark ?></div>
                                                     <div class="td-last justify-content-end">
                                                         <a href="<?= ROOT ?>Question/addQuestionsToCourse/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
+                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
                                                         <form method="POST">
                                                             <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
                                                             <button type="submit" class="btn btn-danger">Delete Quiz</button>

@@ -16,6 +16,7 @@ html {
     line-height: 1.4;
 }
 
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
@@ -697,7 +698,6 @@ textarea {
     border: 1px solid #F1F1F1;
     border-radius: 5px;
 }
-
 
 
 
