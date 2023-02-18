@@ -117,46 +117,46 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="/upload"
+                                                    <form action="" method="POST"
                                                         class="dropzone dropzone-custom needsclick add-professors"
                                                         id="demo1-upload">
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <label for="quiz-name">Quiz Name</label>
-                                                                    <input required name="quiz-name" type="text"
+                                                                    <input required name="quiz_name" type="text"
                                                                         id="quiz-name" class="form-control"
                                                                         placeholder="Quiz Name">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="date">Date</label>
-                                                                    <input required name="date" id="date" type="date"
+                                                                    <input required name="date" type="date"
                                                                         class="form-control" placeholder="Date">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="start-time">Start Time</label>
-                                                                    <input required name="start-time" type="time"
+                                                                    <input required name="start_time" type="time"
                                                                         id="start-time" class="form-control"
                                                                         placeholder="Start Time">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="end-time">End Time</label>
-                                                                    <input required name="end-time" type="time"
+                                                                    <input required name="end_time" type="time"
                                                                         id="end-time" class="form-control"
                                                                         placeholder="End Time">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="end-time">Number Of Questions</label>
-                                                                    <input required name="number-of-questions"
+                                                                    <input required name="number_of_questions"
                                                                         type="number" id="number-of-questions"
                                                                         class="form-control"
                                                                         placeholder="Number Of Questions">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="final-mark">Final Mark</label>
-                                                                    <input required name="final-mark" type="number"
+                                                                    <label for="final-mark">Quiz Time</label>
+                                                                    <input required name="time" type="number"
                                                                         id="final-mark" class="form-control"
-                                                                        placeholder="Final Mark">
+                                                                        placeholder="Enter the Number of minutes for the quiz">
                                                                 </div>
 
                                                             </div>
@@ -164,36 +164,56 @@
                                                                 <div class="form-group">
                                                                     <label for="number-of-attempts">Number Of
                                                                         Attempts</label>
-                                                                    <input required name="number-of-attempts"
+                                                                    <input required name="max_attempts"
                                                                         type="number" id="number-of-attempts"
                                                                         class="form-control"
                                                                         placeholder="Number Of Attempts">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="move-between-questions">Move between
-                                                                        questions</label>
-                                                                    <select required name="Move between questions"
+                                                                    <label for="move-between-questions">Move Between
+                                                                        Questions</label>
+                                                                    <select required name="is_recursive"
                                                                         id="move-between-questions"
                                                                         class="form-control">
                                                                         <option value="none" selected="" disabled="">
                                                                             Move between questions</option>
-                                                                        <option value="0">NO</option>
-                                                                        <option value="1">Yes</option>
+                                                                        <option value="no">NO</option>
+                                                                        <option value="yes">Yes</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="auto-correct">Auto Correct</label>
-                                                                    <select required name="Auto Correct"
+                                                                    <select required name="is_auto_correct"
                                                                         class="form-control" id="auto-correct">
                                                                         <option value="none" selected="" disabled="">
                                                                             Auto Correct</option>
-                                                                        <option value="0">NO</option>
-                                                                        <option value="1">Yes</option>
+                                                                        <option value="no">NO</option>
+                                                                        <option value="yes">Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="auto-correct">Are Questions Shuffled</label>
+                                                                    <select required name="is_shuffled"
+                                                                            class="form-control" id="auto-correct">
+                                                                        <option value="none" selected="" disabled="">
+                                                                            Are Questions Shuffled</option>
+                                                                        <option value="no">NO</option>
+                                                                        <option value="yes">Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="auto-correct">Are Marks Disclosed</label>
+                                                                    <select required name="is_disclosed"
+                                                                            class="form-control" id="auto-correct">
+                                                                        <option value="none" selected="" disabled="">
+                                                                            Are Marks Disclosed</option>
+                                                                        <option value="no">NO</option>
+                                                                        <option value="yes">Yes</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group res-mg-t-15">
                                                                     <label for="description-quiz">Description</label>
-                                                                    <textarea required name="description-quiz"
+                                                                    <textarea required name="description"
                                                                         id="description-quiz"
                                                                         placeholder="Description"></textarea>
                                                                 </div>
@@ -203,7 +223,7 @@
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
                                                                     <button type="submit"
-                                                                        class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                        class="btn btn-primary waves-effect waves-light">Set Quiz</button>
                                                                 </div>
                                                             </div>
                                                         </div>

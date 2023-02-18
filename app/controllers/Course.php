@@ -84,4 +84,11 @@ class Course extends Controller
         $this->data["pageName"] = "remove students";
        $this->view("remove-students-list",$this->data);
     }
+    public function setQuiz($id){
+        $this->data["pageName"] = "Set Quiz";
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->course->setQuiz($_POST,$id);
+        }
+        $this->view("set-quiz",$this->data);
+    }
 }

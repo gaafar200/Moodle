@@ -1,10 +1,12 @@
 <?php
 
-class lecturer extends User implements Description
+class lecturer extends User
 {
+    public description $description;
     public function __construct()
     {
         parent::__construct();
+        $this->description = new description();
     }
 
     public function validateProfData($data,$image)
@@ -13,7 +15,7 @@ class lecturer extends User implements Description
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isValidDescription($data["description"]);
+        $check = $this->description->isValidDescription($data["description"]);
         if(is_array($check)){
             return $check;
         }
@@ -57,15 +59,6 @@ class lecturer extends User implements Description
     {
         return $this->getAllUsersWithRank("lecturer",$username);
     }
-
-    public function isValidDescription($description): array | bool
-    {
-        if(strlen($description) < 6 && !preg_match("/^[a-zA-Z0-9 ]+$/",$description)){
-            return ["description"=>"description must only contains characters and numbers"];
-        }
-        return true;
-    }
-
     public function deleteProfessor($username)
     {
         if($this->Auth->hasRightPrivilege("techEmployee")){

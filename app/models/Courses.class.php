@@ -2,10 +2,14 @@
 class Courses extends Model{
     public Image $image;
     public lecturer $lecturer;
+    public quiz $quiz;
+    public description $description;
     public function __construct(){
         parent::__construct();
         $this->image = new Image();
         $this->lecturer = new lecturer();
+        $this->quiz = new quiz();
+        $this->description = new description();
     }
 
     public function validateData($data,$image = "")
@@ -17,7 +21,7 @@ class Courses extends Model{
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isValidDescription($description);
+        $check = $this->description->isValidDescription($description);
         if(is_array($check)){
             return $check;
         }
@@ -46,18 +50,6 @@ class Courses extends Model{
         }
         return true;
     }
-
-    private function isValidDescription($description)
-    {
-        if(strlen($description) < 3){
-            return ["description"=>"Description can not be less than 3 characters"];
-        }
-        if(!preg_match("/^[A-Za-z0-9 ]+$/",$description)){
-            return["coursename"=>"Course Name must only consist of Characters and numbers"];
-        }
-        return true;
-    }
-
     private function isValidLecturer($professorusername)
     {
         $check = $this->lecturer->isValidUserName($professorusername);
@@ -70,9 +62,6 @@ class Courses extends Model{
         }
         return true;
     }
-
-
-
     public function addCourse($data,$image,$creator_data)
     {
        $courseData["lecturer_id"] = $this->getLecturerId($data["professorusername"]);
@@ -86,13 +75,18 @@ class Courses extends Model{
        $query = "INSERT INTO course (name,date,status,language,lecturer_id,created_by,photo,description) VALUES(:name,:date,:status,:language,:lecturer_id,:created_by,:photo,:description)";
        return $this->db->write($query,$courseData);
     }
-
     private function getLecturerId($username)
     {
         $data = $this->lecturer->checkIfProfessorExists($username);
         return $data[0]->id;
     }
-
+    public function setQuiz(array $data,int $id): bool | array
+    {
+        if(!$this->DoesCourseExists($id)){
+            return ["Course"=>"Course does not exists"];
+        }
+        return $this->quiz->setQuiz($data,$id);
+    }
     public function getCoursesData()
     {
         $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id From users u join course c ON(c.lecturer_id = u.id)";
@@ -106,7 +100,6 @@ class Courses extends Model{
         }
         return $data;
     }
-    //todo
     public function getNumberOfStudentInACourse($id): int
     {
         $query = "SELECT count(student_id) as count FROM student_courses WHERE course_id = :id";
@@ -119,8 +112,6 @@ class Courses extends Model{
         }
         return 0;
     }
-
-
     public function getCourseData($id)
     {
         $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.id = :id";
@@ -129,7 +120,6 @@ class Courses extends Model{
            "id" => $id
         ]);
     }
-
     public function delete($id): bool | array
     {
         $check = $this->DoesCourseExists($id);
@@ -143,7 +133,6 @@ class Courses extends Model{
            "id"=>$id
         ]);
     }
-
     public function DoesCourseExists($id): bool
     {
         $query = "SELECT id FROM course WHERE id = :id";
@@ -156,7 +145,6 @@ class Courses extends Model{
         }
         return false;
     }
-
     private function removeAllStudentsFromThisCourse($id)
     {
         $query = "DELETE FROM student_courses WHERE course_id = :id";
@@ -165,7 +153,6 @@ class Courses extends Model{
            "id"=>$id
         ]);
     }
-
     public function editCourseData(array $data,int $courseId)
     {
         $check = $this->validateData($data);
@@ -193,7 +180,6 @@ class Courses extends Model{
             "rank"=>"student"
         ]);
     }
-
     public function addStudentToACourse(int $studentId,int $courseId)
     {
         $query = "INSERT INTO student_courses (student_id,course_id) VALUES(:student_id,:course_id)";
@@ -204,7 +190,6 @@ class Courses extends Model{
             ]
         );
     }
-
     public function removeStudentFromACourse(int $student_id, int $course_id)
     {
         $query = "DELETE FROM student_courses WHERE student_id = :student_id AND course_id = :course_id";
