@@ -87,7 +87,10 @@ class Course extends Controller
     public function setQuiz($id){
         $this->data["pageName"] = "Set Quiz";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $this->course->setQuiz($_POST,$id);
+            $result = $this->course->setQuiz($_POST,$id);
+            if($result === true){
+                $this->redirect("Course");
+            }
         }
         $this->view("set-quiz",$this->data);
     }

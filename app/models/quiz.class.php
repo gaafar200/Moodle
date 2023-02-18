@@ -14,10 +14,8 @@ class quiz extends model
             return $check;
         }
         $data = $this->setDataReadyForTheQuery($data,$id);
-        show($data);
-        $query = "INSERT INTO quiz(name,created_date,quiz_date,end_time,start_time,desciption,is_auto_correct,number_of_questions,max_attempts,time,course_id,status,is_shuffled,is_recursive,is_disclosed)
-                   VALUES(:quiz_name,:created_date,:date,:end_time,:start_time,:description,:is_auto_correct,:number_of_questions,:max_attempts,:time,:course_id,:status,:is_shuffled,:is_recursive,:is_disclosed)";
-        echo $query;
+        $query = "INSERT INTO quiz(name,created_date,quiz_date,end_time,start_time,desciption,is_auto_correct,number_of_questions,max_attempts,time,course_id,status,is_shuffled,is_recursive,is_disclosed,mark_value)
+                   VALUES(:quiz_name,:created_date,:date,:end_time,:start_time,:description,:is_auto_correct,:number_of_questions,:max_attempts,:time,:course_id,:status,:is_shuffled,:is_recursive,:is_disclosed,:mark_value)";
         return $this->db->write($query,$data);
     }
 
@@ -43,6 +41,10 @@ class quiz extends model
             return $check;
         }
         $check = $this->validateQuizTime($time);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->validateQuizMark($mark_value);
         if(is_array($check)){
             return $check;
         }
@@ -140,7 +142,13 @@ class quiz extends model
         return $data;
     }
 
-
+    private function validateQuizMark($mark_value):bool | array
+    {
+        if($mark_value <= 0){
+            return ["mark_value"=>"mark value must be greater than 0"];
+        }
+        return true;
+    }
 
 
 }

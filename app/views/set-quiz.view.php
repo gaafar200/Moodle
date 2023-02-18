@@ -158,6 +158,12 @@
                                                                         id="final-mark" class="form-control"
                                                                         placeholder="Enter the Number of minutes for the quiz">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="final-mark">Mark Value</label>
+                                                                    <input required name="mark_value" type="number"
+                                                                           id="final-mark" class="form-control"
+                                                                           placeholder="Enter the Final Mark Of the Quiz">
+                                                                </div>
 
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

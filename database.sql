@@ -50,32 +50,25 @@ create table if not exists assignment(
     check(deadline > CURRENT_TIMESTAMP)
 );
 
-create table if not exists mark_method(
-    id int(11) not null primary key,
-    name varchar(50) not null unique
-);
 
 create table if not exists quiz(
     id int(11) not null auto_increment primary key,
     name varchar(50) not null,
     created_date datetime not null default CURRENT_TIMESTAMP,
-    start_date datetime not null,
+    quiz_date date not null,
+    end_time time not null,
+    start_time time not null,
     desciption varchar(255),
-    mark_technique tinyint(3) not null default 0 references mark_method(id) ON DELETE SET null ON UPDATE CASCADE, 
     number_of_questions tinyint(3) not null,
     max_attempts tinyint(3) not null default 1,
-    close_date datetime not null,
     time tinyint(3) not null,
-    course_id int(11) not null references course(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    course_id int(11) not null,
     mark_value tinyint(3) not null,
     status varchar(25) not null,
-    is_disclosed tinyint(1) not null default 1,
-    is_shuffled tinyint(1) not null default 0,
-    i_review_allowed tinyint(1) not null default 0,
-    is_recursive tinyint(1) not null default 1,
-    number_of_question_in_page tinyint(2) not null default 3,
-    is_equal_distributed tinyint(1) not null default 1,
-    check (close_date > start_date)
+    is_disclosed varchar(5) not null default "yes",
+    is_shuffled varchar(5) not null default "no",
+    is_recursive varchar(5) not null default "yes",
+    check (end_time > start_time)
 );
 
 create table if not exists question_type(
@@ -217,6 +210,7 @@ drop table lecturer_degree;
 ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(10) NOT NULL;
 Alter table users add gender ENUM ("male","female") not null after password;
 ALTER Table Course ADD COLUMN description varchar(255) not null;
+Alter table quiz Add CONSTRAINT FK1 FOREIGN KEY(course_id) REFERENCES course(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
    
 
