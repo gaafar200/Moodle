@@ -137,7 +137,7 @@
                                         <option value="none" selected="" disabled="">
                                             Auto Correct</option>
                                         <option value="no">No</option>
-                                        <option value="yes">>Yes</option>
+                                        <option value="yes">Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
