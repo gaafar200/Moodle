@@ -19,7 +19,7 @@ class Quizes extends model
         return $this->db->write($query,$data);
     }
 
-    private function validateQuizData(array $data) :bool | array
+    private function validateQuizData(array $data,bool $is_edit = false) :bool | array
     {
         foreach ($data as $key => $value){
             $$key = $value ?? false;
@@ -28,9 +28,11 @@ class Quizes extends model
         if(is_array($check)){
             return $check;
         }
-        $check = $this->validateDate($date);
-        if(is_array($check)){
-            return $check;
+        if(!$is_edit){
+            $check = $this->validateDate($date);
+            if(is_array($check)){
+                return $check;
+            }
         }
         $check = $this->validateEndTime($start_time,$end_time);
         if(is_array($check)){
@@ -152,7 +154,7 @@ class Quizes extends model
 
     public function getAllQuizes(int $id)
     {
-        $query = "SELECT id,name,quiz_date as date,time,mark_value as mark FROM quiz where course_id = :id";
+        $query = "SELECT id,name,quiz_date as date,time,mark_value as mark FROM quiz where course_id = :id ORDER BY id DESC";
         return $this->db->read($query,
         [
            "id"=>$id
@@ -191,14 +193,12 @@ class Quizes extends model
 
     public function editQuiz(array $data, int $id):bool | array
     {
-        $result = $this->validateQuizData($data);
+        $result = $this->validateQuizData($data,True);
         if(is_array($result)){
             return $result;
         }
-        show($data);
         $sql = "UPDATE quiz SET name = :quiz_name,quiz_date = :date,start_time = :start_time,end_time = :end_time,number_of_questions = :number_of_questions,time = :time,mark_value = :mark_value,max_attempts = :max_attempts,is_recursive = :is_recursive,is_auto_correct = :is_auto_correct,is_shuffled = :is_shuffled,is_disclosed = :is_disclosed,description = :description WHERE id = :id";
         $data["id"] = $id;
-        echo $sql;
         return $this->db->write($sql,$data);
     }
 
