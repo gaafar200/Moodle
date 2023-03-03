@@ -126,34 +126,41 @@
                                     <div class="checkbox-container">
                                         <div class="row">
                                             <div class="col-12">
+                                                <input type="hidden" class="quiz_mark" value="<?= $quiz_mark ?>">
+                                                <input type="hidden" class="quiz_questions" value="<?= $number_of_questions ?>">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                     <tr>
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Question</th>
-                                                        <th scope="col">Correct Answer</th>
+                                                        <th scope="col">Question Type</th>
                                                         <th scope="col">Mark</th>
                                                         <th scope="col">Actions</th>
                                                     </tr>
                                                     </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                                                    <label class="custom-control-label" for="customCheck1">1</label>
-                                                                </div>
-                                                                </td>
-                                                                <td>Bootstrap 4 CDN and Starter Template</td>
-                                                                <td>Cristina</td>
-                                                                <td>913</td>
-                                                                <td>
-                                                                <div class="td-last justify-content-end">
-                                                                    <button type="submit" name="addStudent" class="btn btn-success">Edit Question</button>
-                                                                    <button type="submit" name="addStudent" class="btn btn-danger">Delete Question</button>
-                                                                </div>
-                                                                </td>
-                                                            </tr>
+                                                            <?php if(is_array($questions)):
+                                                                $count = 1;?>
+                                                            <?php foreach ($questions as $question):?>
+                                                                <tr>
+                                                                    <td>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                                                        <label class="custom-control-label" for="customCheck1"><?= $count++ ?></label>
+                                                                    </div>
+                                                                    </td>
+                                                                    <td><?= $question->question ?></td>
+                                                                    <td><?= $question->type ?></td>
+                                                                    <td><?= $question->mark ?></td>
+                                                                    <td>
+                                                                    <div class="td-last justify-content-end">
+                                                                        <button type="submit" name="addStudent" class="btn btn-success">Edit Question</button>
+                                                                        <button type="submit" name="addStudent" class="btn btn-danger">Delete Question</button>
+                                                                    </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                            <?php endif; ?>
                                                         </tbody>
                                                 </table>
                                             </div>

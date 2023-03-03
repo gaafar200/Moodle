@@ -148,4 +148,12 @@ Abstract class Questions extends Model
         return true;
     }
 
+    public function getAllQuestions(int $course_id)
+    {
+        $query = "SELECT question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id";
+        return $this->db->read($query,[
+           "course_id"=>$course_id
+        ]);
+    }
+
 }
