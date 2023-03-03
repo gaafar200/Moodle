@@ -100,15 +100,15 @@
         <div class="row" style="margin-top:100px ;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
-                    <form method="POST" class=" dropzone-custom needsclick add-professors" id="demo1-upload">
+                    <form method="POST" class=" dropzone-custom needsclick add-professors" id="demo1-upload" enctype="multipart/form-data">
                         <div class="devit-card-custom">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Question">
+                                <input type="text" name="question" class="form-control" placeholder="Question">
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="Grade">
+                                <input type="number" name="mark" class="form-control" placeholder="Grade">
                             </div>
-                            <select id="myselection" required name="myselection" class="form-control">
+                            <select id="myselection" required name="question_type" class="form-control">
                                 <option value="none" selected="" disabled="">
                                     Type Question</option>
                                 <option value="One"> True Or False
@@ -120,19 +120,19 @@
                             </select>
 
                             <div id="showOne" class="myDiv">
-                                <select required name="Correct-answer" id="Correct-answer" class="form-control">
+                                <select required name="correct_answer" id="Correct-answer" class="form-control">
                                     <option value="none" selected="" disabled="">
                                         Correct Answer</option>
-                                    <option value="0">False</option>
-                                    <option value="1">True</option>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
                                 </select>
                             </div>
                             <div id="showTwo" class="myDiv">
-                                <select required name="multiple-answer" id="multiple-answer" class="form-control">
+                                <select required name="multiple_answer" id="multiple-answer" class="form-control">
                                     <option value="none" selected="" disabled="">
                                         multiple-answer</option>
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
                                 </select>
                                 </select>
                                 <div class="form-group">
@@ -148,12 +148,7 @@
                                     <input name="choice4" type="text" class="form-control" placeholder="Choice Four">
                                 </div>
                                 <div class="form-group">
-                                    <input name="correct-answer" type="text" class="form-control" placeholder="Correct Answer">
-                                </div>
-                            </div>
-                            <div id="showThree" class="myDiv">
-                                <div class="form-group res-mg-t-15">
-                                    <textarea name="correct-answer" placeholder="Correct Answer"></textarea>
+                                    <input name="correct_answers" type="text" class="form-control" placeholder="Correct Answer">
                                 </div>
                             </div>
 
@@ -164,17 +159,8 @@
                                 <span class="drop-title">Drop image here</span>
                                 or
                                 <input name="image" type="file" id="images" accept="image/*">
-                                <?php if (
-                                    isset(
-                                        $errors
-                                    ) &&
-                                    isset(
-                                        $errors['image']
-                                    )
-                                ) : ?>
-                                    <em for="image" class="invalid"><?= ucfirst(
-                                                                        $errors['image']
-                                                                    ) ?></em>
+                                <?php if (isset($errors) && isset($errors['image'])) : ?>
+                                    <em for="image" class="invalid"><?= ucfirst($errors['image']) ?></em>
                                 <?php endif; ?>
                             </label>
                         </div>

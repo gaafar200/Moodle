@@ -98,16 +98,21 @@ class Image extends Model
         ]);
     }
 
-    private function getOldImagePath($username, mixed $intended)
+    private function getOldImagePath($helping_data, mixed $intended)
     {
         switch($intended){
             case "users":
                 $user = new Stud();
-                $data = $user->getUserDataFromUsername($username);
+                $data = $user->getUserDataFromUsername($helping_data);
                 $oldImagePath = $data[0]->photo;break;
             case "course":
                 $course = new courses();
-                $data = $course->getCourseData($username);
+                $data = $course->getCourseData($helping_data);
+                $oldImagePath = $data[0]->photo;break;
+            case "question":
+                $questionFactory = new NormalQuestionFactory();
+                $question = $questionFactory->getQuestion();
+                $data = $question->getQuestionData($helping_data["question"],$helping_data["course_id"]);
                 $oldImagePath = $data[0]->photo;break;
         }
         return $oldImagePath;

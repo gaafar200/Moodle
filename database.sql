@@ -211,8 +211,10 @@ ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(10) NOT NULL;
 Alter table users add gender ENUM ("male","female") not null after password;
 ALTER Table Course ADD COLUMN description varchar(255) not null;
 Alter table quiz Add CONSTRAINT FK1 FOREIGN KEY(course_id) REFERENCES course(id) ON DELETE CASCADE ON UPDATE CASCADE;
-
-   
+INSERT INTO question_type (name) VALUES("True Or False"),("Multiable Choice"),("Essay Question");
+ALTER TABLE question ADD course_id int(11);
+ALTER TABLE question
+ADD PRIMARY KEY (question,course_id);
 
 
 
