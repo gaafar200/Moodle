@@ -9,3 +9,4 @@ include "../app/core/config.php";
 include "../app/core/controller.php";
 include "../app/core/database.php";
 include "../app/core/Model.php";
+include "../app/core/SQuestion.php";

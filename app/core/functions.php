@@ -206,3 +206,97 @@ function DisplayQuizDescription($data){
     }
     return " ";
 }
+/**
+ * Questions Section
+ */
+function checkFieldOkay($data,$type = ""):bool{
+    if(isset($data)){
+        if($type == ""){
+            return true;
+        }
+        else{
+            if($type == $data[0]->question_type){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+ function displayQuestion($data){
+    if(checkFieldOkay($data)){
+        return $data[0]->question;
+    }
+    return "";
+ }
+
+ function displayQuestionMark($data){
+    if(checkFieldOkay($data)){
+        return $data[0]->mark_value;
+    }
+    return "";
+ }
+ function checkIfQuestionIsOfThisType($data,$type){
+    if(checkFieldOkay($data)){
+        if($type == "One" && $data[0]->question_type == "trueOrFalse"){
+            return "Selected";
+        }
+        else if($type == "Two" && $data[0]->question_type == "multiableChoice"){
+            return "Selected";
+        }
+        else if($type == "Three" && $data[0]->question_type == "essayQuestion"){
+            return "Selected";
+        }
+    }
+    return "";
+ }
+ function checkIfThisIsRightAnswer($question_data, $choice,$type):string{
+    if(checkFieldOkay($question_data,$type)){
+        if($choice->is_right_answer == 1){
+            return "Selected";
+        }
+    }
+    return "";
+ }
+ function checkIfQuestionHaveMultibleAnswer($data,$choice,$type,$value){
+    if(checkFieldOkay($data,$type)){
+        $count = 0;
+        foreach ($choice as $c){
+            if($c->is_right_answer == 1){
+                $count++;
+            }
+        }
+        if($count > 1 && $value == "yes"){
+            return "Selected";
+        }
+        else if($count == 1 && $value == "no"){
+            return "Selected";
+        }
+    }
+    return "";
+ }
+
+ function displayQuestionChoice($data,$choice,$type){
+     if(checkFieldOkay($data,$type)){
+         return $choice->choice;
+     }
+     return "";
+ }
+ function displayQuestionCorrectAnswers($data,$choice,$type){
+    if(checkFieldOkay($data,$type)){
+        $count = 0;
+        $correctAnswer = "";
+        for($i = 0;$i < sizeof($choice);$i++){
+            if($choice[$i]->is_right_answer == 1){
+                if($count == 0){
+                    $correctAnswer = "" . ($i + 1);
+                    $count++;
+                }
+                else{
+                    $correctAnswer .= "&" . ($i + 1);
+                }
+            }
+        }
+        return $correctAnswer;
+    }
+    return "";
+ }

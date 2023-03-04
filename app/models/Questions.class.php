@@ -78,7 +78,7 @@ Abstract class Questions extends Model
         if(!is_uploaded_file($image["image"]["tmp_name"])){
             $image = "";
         }
-        $check = $this->ValidateBasicQuestionData($data,$course_id,$image);
+        $check = $this->validateQuestionData($data,$course_id,$image);
         if(is_array($check)){
             return $check;
         }
@@ -99,7 +99,7 @@ Abstract class Questions extends Model
         return $question && $choices;
     }
     abstract function addAnswersToTheQuestion($data);
-    public function getDataReady($data,$course_id,$image){
+    public function getDataReady($data,$course_id,$image = ""){
         $data["course_id"] = $course_id;
         if($image != ""){
             $data["image"] = $this->image->uploadToFileSystem($image,"question");
@@ -121,7 +121,12 @@ Abstract class Questions extends Model
         }
     }
     public function getQuestionData($question,$course_id){
-        $query = "SELECT id FROM question WHERE question = :question AND course_id = :course_id LIMIT 1";
+        if(is_numeric($question)){
+            $query = "SELECT * FROM question WHERE id = :question AND course_id = :course_id LIMIT 1";
+        }
+        else{
+            $query = "SELECT * FROM question WHERE question = :question AND course_id = :course_id LIMIT 1";
+        }
         return $this->db->read($query,[
             "question"=>$question,
             "course_id"=>$course_id
@@ -150,10 +155,121 @@ Abstract class Questions extends Model
 
     public function getAllQuestions(int $course_id)
     {
-        $query = "SELECT question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id";
+        $query = "SELECT id,question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id";
         return $this->db->read($query,[
            "course_id"=>$course_id
         ]);
+    }
+
+    public function deleteQuestion(int $course_id, int $question_id):void
+    {
+        $query = "DELETE FROM question WHERE course_id = :course_id AND id = :question_id";
+        $this->db->write($query,
+        [
+           "question_id"=>$question_id,
+           "course_id"=>$course_id
+        ]);
+        $this->deleteQuestionChoices($question_id);
+        $this->deleteQuestionFromCourses($question_id);
+    }
+
+    private function deleteQuestionChoices(int $question_id):void
+    {
+        $query = "DELETE FROM question_choice WHERE question_id = :question_id";
+        $this->db->write($query,
+        [
+           "question_id"=>$question_id
+        ]);
+    }
+
+    private function deleteQuestionFromCourses(int $question_id)
+    {
+        //todo
+    }
+
+    public function editQuestion(int $course_id, int $question_id, array $data):bool | array
+    {
+        $check = $this->validateEditData($data,$course_id);
+        if(is_array($check)){
+            return $check;
+        }
+        $data = $this->getDataReady($data,$course_id);
+        $data = $this->getDataReadyForEdit($data,$question_id);
+        return $this->editData($data);
+    }
+
+    public function getQuestionChoices(int $question_id):bool | array
+    {
+        $query = "SELECT choice,is_right_answer FROM question_choice WHERE question_id = :question_id";
+        return $this->db->read($query,
+        [
+            "question_id"=>$question_id
+        ]);
+    }
+
+    private function getDataReadyForEdit($data, int $question_id)
+    {
+        unset($data["image"]);
+        $data["question_id"] = $question_id;
+        return $data;
+    }
+
+    private function editData($data)
+    {
+        $query = "UPDATE question SET question_type = :question_type,
+        question = :question,
+        mark_value = :mark
+        WHERE id = :question_id AND course_id = :course_id";
+        $check1 = $this->db->write($query,[
+            "question_type"=>$data["question_type"],
+            "question"=>$data["question"],
+            "mark"=>$data["mark"],
+            "question_id"=>$data["question_id"],
+            "course_id"=>$data["course_id"]
+        ]);
+        $check2  = $this->editChoices($data);
+        return $check1 && $check2;
+    }
+    public abstract function editChoices(array $data):bool;
+
+    private function validateBasicEditData(array $data, int $course_id)
+    {
+        $course = new Courses();
+        $check = $course->DoesCourseExists($course_id);
+        if(!$check){
+            return["course"=>"course does not exists"];
+        }
+        $check = $this->ValidateQuestionType($data["question_type"]);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->ValidateQuestion($data["question"]);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->ValidateMarkValue($data["mark"]);
+        if(is_array($check)) {
+            return $check;
+        }
+        return true;
+    }
+
+    private function validateEditData(array $data, int $course_id)
+    {
+        $check = $this->validateBasicEditData($data,$course_id);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->validateSpecificTypeData($data);
+        if(is_array($check)){
+            return $check;
+        }
+        return true;
+    }
+
+    public function getAllQuestionsNotInTheQuiz(int $course_id,int $quiz_id)
+    {
+        $query = "SELECT id,question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id";
     }
 
 }

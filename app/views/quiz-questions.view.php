@@ -119,47 +119,43 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                    <div class="top-btn">
-                                        <h4 > Quizes List </h4>
-                                        <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
-                                    </div>
-                                        <div class="table-flex">
-
-                                            <div class="tabel-thead">
-                                                <div class="td-id"> ID </div>
-                                                <div class="td"> Quiz Name </div>
-                                                <div class="td-flex">Quiz Date</div>
-                                                <div class="td-flex">Quiz Time</div>
-                                                <div class="td-flex">Quiz Mark</div>
-                                                <div class="td-last justify-content-center">Actions</div>
+                                    <div class="checkbox-container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">ID</th>
+                                                        <th scope="col">Question</th>
+                                                        <th scope="col">Question Type</th>
+                                                        <th scope="col">Mark</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                            <?php if(is_array($questions)):
+                                                                $count = 1;?>
+                                                            <?php foreach ($questions as $question):?>
+                                                                <tr>
+                                                                    <td>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <label class="custom-control-label" for="customCheck1"><?= $count++ ?></label>
+                                                                    </div>
+                                                                    </td>
+                                                                    <td><?= $question->question ?></td>
+                                                                    <td><?= $question->type ?></td>
+                                                                    <td><?= $question->mark ?></td>
+                                                                    <td>
+                                                                    <div class="td-last justify-content-end">
+                                                                        <button type="submit" name="addStudent" class="btn btn-success">Add To Quiz</button>
+                                                                    </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                            <?php endif; ?>
+                                                        </tbody>
+                                                </table>
                                             </div>
-
-                                            <!-- ------- Here goes the loop -----  -->
-                                            <?php if($quizes_data):
-                                                $count = 1;
-                                            ?>
-                                            <?php foreach ($quizes_data as $quiz): ?>
-                                            <form method="POST">
-                                                <div class="table-tbody mt-2">
-                                                    <div class="td-id">
-                                                        <span><?= $count++ ?></span>
-                                                    </div>
-                                                    <div class="td"><?= $quiz->name ?></div>
-                                                    <div class="td-flex"><?= $quiz->date ?></div>
-                                                    <div class="td-flex"><?= $quiz->time ?></div>
-                                                    <div class="td-flex"><?= $quiz->mark ?></div>
-                                                    <div class="td-last justify-content-end">
-                                                        <a href="<?= ROOT ?>QuizQuestions/<?= $course_id ?>/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
-                                                        <form method="POST">
-                                                            <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
-                                                            <button type="submit" class="btn btn-danger">Delete Quiz</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <?php endforeach; ?>
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +165,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 <?php $this->view("include/footer"); ?>

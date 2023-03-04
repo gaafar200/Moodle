@@ -110,4 +110,34 @@ class MultibaleTypeQuestion extends Questions
 
         return true;
     }
+
+    public function editChoices(array $data): bool
+    {
+        $old_choices = $this->getQuestionChoices($data["question_id"]);
+        $correct_Answers = explode("&",$data["correct_answers"]);
+        $query = "UPDATE question_choice SET choice = :choice,is_right_answer = :is_right_answer WHERE question_id = :question_id AND choice = :old_choice";
+        $count = 0;
+        for($i = 1;$i <= 4;$i++){
+            $new_Choice = "choice" . $i;
+            $check = $this->isValidChoice($data[$new_Choice],$i);
+            $is_correct = 0;
+            if(isset($correct_Answers[$count])){
+                if($correct_Answers[$count] == $i){
+                    $is_correct = 1;
+                    $count++;
+                }
+            }
+            if(!$this->db->write($query,[
+                "choice"=>$data[$new_Choice],
+                "is_right_answer"=>$is_correct,
+                "question_id"=>$data["question_id"],
+                "old_choice"=>$old_choices[$i - 1]->choice
+            ])){
+                return false;
+            }
+
+        }
+        return true;
+
+    }
 }

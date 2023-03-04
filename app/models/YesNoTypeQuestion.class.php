@@ -18,7 +18,7 @@ class YesNoTypeQuestion extends Questions
     /**
      * @Override
      */
-    public function getDataReady($data,$course_id,$image):array{
+    public function getDataReady($data,$course_id,$image = ""):array{
         $data = parent::getDataReady($data,$course_id,$image);
         unset($data["choice1"]);
         unset($data["choice2"]);
@@ -47,4 +47,16 @@ class YesNoTypeQuestion extends Questions
         return true;
     }
 
+    public function editChoices(array $data): bool
+    {
+        $choice = ["true","false"];
+        $query = "UPDATE question_choice SET is_right_answer = :is_right_answer WHERE question_id = :question_id AND choice = :choice";
+        for($i = 0;$i < 2;$i++){
+            $is_correct = $choice[$i] == $data["correct_answer"] ? 1 : 0;
+            if(!$this->db->write($query,["choice"=>$choice[$i],"is_right_answer"=>$is_correct,"question_id"=>$data["question_id"]])){
+                return false;
+            }
+        }
+        return true;
+    }
 }

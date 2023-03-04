@@ -121,13 +121,11 @@
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="top-btn">
                                         <h4 class=""> Questions List </h4>
-                                        <a href="<?= ROOT ?>Question/set/<?= $course_id ?>/<?= $quiz_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Questions</button></a>
+                                        <a href="<?= ROOT ?>Question/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Questions</button></a>
                                     </div>
                                     <div class="checkbox-container">
                                         <div class="row">
                                             <div class="col-12">
-                                                <input type="hidden" class="quiz_mark" value="<?= $quiz_mark ?>">
-                                                <input type="hidden" class="quiz_questions" value="<?= $number_of_questions ?>">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                     <tr>
@@ -145,7 +143,6 @@
                                                                 <tr>
                                                                     <td>
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
                                                                         <label class="custom-control-label" for="customCheck1"><?= $count++ ?></label>
                                                                     </div>
                                                                     </td>
@@ -154,8 +151,10 @@
                                                                     <td><?= $question->mark ?></td>
                                                                     <td>
                                                                     <div class="td-last justify-content-end">
-                                                                        <button type="submit" name="addStudent" class="btn btn-success">Edit Question</button>
-                                                                        <button type="submit" name="addStudent" class="btn btn-danger">Delete Question</button>
+                                                                        <a href="<?= ROOT ?>Question/edit/<?= $course_id ?>/<?= $question->id ?>"><button type="submit" name="addStudent" class="btn btn-success">Edit Question</button></a>
+                                                                    <form method="POST">
+                                                                        <button type="submit" name="deleteQuestion" value="<?= $question->id ?>" class="btn btn-danger">Delete Question</button>
+                                                                    </form>
                                                                     </div>
                                                                     </td>
                                                                 </tr>

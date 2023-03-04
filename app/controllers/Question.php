@@ -1,40 +1,45 @@
 <?php
 
-class Question extends Controller
+class Question extends SQuestion
 {
     public IQuestionFactory $questionFactory;
     public Questions $question;
-    public function addQuestionsToCourse(int $course_id,int $quiz_id){
-        $this->data["course_id"] = $course_id;
-        $this->data["quiz_id"] = $quiz_id;
-        $this->data["pageName"] = "add Questions";
+    public function index(int $course_id){
         $this->question = $this->getQuestion();
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->question->deleteQuestion($course_id,$_POST["deleteQuestion"]);
+        }
+        $this->data["course_id"] = $course_id;
+        $this->data["pageName"] = "add Questions";
         $this->data["questions"] = $this->question->getAllQuestions($course_id);
-        $quiz = new Quizes();
-        $quiz_data = $quiz->getQuizData($quiz_id);
-        $this->data["quiz_mark"] = $quiz_data[0]->mark_value;
-        $this->data["number_of_questions"] = $quiz_data[0]->number_of_questions;
         $this->view("questions-list",$this->data);
     }
-    public function set(int $course_id,int $quiz_id){
+    public function set(int $course_id){
         $this->data["pageName"] = "Set Question";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $this->question = $this->getQuestion($_POST["question_type"]);
             $result = $this->question->addQuestion($_POST,$course_id,$_FILES);
             if($result === true){
-                $this->redirect("Question/addQuestionsToCourse/". $course_id . "/" . $quiz_id);
+                $this->redirect("Question/". $course_id);
             }
         }
         $this->view("add-question",$this->data);
     }
-    private function getQuestion($question_type = ""){
-        if($question_type == ""){
-            $this->questionFactory = new NormalQuestionFactory();
-            return $this->questionFactory->getQuestion();
-        }else{
-            $this->questionFactory = new SpecialQuestionFactory();
-            return $this->questionFactory->getQuestion($question_type);
+    public function edit(int $course_id,int $question_id){
+        $this->data["pageName"] = "Edit Question";
+        $this->question = $this->getQuestion();
+        $this->data["question_data"] = $this->question->getQuestionData($question_id,$course_id);
+        $this->data["question_choice"] = $this->question->getQuestionChoices($question_id);
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->question = $this->getQuestion($_POST["question_type"]);
+            $result = $this->question->editQuestion($course_id,$question_id,$_POST);
+            var_dump($result);
+            if($result === true){
+                $this->redirect("Question/" . $course_id);
+            }
         }
+        $this->view("edit-question",$this->data);
     }
+
 
 }
