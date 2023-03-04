@@ -342,6 +342,12 @@ textarea {
 
 }
 
+.top-btn-add {
+    justify-content: center;
+    gap: 15px;
+
+}
+
 .btn2Courses {
     display: flex;
     align-items: center;

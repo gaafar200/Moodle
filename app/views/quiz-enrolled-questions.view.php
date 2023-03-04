@@ -122,6 +122,10 @@
                                     <div class="checkbox-container">
                                         <div class="row">
                                             <div class="col-12">
+                                                <div class="top-btn top-btn-add">
+                                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Quiz Questions</button></a>
+                                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">All Questions</button></a>
+                                                </div>
                                                 <table class="table table-bordered">
                                                     <thead>
                                                     <tr>
@@ -157,6 +161,10 @@
                                                             <?php endif; ?>
                                                         </tbody>
                                                 </table>
+                                                <div class="top-btn">
+                                                    <h4>Number Of Questions Left <span>34</span></h4>
+                                                    <h4>Number Of Marks Left <span>45</span></h4>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
