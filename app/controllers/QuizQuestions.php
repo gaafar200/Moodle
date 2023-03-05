@@ -10,6 +10,9 @@ class QuizQuestions extends SQuestion{
     public function enrolledQuestions(int $course_id,int $quiz_id){
         $this->data["pageName"] = "Quiz Questions";
         $this->question = $this->getQuestion();
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            //todo
+        }
         $this->data["questions"] = $this->question->getAllQuestions($course_id);
         $this->view("quiz-enrolled-questions",$this->data);
     }

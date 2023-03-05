@@ -148,7 +148,8 @@
                                                                     <td>
                                                                     <div class="td-last justify-content-end">
                                                                     <form method="POST">
-                                                                        <button type="submit" name="deleteQuestion" value="<?= $question->id ?>" class="btn btn-danger">Remove From Quiz</button>
+                                                                        <input type="hidden" name="question_id" value="<?= $question->id ?>">
+                                                                        <button type="submit" class="btn btn-danger">Remove From Quiz</button>
                                                                     </form>
                                                                     </div>
                                                                     </td>
