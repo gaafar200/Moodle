@@ -29,7 +29,7 @@ class lecturer extends User
         if(is_array($check)){
             return $check;
         }
-        $check = $this->isValidDescription($data["description"]);
+        $check = $this->description->isValidDescription($data["description"]);
         if(is_array($check)){
             return $check;
         }

@@ -147,7 +147,10 @@
                                                                     <td><?= $question->mark ?></td>
                                                                     <td>
                                                                     <div class="td-last justify-content-end">
-                                                                        <button type="submit" name="addStudent" class="btn btn-success">Add To Quiz</button>
+                                                                        <form method="POST">
+                                                                            <input type="hidden" name="question_id" value="<?= $question->id ?>">
+                                                                            <button type="submit"  class="btn btn-success">Add To Quiz</button>
+                                                                        </form>
                                                                     </div>
                                                                     </td>
                                                                 </tr>

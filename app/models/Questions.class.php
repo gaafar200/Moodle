@@ -267,9 +267,32 @@ Abstract class Questions extends Model
         return true;
     }
 
-    public function getAllQuestionsNotInTheQuiz(int $course_id,int $quiz_id)
+    public function getAllQuestionsNotInTheQuiz(int $course_id,int $quiz_id):array | bool
     {
-        $query = "SELECT id,question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id";
+        $query = "SELECT id,question,question_type as type,mark_value as mark FROM question WHERE course_id = :course_id AND id NOT IN(SELECT question_id FROM quiz_questions WHERE quiz_id = :quiz_id)";
+        return $this->db->read($query,[
+            "course_id"=>$course_id,
+            "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    public function getAllQuestionsInTheQuiz(int $course_id, int $quiz_id):array | bool
+    {
+        $query = "SELECT id,question,question_type as type,mark_value as mark FROM question INNER JOIN quiz_questions ON (id = question_id)WHERE course_id = :course_id AND quiz_id = :quiz_id";
+        return $this->db->read($query,[
+           "course_id"=>$course_id,
+           "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    public function addQuestionToTheQuiz(mixed $question_id, int $quiz_id):bool | array
+    {
+        $query = "INSERT INTO quiz_questions (question_id,quiz_id) VALUES(:question_id,:quiz_id)";
+        return $this->db->write($query,
+        [
+            "question_id"=>$question_id,
+            "quiz_id"=>$quiz_id
+        ]);
     }
 
 }
