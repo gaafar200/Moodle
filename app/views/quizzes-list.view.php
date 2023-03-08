@@ -150,10 +150,15 @@
                                                     <div class="td-flex"><?= $quiz->mark ?></div>
                                                     <div class="td-last justify-content-end">
                                                         <a href="<?= ROOT ?>QuizQuestions/<?= $course_id ?>/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit Quiz</button></a>
+                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                                                        <?php if($quiz->status != "ready"): ?>
+                                                            <a href="<?= ROOT ?>Quiz/activate/<?= $quiz->id ?>/<?= $course_id ?>"><button <?= isActiveButtonActive($quiz->status) ?> type="button" class="btn btn-success">Activate</button></a>
+                                                        <?php else: ?>
+                                                            <a href="<?= ROOT ?>Quiz/deactivate/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-danger">Deactivate</button></a>
+                                                        <?php  endif; ?>
                                                         <form method="POST">
                                                             <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
-                                                            <button type="submit" class="btn btn-danger">Delete Quiz</button>
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>

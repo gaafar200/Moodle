@@ -300,3 +300,23 @@ function checkFieldOkay($data,$type = ""):bool{
     }
     return "";
  }
+
+/**
+ * @return string
+ *
+ */
+ function checkCanAddMoreQuestions($question_mark,$marks_left,$number_of_questions_left):string{
+     if($question_mark > $marks_left){
+         return "disabled";
+     }
+     if($number_of_questions_left == 0){
+         return "disabled";
+     }
+     return "";
+ }
+ function isActiveButtonActive($quiz_status):string{
+     if($quiz_status == "inactive"){
+         return "disabled";
+     }
+     return "";
+ }

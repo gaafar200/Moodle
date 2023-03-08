@@ -140,7 +140,7 @@ class Quizes extends model
     {
         $data["created_date"] = date('y-m-d h:i');
         $data["course_id"] = $id;
-        $data["status"] = "active";
+        $data["status"] = "inactive";
         return $data;
     }
 
@@ -154,7 +154,7 @@ class Quizes extends model
 
     public function getAllQuizes(int $id)
     {
-        $query = "SELECT id,name,quiz_date as date,time,mark_value as mark FROM quiz where course_id = :id ORDER BY id DESC";
+        $query = "SELECT id,name,quiz_date as date,time,mark_value as mark,status FROM quiz where course_id = :id ORDER BY id DESC";
         return $this->db->read($query,
         [
            "id"=>$id
@@ -201,8 +201,62 @@ class Quizes extends model
         $data["id"] = $id;
         return $this->db->write($sql,$data);
     }
+    public function checkQuizReady(int $quiz_id){
+        $quiz_data = $this->getQuizQuestionsData($quiz_id);
+        $quiz_actual_data = $this->getQuizActualQuestionData($quiz_id);
+        if($quiz_data[0]->number_of_questions == $quiz_actual_data[0]->number_of_questions
+            && $quiz_data[0]->sumOfMarks == $quiz_actual_data[0]->mark_value){
+            return true;
+        }
+        return false;
+    }
 
+    public function checkQuizStatus(int $quiz_id,string $status = "add"):void
+    {
+        if($status == "add" && $this->checkQuizReady($quiz_id)){
+            $this->setQuizStatus($quiz_id,"active");
+        }
+        else if($status == "delete" && !$this->checkQuizReady($quiz_id)){
+            $this->setQuizStatus($quiz_id,"inactive");
+        }
+    }
 
+    private function getQuizQuestionsData($quiz_id):array | bool
+    {
+        $query = "SELECT count(question_id) as number_of_questions,sum(mark_value) as sumOfMarks FROM quiz_questions INNER JOIN  question ON (id = question_id) WHERE quiz_id = :quiz_id";
+        return $this->db->read($query,[
+           "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    private function getQuizActualQuestionData(int $quiz_id):bool | array
+    {
+        $query = "SELECT mark_value, number_of_questions FROM quiz WHERE id = :quiz_id LIMIT 1";
+        return $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    private function setQuizStatus(int $quiz_id,$status):void
+    {
+        $query = "UPDATE quiz SET status = :status WHERE id = :quiz_id LIMIT 1";
+        $this->db->write($query,
+        [
+            "quiz_id"=>$quiz_id,
+            "status"=>$status
+        ]);
+    }
+    public function activateQuiz(int $quiz_id){
+        if($this->checkQuizReady($quiz_id)){
+            $this->setQuizStatus($quiz_id,"ready");
+        }
+    }
+    public function deactivateQuiz(int $quiz_id){
+        if($this->checkQuizReady($quiz_id)){
+            $this->setQuizStatus($quiz_id,"active");
+        }
+    }
 
 
 }

@@ -182,7 +182,7 @@ Abstract class Questions extends Model
         ]);
     }
 
-    private function deleteQuestionFromCourses(int $question_id)
+    private function deleteQuestionFromCourses(int $question_id):void
     {
         //todo
     }
@@ -287,12 +287,114 @@ Abstract class Questions extends Model
 
     public function addQuestionToTheQuiz(mixed $question_id, int $quiz_id):bool | array
     {
+        $check = $this->ValidateQuizQuestion($question_id,$quiz_id);
+        if(is_array($check)){
+            return $check;
+        }
         $query = "INSERT INTO quiz_questions (question_id,quiz_id) VALUES(:question_id,:quiz_id)";
-        return $this->db->write($query,
+        $check =  $this->db->write($query,
         [
             "question_id"=>$question_id,
             "quiz_id"=>$quiz_id
         ]);
+        $quiz = new Quizes();
+        $quiz->checkQuizStatus($quiz_id);
+        return $check;
+    }
+
+    public function removeQuestionFromQuiz(mixed $question_id, int $quiz_id):bool | array
+    {
+        $query = "DELETE FROM quiz_questions WHERE question_id = :question_id AND quiz_id = :quiz_id";
+        $check =  $this->db->write($query, [
+            "question_id"=>$question_id,
+            "quiz_id"=>$quiz_id
+        ]);
+        $quiz = new Quizes();
+        $quiz->checkQuizStatus($quiz_id,"delete");
+        return $check;
+    }
+
+    public function getNumberOfQuestionsLeft(int $quiz_id):int
+    {
+        $query = "SELECT count(question_id) as numberOfQuestions FROM quiz_questions WHERE quiz_id = :quiz_id";
+        $result = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id
+        ]);
+        $query = "SELECT number_of_questions FROM quiz WHERE id = :quiz_id";
+        $result2 = $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+        return $result2[0]->number_of_questions - $result[0]->numberOfQuestions;
+    }
+
+    public function getNumberOfMarksLeft(int $quiz_id)
+    {
+        $query = "SELECT sum(mark_value) as total_mark FROM question INNER JOIN quiz_questions ON(id = question_id) WHERE quiz_id = :quiz_id";
+        $result = $this->db->read($query,
+            [
+                "quiz_id"=>$quiz_id
+            ]);
+        $query = "SELECT mark_value FROM quiz WHERE id = :quiz_id";
+        $result2 = $this->db->read($query,
+            [
+                "quiz_id"=>$quiz_id
+            ]);
+        return $result2[0]->mark_value - $result[0]->total_mark;
+    }
+
+    private function ValidateQuizQuestion(mixed $question_id, int $quiz_id):bool | array
+    {
+        $check = $this->isQuestionUniqueWithinQuiz($question_id,$quiz_id);
+        if(is_array($check)){
+            return $check;
+        }
+        $check = $this->checkIfQuizCanHaveThisQuestion($quiz_id,$question_id);
+        if(is_array($check)){
+            return $check;
+        }
+        return true;
+    }
+
+    private function isQuestionUniqueWithinQuiz(mixed $question_id, int $quiz_id):bool | array
+    {
+        $query = "SELECT question_id FROM quiz_questions WHERE question_id = :question_id AND quiz_id = :quiz_id";
+        $result = $this->db->read($query,
+        [
+           "question_id"=>$question_id,
+           "quiz_id"=>$quiz_id
+        ]);
+        if($result){
+            return ["quiz_question"=>"quiz is not unique withen the Quiz"];
+        }
+        return true;
+    }
+
+    private function checkIfQuizCanHaveThisQuestion(int $quiz_id, int $question_id):bool | array
+    {
+        $number_of_questions_left = $this->getNumberOfQuestionsLeft($quiz_id);
+        if($number_of_questions_left == 0){
+            return ["quiz_question"=>"No more questions can be added to this quiz"];
+        }
+        $number_of_marks_left = $this->getNumberOfMarksLeft($quiz_id);
+        $question_mark = $this->getQuestionMark($question_id);
+        if($question_mark > $number_of_marks_left){
+            return ["quiz_question"=>"The mark of the question doesn't fit in the quiz"];
+        }
+        return true;
+    }
+
+    private function getQuestionMark($question_id)
+    {
+        $query = "SELECT mark_value FROM question WHERE id = :question_id";
+        $result = $this->db->read($query,[
+            "question_id"=>$question_id
+        ]);
+        if(!$result){
+            return ["quiz_question"=>"question does not exists"];
+        }
+        return $result[0]->mark_value;
     }
 
 }
