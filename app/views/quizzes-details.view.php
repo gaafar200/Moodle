@@ -119,49 +119,72 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="<?= ASSETS ?>img/blog-details/1.jpg" alt="" />
-                                            </a>
-                                            
+                                    <div class="quiz-wrapper">
+                                        <div class="course-name-wrapper">
+                                            <h4 class="course-name">Digital Electronics</h4>
                                         </div>
-
-                                        <div class="blog-details blog-sig-details">
-                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> <?= ucwords($courseDetails[0]->name) ?></a></span>
-                                                <span><a href="<?= ROOT ?>Professor/profile/<?= $courseDetails[0]->username ?>"><i class="fa fa-comments-o"></i> <b>Professor
-                                                            Name:</b> <?= ucfirst($courseDetails[0]->f_name) . " " . ucfirst($courseDetails[0]->l_name) ?></a></span>
-                                                <?php if($user->rank == "lecturer"): ?>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Course Actions
-                                                        </button>
-                                                        <div  class=" dropdown-menu ">
-                                                            <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Quizes Control</button></a>
-                                                            <a href="<?= ROOT ?>Question/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Questions Control</button></a>
-                                                            <a href="<?= ROOT ?>Course/addStudents/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Add Student</button></a>
-                                                            <a href="<?= ROOT ?>Course/removeStudents/<?= $courseDetails[0]->id ?>" ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Remove Student</button></a>
-                                                        </div>
-                                                    </div>
-                                                <?php endif; ?>
+                                        <div class="quiz-details-wrapper">
+                                            <div class="quiz-details-one">
+                                            <span class="quiz-details-one-name"> Quiz Chapter 7 </span>
+                                            <p class="quiz-details-one-description">This quiz covers Chapter 7</p>
                                             </div>
-                                            <h1><a class="blog-ht" href="#">Courses Description</a></h1>
-                                            <p><?= ucfirst($courseDetails[0]->description) ?></p>
-                                            <div class="course-active">
-                                                <h4 class="course-active-name">Quizzes</h4>
+                                            <div class="quiz-details-two">
+                                            <span class="quiz-details-two-attempts">
+                                                Attempts allowed: <span>2</span>
+                                            </span>
+                                            <span class="quiz-details-two-date">
+                                                This quiz closed on <span>Monday, 6 March 2023, 11:59 PM</span>
+                                            </span>
+                                            <span class="quiz-details-two-time">
+                                                Time limit: <span>10 mins</span>
+                                            </span>
+                                            <span class="quiz-details-two-method">
+                                                Grading method: <span>Highest grade</span>
+                                            </span>
                                             </div>
-                                            <div class="course-quiz-list">
-                                            <div class="course-quiz-list-quiz">
-                                                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#f33;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24.04" r="24"/><path id="path1" class="cls-2" d="M18.49,32H38.63v1.84H18.49Zm-5.89-.15A1.41,1.41,0,1,0,14,33.23,1.4,1.4,0,0,0,12.6,31.82Zm0-1.84a3.22,3.22,0,1,1-3.22,3.24A3.22,3.22,0,0,1,12.6,30Zm5.89-7.16H38.63v1.84H18.49Zm-5.89-.19A1.41,1.41,0,1,0,14,24,1.4,1.4,0,0,0,12.6,22.63Zm0-1.82A3.22,3.22,0,1,1,9.38,24,3.22,3.22,0,0,1,12.6,20.81Zm5.89-7.14H38.63v1.84H18.49Zm-5.89-.21A1.41,1.41,0,1,0,14,14.87,1.4,1.4,0,0,0,12.6,13.46Zm0-1.84a3.22,3.22,0,1,1-3.22,3.23A3.22,3.22,0,0,1,12.6,11.63Z"/></svg>
-                                                <a href="#" class="course-quiz-list-link">Quiz 1 Chapter 2</a>
+                                            <div class="quiz-details-three">
+                                            <span class="quiz-details-three-summary">
+                                                Summary of your previous attempts
+                                            </span>
+                                            <table class="grade-table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="grade-tabl-width">Attempt</th>
+                                                    <th>State</th>
+                                                    <th class="grade-tabl-width">Grade / <span>4</span></th>
+                                                    <th class="grade-tabl-width">Review</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td class="grade-table-state">
+                                                    <span>Finished</span>
+                                                    <span>Submitted Monday, 6 March 2023, 4:09 PM</span>
+                                                    </td>
+                                                    <td>3.5</td>
+                                                    <td><a href="">Review</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td class="grade-table-state">
+                                                    <span>Finished</span>
+                                                    <span>Submitted Monday, 6 March 2023, 4:09 PM</span>
+                                                    </td>
+                                                    <td>2.5</td>
+                                                    <td><a href="">Review</a></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <span class="quiz-details-three-grade">
+                                                Your final grade for this quiz is <span> 4/4</span>.
+                                            </span>
                                             </div>
-                                            <div class="course-quiz-list-quiz">
-                                                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#f33;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24.04" r="24"/><path id="path1" class="cls-2" d="M18.49,32H38.63v1.84H18.49Zm-5.89-.15A1.41,1.41,0,1,0,14,33.23,1.4,1.4,0,0,0,12.6,31.82Zm0-1.84a3.22,3.22,0,1,1-3.22,3.24A3.22,3.22,0,0,1,12.6,30Zm5.89-7.16H38.63v1.84H18.49Zm-5.89-.19A1.41,1.41,0,1,0,14,24,1.4,1.4,0,0,0,12.6,22.63Zm0-1.82A3.22,3.22,0,1,1,9.38,24,3.22,3.22,0,0,1,12.6,20.81Zm5.89-7.14H38.63v1.84H18.49Zm-5.89-.21A1.41,1.41,0,1,0,14,14.87,1.4,1.4,0,0,0,12.6,13.46Zm0-1.84a3.22,3.22,0,1,1-3.22,3.23A3.22,3.22,0,0,1,12.6,11.63Z"/></svg>
-                                                <a href="#" class="course-quiz-list-link">Quiz 1 Chapter 2</a>
-                                            </div>
-                                                
+                                            <div class="quiz-details-four">
+                                            <button class="quiz-details-four-attempt">Attempt Quiz</button>
+                                            <button class="quiz-details-four-back">Back to the course</button>
                                             </div>
                                         </div>
-                                        <div>
                                         </div>
                                     </div>
                                 </div>
@@ -171,5 +194,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 <?php $this->view("include/footer"); ?>
