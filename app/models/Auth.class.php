@@ -82,7 +82,7 @@ class Auth
         return false;
     }
 
-    public function hasRightPrivilege($privilegeRequired){
+    public function hasRightPrivilege($privilegeRequired):bool{
         $data = $this->is_logged_in();
         $RANK["admin"] = ["admin","technical","lecturer","student"];
         $RANK["technical"] = ["technical","lecturer","student"];
@@ -93,6 +93,27 @@ class Auth
         }
         else{
             return false;
+        }
+    }
+
+    public function checkCanDisplayCourseMaterials(int $course_id):bool
+    {
+        if($this->hasRightPrivilege("technical") || $this->AreInThisCourse($course_id)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    private function AreInThisCourse(int $course_id):bool{
+        $data = $this->is_logged_in();
+        if($data[0]->rank == "lecturer"){
+            $lecturer = new lecturer();
+            return $lecturer->DoesThisLecturerTeachThisCourse($course_id,$data[0]->id);
+        }
+        else{
+            $student = new Stud();
+            return $student->DoesStudentEnrolledInThisCourse($course_id,$data[0]->id);
         }
     }
 

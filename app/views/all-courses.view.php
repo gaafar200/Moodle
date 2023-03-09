@@ -137,7 +137,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 center pro-1">
                             <div class="courses-inner res-mg-b-30 pro-2">
                                 <div class="courses-title pro-2">
-                                    <a href="#"><img  class="img-rounded m-b pro-3" src="<?= $course->photo ?>" alt=""></a>
+                                    <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"><img  class="img-rounded m-b pro-3" src="<?= $course->photo ?>" alt=""></a>
                                     <h2><?= $course->name ?></h2>
                                 </div>
                                 <div class="course-des pro-2">
@@ -146,14 +146,17 @@
                                 </div>
                                 <div class="btn1Courses">
                                     <a href="<?= ROOT ?>Course/info/<?= $course->id ?>"> <button  type="button" class="btn btn-custon-rounded-four btn-primary btnWidth">Read More</button></a>
-                                    <a href="<?= ROOT ?>Course/delete/<?= $course->id ?>"><button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth">Delete</button></a>
+                                    <?php if(checkAuthorization("technical")): ?>
+                                        <a href="<?= ROOT ?>Course/delete/<?= $course->id ?>"><button  type="button" id="001" value="<?= $course->id ?>" class="btn btn-custon-rounded-four btn-danger btnWidth">Delete</button></a>
+                                    <?php endif; ?>
                                     </div>
+                                    <?php if(checkAuthorization("technical")): ?>
+                                        <div class="btn1Courses">
 
-                                    <div class="btn1Courses">
+                                            <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Edit</button></a>
 
-                                        <a href="<?= ROOT ?>Course/edit/<?= $course->id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Edit</button></a>
-                                        
-                                    </div>
+                                        </div>
+                                    <?php endif; ?>
                             </div>
                         </div>
                         <?php endforeach; ?>

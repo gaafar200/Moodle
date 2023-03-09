@@ -258,5 +258,26 @@ class Quizes extends model
         }
     }
 
+    public function getQuizDisplayData($quiz_id):bool | array
+    {
+        $query = "SELECT name,quiz_date,start_time,end_time,description,max_attempts,time FROM quiz WHERE id = :quiz_id";
+        return $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+    }
+    public function getMaxAttempts($quiz_id):int | bool{
+        $query = "SELECT max_attempts FROM quiz WHERE id = :quiz_id";
+        $data = $this->db->read($query,
+            [
+                "quiz_id"=>$quiz_id
+            ]);
+        if($data){
+            return $data[0]->max_attempts;
+        }
+        return false;
+    }
+
+
 
 }

@@ -8,7 +8,7 @@ class description
             return ["description"=>"Description can not be less than 3 characters"];
         }
         if(!preg_match("/^[A-Za-z0-9 ]+$/",$description)){
-            return["coursename"=>"Course Name must only consist of Characters and numbers"];
+            return["description"=>"description must only consist of Characters and numbers"];
         }
         return true;
     }

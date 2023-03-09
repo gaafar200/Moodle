@@ -149,7 +149,7 @@
                                                     <div class="td-flex"><?= $quiz->time ?></div>
                                                     <div class="td-flex"><?= $quiz->mark ?></div>
                                                     <div class="td-last justify-content-end">
-                                                        <a href="<?= ROOT ?>QuizQuestions/<?= $course_id ?>/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Add Questions</button></a>
+                                                        <a href="<?= ROOT ?>QuizQuestions/<?= $course_id ?>/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Questions</button></a>
                                                         <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit</button></a>
                                                         <?php if($quiz->status != "ready"): ?>
                                                             <a href="<?= ROOT ?>Quiz/activate/<?= $quiz->id ?>/<?= $course_id ?>"><button <?= isActiveButtonActive($quiz->status) ?> type="button" class="btn btn-success">Activate</button></a>

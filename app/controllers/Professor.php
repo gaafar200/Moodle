@@ -20,25 +20,29 @@ class Professor extends Controller
         $this->view("all-professors",$this->data);
     }
     public function edit($username = ""){
-        $this->data["pageName"] = "edit Professor";
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if($_FILES["image"]["full_path"] !== ""){
-                $imageChangedSuccessfully = $this->prof->image->changePhoto($username,$_FILES);
-                if($imageChangedSuccessfully !== true){
-                    $this->data["errors"] = $imageChangedSuccessfully;
-                }
+        if($this->Auth->hasRightPrivilege("technical")){
+            $this->data["pageName"] = "edit Professor";
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($_FILES["image"]["full_path"] !== "") {
+                    $imageChangedSuccessfully = $this->prof->image->changePhoto($username, $_FILES);
+                    if ($imageChangedSuccessfully !== true) {
+                        $this->data["errors"] = $imageChangedSuccessfully;
+                    }
 
-            }
-            $check =  $this->prof->validateEditBaseData($_POST);
-            if($check !== true){
-                $this->data["errors"] = $check;
-            }
-            if(!isset($this->data["errors"])){
-                if($this->prof->EditProfessorData($_POST)){
-                    $this->redirect("Professor");
+                }
+                $check = $this->prof->validateEditBaseData($_POST);
+                if ($check !== true) {
+                    $this->data["errors"] = $check;
+                }
+                if (!isset($this->data["errors"])) {
+                    if ($this->prof->EditProfessorData($_POST)) {
+                        $this->redirect("Professor");
+                    }
                 }
             }
-
+            else{
+                $this->forbidden();
+            }
         }
         $this->data["lectData"] = false;
         if($username !== ""){
@@ -52,29 +56,38 @@ class Professor extends Controller
         $this->view("professor-profile",$this->data);
     }
     public function add(){
-        $this->data["pageName"] = "add Professor";
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $result = $this->prof->validateProfData($_POST,$_FILES);
-            if($result === true){
-                $result = $this->prof->registerUser($_POST,$_FILES);
-                $this->redirect("Professor");
+        if($this->Auth->hasRightPrivilege("technical")) {
+            $this->data["pageName"] = "add Professor";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $result = $this->prof->validateProfData($_POST, $_FILES);
+                if ($result === true) {
+                    $result = $this->prof->registerUser($_POST, $_FILES);
+                    $this->redirect("Professor");
+                } else {
+                    $this->data["errors"] = $result;
+                }
             }
-            else{
-                $this->data["errors"] = $result;
-            }
+            $this->view("add-professor", $this->data);
         }
-        $this->view("add-professor",$this->data);
+        else{
+            $this->forbidden();
+        }
     }
     public function delete($username = ""){
-        $this->data["pageName"] = "All Professors";
-        if($username != ""){
-            $result = $this->prof->deleteUser($username);
-            if($result === true){
-                $this->data["success"] = ["lecturer"=> "Lecturer Deleted Successfully"];
+        if($this->Auth->hasRightPrivilege("technical")) {
+            $this->data["pageName"] = "All Professors";
+            if ($username != "") {
+                $result = $this->prof->deleteUser($username);
+                if ($result === true) {
+                    $this->data["success"] = ["lecturer" => "Lecturer Deleted Successfully"];
+                }
             }
+            $this->getMissingData();
+            $this->view("all-professors", $this->data);
         }
-        $this->getMissingData();
-        $this->view("all-professors",$this->data);
+        else{
+            $this->forbidden();
+        }
     }
     public function getMissingData(){
         $lecturers = $this->prof->getAllLecturers($this->data["user"]->username);

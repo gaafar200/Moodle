@@ -88,46 +88,6 @@ class Stud extends User
     {
     }
 
-   /* public function checkForEditData($data)
-    {
-        foreach ($data as $key => $value){
-            $$key = $value ?? false;
-        }
-        $check = $this->isVaildName($firstname);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isVaildName($lastname);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidAddress($address);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidMobilNo($mobileno);
-        if(is_array($check)){
-            return $check;
-        }
-        $check = $this->isValidEmail($email);
-        if(is_array($check)){
-            return $check;
-        }
-        return true;
-    }*/
-
-    /*public function editStudentData($data)
-    {
-        $query = "UPDATE users SET f_name = :firstname,
-                 l_name = :lastname,
-                 address = :address,
-                 phone_number = :mobileno,
-                 gender = :gender,
-                 email = :email 
-             WHERE username = :username";
-        return $this->db->write($query,$data);
-    }*/
-
     public function searchForStudents($search)
     {
         $query = "SELECT * FROM users WHERE (f_name LIKE :name OR l_name LIKE :name OR username LIKE :name OR university_id = :id) AND rank = :rank ";
@@ -155,5 +115,18 @@ class Stud extends User
         $data["university_id"] = $this->createUniqueUniversityId($data["gender"]);
         $data["rank"] = self::RANK;
         return $data;
+    }
+    public function DoesStudentEnrolledInThisCourse(int $course_id,int  $student_id):bool
+    {
+        $query = "SELECT id FROM course JOIN student_courses ON (id=course_id) WHERE student_id = :student_id";
+        $data = $this->db->read($query,
+        [
+           "course_id"=>$course_id,
+           "student_id"=>$student_id
+        ]);
+        if($data){
+            return true;
+        }
+        return false;
     }
 }

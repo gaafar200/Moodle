@@ -79,12 +79,12 @@ class Courses extends Model{
         $data = $this->lecturer->checkIfProfessorExists($username);
         return $data[0]->id;
     }
-    public function getCoursesData()
+    public function getCoursesData($user_id,$rank)
     {
-        $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id From users u join course c ON(c.lecturer_id = u.id)";
-        $db = new database();
-        $data = $db->read($query);
-        if(!is_array($data) || empty($data)){
+        $query = $this->getCoursesFetchQuery($user_id,$rank);
+        $requiredData = $this->getCoursesFetchData($user_id,$rank);
+        $data = $this->db->read($query,$requiredData);
+        if($data === false){
             return false;
         }
         foreach ($data as $course){
@@ -104,13 +104,15 @@ class Courses extends Model{
         }
         return 0;
     }
-    public function getCourseData($id)
+    public function getCourseData($course_id):bool | array
     {
         $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.id = :id";
-        return $this->db->read($query,
+        $data =  $this->db->read($query,
         [
-           "id" => $id
+           "id" => $course_id
         ]);
+        $data = $this->addCourseQuizesToData($course_id,$data);
+        return $data;
     }
     public function delete($id): bool | array
     {
@@ -190,5 +192,39 @@ class Courses extends Model{
            "student_id"=>$student_id,
            "course_id" =>$course_id
         ]);
+    }
+
+    private function getCoursesFetchQuery($user_id, $rank):string
+    {
+        if($rank == "admin" || $rank == "technical"){
+            $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id)";
+        }
+        else if($rank == "lecturer"){
+            $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From users u join course c ON(c.lecturer_id = u.id) WHERE c.lecturer_id = :user_id";
+        }
+        else{
+            $query = "SELECT u.username,u.f_name,u.l_name,c.name,c.id,c.photo,c.id,c.description From student_courses s JOIN course c ON (s.course_id = c.id) JOIN users u ON (c.lecturer_id = u.id) WHERE s.student_id = :user_id";
+        }
+        return $query;
+    }
+
+    private function getCoursesFetchData($user_id, $rank):array
+    {
+        $data = array();
+        if($rank != "admin" && $rank != "technical"){
+            $data["user_id"] = $user_id;
+        }
+        return $data;
+    }
+
+    private function addCourseQuizesToData($course_id, bool|array $data)
+    {
+        $query = "SELECT id,name FROM quiz WHERE course_id = :course_id";
+        $quiz_data = $this->db->read($query,
+        [
+           "course_id"=>$course_id
+        ]);
+        $data["quiz_data"] = $quiz_data;
+        return $data;
     }
 }

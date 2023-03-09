@@ -128,20 +128,21 @@
                                         <div class="blog-details blog-sig-details">
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
                                                 <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> <?= ucwords($courseDetails[0]->name) ?></a></span>
-                                                <span><a href="#"><i class="fa fa-comments-o"></i> <b>Professor
+                                                <span><a href="<?= ROOT ?>Professor/profile/<?= $courseDetails[0]->username ?>"><i class="fa fa-comments-o"></i> <b>Professor
                                                             Name:</b> <?= ucfirst($courseDetails[0]->f_name) . " " . ucfirst($courseDetails[0]->l_name) ?></a></span>
-                                                
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Course Actions
-                                                    </button>
-                                                    <div  class=" dropdown-menu ">
-                                                        <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Quizes Control</button></a>
-                                                        <a href="<?= ROOT ?>Question/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Questions Control</button></a>
-                                                        <a href="<?= ROOT ?>Course/addStudents/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Add Student</button></a>
-                                                        <a href="<?= ROOT ?>Course/removeStudents/<?= $courseDetails[0]->id ?>" ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Remove Student</button></a>
+                                                <?php if($user->rank == "lecturer"): ?>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Course Actions
+                                                        </button>
+                                                        <div  class=" dropdown-menu ">
+                                                            <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Quizes Control</button></a>
+                                                            <a href="<?= ROOT ?>Question/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Questions Control</button></a>
+                                                            <a href="<?= ROOT ?>Course/addStudents/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Add Student</button></a>
+                                                            <a href="<?= ROOT ?>Course/removeStudents/<?= $courseDetails[0]->id ?>" ><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Remove Student</button></a>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                <?php endif; ?>
                                             </div>
                                             <h1><a class="blog-ht" href="#">Courses Description</a></h1>
                                             <p><?= ucfirst($courseDetails[0]->description) ?></p>

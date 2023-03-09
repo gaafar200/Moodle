@@ -320,3 +320,6 @@ function checkFieldOkay($data,$type = ""):bool{
      }
      return "";
  }
+function displayCourseSideBar():string{
+
+}

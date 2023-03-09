@@ -1,6 +1,6 @@
 <?php
 
-class Student extends  Controller
+class Student extends Controller
 {
     public Stud $student;
     public function __construct(){
@@ -18,27 +18,32 @@ class Student extends  Controller
         $this->view("all-students",$this->data);
     }
     public function edit($username = ""){
-        $this->data["pageName"] = "Edit Student";
-        if($username != ""){
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                if($_FILES["image"]["full_path"] !== ""){
-                    $isPhotoChanged = $this->student->image->changePhoto($username,$_FILES);
-                    if($isPhotoChanged !== true){
-                        $this->data["errors"] = $isPhotoChanged;
+        if($this->data["user"]->rank == "technical") {
+            $this->data["pageName"] = "Edit Student";
+            if($username != ""){
+                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                    if($_FILES["image"]["full_path"] !== ""){
+                        $isPhotoChanged = $this->student->image->changePhoto($username,$_FILES);
+                        if($isPhotoChanged !== true){
+                            $this->data["errors"] = $isPhotoChanged;
+                        }
+                    }
+                    $check =  $this->student->validateEditBaseData($_POST);
+                    if($check === true){
+                        $isEdited = $this->student->editUserData($_POST);
+                        if($isEdited){
+                            $this->redirect("student");
+                        }
                     }
                 }
-                $check =  $this->student->validateEditBaseData($_POST);
-                if($check === true){
-                    $isEdited = $this->student->editUserData($_POST);
-                    if($isEdited){
-                        $this->redirect("student");
-                    }
-                }
+                $this->data["studData"] = $this->student->getUserDataFromUsername($username);
             }
-            $this->data["studData"] = $this->student->getUserDataFromUsername($username);
-        }
 
-        $this->view("edit-student",$this->data);
+            $this->view("edit-student",$this->data);
+        }
+        else{
+            $this->forbidden();
+        }
     }
     public function profile($username = ""){
         $this->data["pageName"] = "Student Profile";
@@ -46,29 +51,41 @@ class Student extends  Controller
         $this->view("student-profile",$this->data);
     }
     public function add(){
-        $this->data["pageName"] = "Add Student";
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $isValidData = $this->student->validateStudentData($_POST,$_FILES);
-            if($isValidData === true){
-                $isCreatedSuccessfully = $this->student->registerUser($_POST,$_FILES);
-                $this->redirect("Student");
+        if($this->data["user"]->rank == "technical") {
+            $this->data["pageName"] = "Add Student";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $isValidData = $this->student->validateStudentData($_POST, $_FILES);
+                if ($isValidData === true) {
+                    $isCreatedSuccessfully = $this->student->registerUser($_POST, $_FILES);
+                    $this->redirect("Student");
+                } else {
+                    $this->data["errors"] = $isValidData;
+                }
             }
-            else{
-                $this->data["errors"] = $isValidData;
-            }
+            $this->view("add-student", $this->data);
         }
-        $this->view("add-student",$this->data);
+        else{
+            $this->forbidden();
+        }
     }
     public function delete($username = ""){
-        $this->data["pageName"] = "All Students";
-        if($username != ""){
-            $data = $this->student->getUserDataFromUsername($username);
-            if($data[0]->rank === "student"){
-                $this->student->deleteUser($username);
+        if($this->data["user"]->rank == "technical") {
+            $this->data["pageName"] = "All Students";
+            if ($username != "") {
+                $data = $this->student->getUserDataFromUsername($username);
+                if ($data[0]->rank === "student") {
+                    $this->student->deleteUser($username);
+                }
             }
+            $this->data["students"] = $this->student->getAllStudent($this->data["user"]->username);
+            $this->view("all-students", $this->data);
         }
-        $this->data["students"] = $this->student->getAllStudent($this->data["user"]->username);
-        $this->view("all-students",$this->data);
+        else{
+            $this->forbidden();
+        }
     }
+
+
+
 
 }

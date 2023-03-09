@@ -110,6 +110,19 @@ class lecturer extends User
         ]);
     }
 
+    public function DoesThisLecturerTeachThisCourse(int $course_id,int $lecturer_id):bool
+    {
+        $query = "SELECT id FROM course WHERE id = :course_id AND lecturer_id = :lecturer_id LIMIT 1";
+        $data = $this->db->read($query,
+        [
+            "course_id"=>$course_id,
+            "lecturer_id"=>$lecturer_id
+        ]);
+        if($data){
+            return true;
+        }
+        return false;
+    }
 
 
 }

@@ -38,8 +38,10 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All Professors" href="<?= ROOT ?>Professor"><span class="mini-sub-pro">All
                                             Professors</span></a></li>
-                            <li><a title="Add Professor" href="<?= ROOT ?>Professor/add"><span class="mini-sub-pro">Add
-                                            Professor</span></a></li>
+                            <?php if(checkAuthorization("technical")): ?>
+                                <li><a title="Add Professor" href="<?= ROOT ?>Professor/add"><span class="mini-sub-pro">Add
+                                                Professor</span></a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
 
@@ -50,8 +52,10 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All Students" href="<?= ROOT ?>Student"><span class="mini-sub-pro">All
                                             Students</span></a></li>
-                            <li><a title="Add Students" href="<?= ROOT ?>Student/add"><span class="mini-sub-pro">Add
-                                            Student</span></a></li>
+                            <?php if(checkAuthorization("technical")):  ?>
+                                <li><a title="Add Students" href="<?= ROOT ?>Student/add"><span class="mini-sub-pro">Add
+                                                Student</span></a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li>
@@ -61,8 +65,10 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All Courses" href="<?= ROOT ?>Course"><span class="mini-sub-pro">All
                                             Courses</span></a></li>
-                            <li><a title="Add Courses" href="<?= ROOT ?>Course/add"><span class="mini-sub-pro">Add
-                                            Course</span></a></li>
+                            <?php if(checkAuthorization("technical")): ?>
+                                <li><a title="Add Courses" href="<?= ROOT ?>Course/add"><span class="mini-sub-pro">Add
+                                                Course</span></a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
 
