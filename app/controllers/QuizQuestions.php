@@ -2,6 +2,7 @@
 class QuizQuestions extends SQuestion{
     public Questions $question;
     public function index(int $course_id,int $quiz_id){
+        echo json_encode($this->data);
         if($this->data["user"]->rank == "lecturer") {
             $this->data["pageName"] = "Quiz Questions";
             $this->question = $this->getQuestion();

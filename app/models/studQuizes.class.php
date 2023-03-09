@@ -43,7 +43,7 @@ class studQuizes extends Model
         return false;
     }
 
-    public function performQuiz(int $student_id, int $quiz_id):void
+    public function performQuiz(int $student_id, int $quiz_id):int
     {
         $data["attempt_number"] = $this->getNumberOfAttemptsForStudent($student_id,$quiz_id) + 1;
         $data["student_id"] = $student_id;
@@ -53,7 +53,8 @@ class studQuizes extends Model
         $query = "INSERT INTO student_quiz (student_id,quiz_id,attempt_number,start_time,end_time) VALUES(:student_id,:quiz_id,:attempt_number,:start_time,:end_time)";
         $this->db->write($query,$data);
         $student_quiz_id = $this->getStudentQuizId($student_id,$quiz_id,$data["attempt_number"]);
-        $this->getAllQuiestionForThisStudentQuiz();
+        $this->getAllQuestionForThisStudentQuiz($student_quiz_id,$student_id);
+        return $student_quiz_id;
     }
 
     private function getStudentQuizId(int $student_id, int $quiz_id,int $attempt_number):int
@@ -68,7 +69,78 @@ class studQuizes extends Model
         return $data[0]->id;
     }
 
-    private function getAllQuiestionForThisStudentQuiz()
+    private function getAllQuestionForThisStudentQuiz(int $student_quiz_id,int $quiz_id):bool
+    {
+        $is_random_generated = $this->quiz->isRandom($quiz_id);
+        $numberOfQuestions = $this->quiz->getNumberOfQuestions($quiz_id);
+        $query = $this->getQuestionsQuery($is_random_generated,$numberOfQuestions,$student_quiz_id);
+        return $this->db->write($query,[
+           "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    private function getQuestionsQuery(bool $is_random_generated,int $numberOfQuestions,int $student_quiz_id):string
+    {
+        if($is_random_generated){
+            $query = "INSERT INTO student_quiz_question (question_id,student_quiz) SELECT question_id,{$student_quiz_id} FROM quiz_questions WHERE quiz_id = :quiz_id ORDER BY RAND() LIMIT {$numberOfQuestions}";
+        }
+        else{
+            $query = "INSERT INTO student_quiz_question (question_id,student_quiz) SELECT question_id,{$student_quiz_id} FROM quiz_questions WHERE quiz_id = :quiz_id LIMIT {$numberOfQuestions}";
+        }
+        return $query;
+    }
+
+    public function getProperPageNumber(int $page,int $student_quiz)
+    {
+        $expectedPageNumber = $this->getExpectedPageNumber($student_quiz);
+        if($page <= 0){
+            return $expectedPageNumber;
+        }
+        $maximumPageNumber = $this->getMaxiumPageNumber($student_quiz);
+        if($page > $maximumPageNumber){
+            return $expectedPageNumber;
+        }
+        $quiz_id = $this->getQuizIdFromStudentQuiz($student_quiz);
+        $is_recursive = $this->quiz->isRecursive($quiz_id);
+        if(!$is_recursive){
+            if($page <= $expectedPageNumber){
+                return $expectedPageNumber + 1;
+            }
+        }
+        return $page;
+    }
+
+    private function getExpectedPageNumber(int $student_quiz)
+    {
+        $query = "SELECT count(question_id)/3 as expectedPageNumber FROM student_quiz_question where student_quiz = :student_quiz AND is_solved = 1";
+        $data = $this->db->read($query,
+        [
+            "student_quiz"=>$student_quiz
+        ]);
+        return $data[0]->expectedPageNumber;
+    }
+
+    private function getMaxiumPageNumber(int $student_quiz)
+    {
+        $query = "SELECT count(question_id)/3 as maxPageNumbers FROM student_quiz_question WHERE student_quiz = :student_quiz";
+        $data = $this->db->read($query,
+        [
+           "student_quiz"=>$student_quiz
+        ]);
+        return $data[0]->maxPageNumbers;
+    }
+
+    private function getQuizIdFromStudentQuiz(int $student_quiz):int
+    {
+        $query = "SELECT quiz_id FROM student_quiz_question WHERE id = :student_quiz";
+        $data = $this->db->read($query,
+        [
+           "student_quiz"=>$student_quiz
+        ]);
+        return  $data[0]->quiz_id;
+    }
+
+    public function getQuestionsForPage(int $pageNumber, int $student_quiz_id)
     {
     }
 

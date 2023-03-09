@@ -278,6 +278,38 @@ class Quizes extends model
         return false;
     }
 
+    public function isRandom(int $quiz_id):bool
+    {
+        $query = "SELECT is_shuffled FROM quiz WHERE id = :quiz_id LIMIT 1";
+        $data = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id
+        ]);
+        if($data[0]->is_shuffled == "yes"){
+            return true;
+        }
+        return false;
+    }
+    public function getNumberOfQuestions(int $quiz_id){
+        $query = "SELECT number_of_questions FROM quiz WHERE id = :quiz_id LIMIT 1";
+        $data = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id
+        ]);
+        return $data[0]->number_od_questions;
+    }
 
+    public function isRecursive(int $quiz_id)
+    {
+        $query = "SELECT is_recursive FROM quiz WHERE quiz_id = :quiz_id";
+        $data = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id
+        ]);
+        if($data[0]->is_recursive == "yes"){
+            return true;
+        }
+        return false;
+    }
 
 }
