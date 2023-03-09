@@ -85,9 +85,8 @@ class Quiz extends Controller
             $this->data["quiz_display"] = $this->quiz->getQuizDisplayData($quiz_id);
             if($this->data["quiz_display"]){
                 $this->data["pageName"] = $this->data["quiz_display"][0]->name;
-                show($this->data);
             }
-
+            $this->view("quizzes-details",$this->data);
         }
         else{
             $this->forbidden();
