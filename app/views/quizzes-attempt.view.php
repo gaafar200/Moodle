@@ -115,7 +115,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="blog-details-inner">
+                <div class="blog-details-inner change-background">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="latest-blog-single blog-single-full-view">
