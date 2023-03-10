@@ -150,15 +150,14 @@
                                                 <h4 class="course-active-name">Quizzes</h4>
                                             </div>
                                             <div class="course-quiz-list">
-                                            <div class="course-quiz-list-quiz">
-                                                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#f33;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24.04" r="24"/><path id="path1" class="cls-2" d="M18.49,32H38.63v1.84H18.49Zm-5.89-.15A1.41,1.41,0,1,0,14,33.23,1.4,1.4,0,0,0,12.6,31.82Zm0-1.84a3.22,3.22,0,1,1-3.22,3.24A3.22,3.22,0,0,1,12.6,30Zm5.89-7.16H38.63v1.84H18.49Zm-5.89-.19A1.41,1.41,0,1,0,14,24,1.4,1.4,0,0,0,12.6,22.63Zm0-1.82A3.22,3.22,0,1,1,9.38,24,3.22,3.22,0,0,1,12.6,20.81Zm5.89-7.14H38.63v1.84H18.49Zm-5.89-.21A1.41,1.41,0,1,0,14,14.87,1.4,1.4,0,0,0,12.6,13.46Zm0-1.84a3.22,3.22,0,1,1-3.22,3.23A3.22,3.22,0,0,1,12.6,11.63Z"/></svg>
-                                                <a href="<?= ROOT ?>Quiz/quizDisplay/<?= $courseDetails[0]->id?>/<?= $courseDetails["quiz_data"][0]->id; ?>" class="course-quiz-list-link">Quiz 1 Chapter 2</a>
-                                            </div>
-                                            <div class="course-quiz-list-quiz">
-                                                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#f33;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24.04" r="24"/><path id="path1" class="cls-2" d="M18.49,32H38.63v1.84H18.49Zm-5.89-.15A1.41,1.41,0,1,0,14,33.23,1.4,1.4,0,0,0,12.6,31.82Zm0-1.84a3.22,3.22,0,1,1-3.22,3.24A3.22,3.22,0,0,1,12.6,30Zm5.89-7.16H38.63v1.84H18.49Zm-5.89-.19A1.41,1.41,0,1,0,14,24,1.4,1.4,0,0,0,12.6,22.63Zm0-1.82A3.22,3.22,0,1,1,9.38,24,3.22,3.22,0,0,1,12.6,20.81Zm5.89-7.14H38.63v1.84H18.49Zm-5.89-.21A1.41,1.41,0,1,0,14,14.87,1.4,1.4,0,0,0,12.6,13.46Zm0-1.84a3.22,3.22,0,1,1-3.22,3.23A3.22,3.22,0,0,1,12.6,11.63Z"/></svg>
-                                                <a href="#" class="course-quiz-list-link">Quiz 1 Chapter 2</a>
-                                            </div>
-                                                
+                                             <?php if(is_array($courseDetails["quiz_data"]) && !empty($courseDetails["quiz_data"])): ?>
+                                                <?php foreach ($courseDetails["quiz_data"] as $quiz): ?>
+                                                    <div class="course-quiz-list-quiz">
+                                                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#f33;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24.04" r="24"/><path id="path1" class="cls-2" d="M18.49,32H38.63v1.84H18.49Zm-5.89-.15A1.41,1.41,0,1,0,14,33.23,1.4,1.4,0,0,0,12.6,31.82Zm0-1.84a3.22,3.22,0,1,1-3.22,3.24A3.22,3.22,0,0,1,12.6,30Zm5.89-7.16H38.63v1.84H18.49Zm-5.89-.19A1.41,1.41,0,1,0,14,24,1.4,1.4,0,0,0,12.6,22.63Zm0-1.82A3.22,3.22,0,1,1,9.38,24,3.22,3.22,0,0,1,12.6,20.81Zm5.89-7.14H38.63v1.84H18.49Zm-5.89-.21A1.41,1.41,0,1,0,14,14.87,1.4,1.4,0,0,0,12.6,13.46Zm0-1.84a3.22,3.22,0,1,1-3.22,3.23A3.22,3.22,0,0,1,12.6,11.63Z"/></svg>
+                                                        <a href="<?= ROOT ?>Quiz/quizDisplay/<?= $courseDetails[0]->id?>/<?= $quiz->id; ?>" class="course-quiz-list-link"><?= $quiz->name ?></a>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                             <?php endif; ?>
                                             </div>
                                         </div>
                                         <div>

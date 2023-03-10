@@ -13,8 +13,10 @@ class studQuizes extends Model
 
     public function checkStudentCanPerformQuiz($student_data,$quiz_id,$course_id):bool{
         if($student_data->rank == "student" && $this->student->DoesStudentEnrolledInThisCourse($course_id,$student_data->id)){
-            if($this->checkStudentAttempts($student_data[0]->id,$quiz_id)){
-                return true;
+            if($this->checkStudentAttempts($student_data->id,$quiz_id)){
+                if($this->quiz->checkQuizTime($quiz_id) == "available"){
+                    return true;
+                }
             }
         }
         return false;
@@ -143,5 +145,4 @@ class studQuizes extends Model
     public function getQuestionsForPage(int $pageNumber, int $student_quiz_id)
     {
     }
-
 }

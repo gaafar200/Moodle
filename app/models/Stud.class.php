@@ -121,7 +121,6 @@ class Stud extends User
         $query = "SELECT id FROM course JOIN student_courses ON (id=course_id) WHERE student_id = :student_id";
         $data = $this->db->read($query,
         [
-           "course_id"=>$course_id,
            "student_id"=>$student_id
         ]);
         if($data){

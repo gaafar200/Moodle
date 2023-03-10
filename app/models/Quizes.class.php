@@ -258,13 +258,14 @@ class Quizes extends model
         }
     }
 
-    public function getQuizDisplayData($quiz_id):bool | array
+    public function getQuizDisplayData($quiz_id): stdClass
     {
-        $query = "SELECT name,quiz_date,start_time,end_time,description,max_attempts,time FROM quiz WHERE id = :quiz_id";
-        return $this->db->read($query,
+        $query = "SELECT name,quiz_date,start_time,end_time,description,max_attempts,time,mark_value FROM quiz WHERE id = :quiz_id LIMIT 1";
+        $data =  $this->db->read($query,
         [
             "quiz_id"=>$quiz_id
         ]);
+        return $data[0];
     }
     public function getMaxAttempts($quiz_id):int | bool{
         $query = "SELECT max_attempts FROM quiz WHERE id = :quiz_id";
@@ -285,7 +286,7 @@ class Quizes extends model
         [
            "quiz_id"=>$quiz_id
         ]);
-        if($data[0]->is_shuffled == "yes"){
+        if($data && $data[0]->is_shuffled == "yes"){
             return true;
         }
         return false;
@@ -296,7 +297,7 @@ class Quizes extends model
         [
            "quiz_id"=>$quiz_id
         ]);
-        return $data[0]->number_od_questions;
+        return $data[0]->number_of_questions;
     }
 
     public function isRecursive(int $quiz_id)
@@ -310,6 +311,54 @@ class Quizes extends model
             return true;
         }
         return false;
+    }
+
+    public function getCourseDataForQuiz(int $course_id):string
+    {
+        $course = new Courses();
+        return $course->getCourseName($course_id);
+    }
+    public function getDateInfo($quiz_id){
+        $query = "SELECT quiz_date,start_time,end_time FROM quiz WHERE id = :quiz_id";
+        return $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    public function checkQuizTime($quiz_id):string
+    {
+        $data = $this->getDateInfo($quiz_id);
+        $date = $data[0]->quiz_date;
+        $start = $data[0]->start_time;
+        $end = $data[0]->end_time;
+        $startQuizTime = date('Y-m-d H:i:s', strtotime("$date $start"));
+        $endQuizTime = date('Y-m-d H:i:s', strtotime("$date $end"));
+        $currentDate = date("Y-m-d H:i:s");
+        if($currentDate < $startQuizTime){
+            return "closed";
+        }
+        else if($currentDate <=  $endQuizTime){
+            return "available";
+        }
+        else{
+            return "finished";
+        }
+    }
+    public function quizGetStartTimeFormatted($quiz_id):string{
+        $data = $this->getDateInfo($quiz_id);
+        $date = $data[0]->quiz_date;
+        $start = $data[0]->start_time;
+        return $this->getTimeFormattedNicely($date,$start);
+    }
+    public function quizGetEndTimeFormatted($quiz_id):string{
+        $data = $this->getDateInfo($quiz_id);
+        $date = $data[0]->quiz_date;
+        $end = $data[0]->end_time;
+        return $this->getTimeFormattedNicely($date,$end);
+    }
+    public function getTimeFormattedNicely($date,$time):string{
+        return  date('l, d F h:i A', strtotime("$date $time"));
     }
 
 }

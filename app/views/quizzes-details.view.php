@@ -121,22 +121,22 @@
                                     <div class="latest-blog-single blog-single-full-view">
                                     <div class="quiz-wrapper">
                                         <div class="course-name-wrapper">
-                                            <h4 class="course-name">Digital Electronics</h4>
+                                            <h4 class="course-name"><?= ucwords($course_name) ?></h4>
                                         </div>
                                         <div class="quiz-details-wrapper">
                                             <div class="quiz-details-one">
-                                            <span class="quiz-details-one-name"> Quiz Chapter 7 </span>
-                                            <p class="quiz-details-one-description">This quiz covers Chapter 7</p>
+                                            <span class="quiz-details-one-name"><?= $quiz_display->name ?></span>
+                                            <p class="quiz-details-one-description"><?= $quiz_display->description ?></p>
                                             </div>
                                             <div class="quiz-details-two">
                                             <span class="quiz-details-two-attempts">
-                                                Attempts allowed: <span>2</span>
+                                                Attempts allowed: <span><?= $quiz_display->max_attempts  ?></span>
                                             </span>
                                             <span class="quiz-details-two-date">
-                                                This quiz closed on <span>Monday, 6 March 2023, 11:59 PM</span>
+                                                <?= displayQuizDateStat($quiz_status) ?><span><?= displayQuizDateDetails($quiz_display->quizStartDate,$quiz_display->quizendDate,$quiz_status); ?></span>
                                             </span>
                                             <span class="quiz-details-two-time">
-                                                Time limit: <span>10 mins</span>
+                                                Time limit: <span><?= $quiz_display->time ?> mins</span>
                                             </span>
                                             <span class="quiz-details-two-method">
                                                 Grading method: <span>Highest grade</span>
@@ -151,7 +151,7 @@
                                                 <tr>
                                                     <th class="grade-tabl-width">Attempt</th>
                                                     <th>State</th>
-                                                    <th class="grade-tabl-width">Grade / <span>4</span></th>
+                                                    <th class="grade-tabl-width">Grade / <span><?= $quiz_display->mark_value ?></span></th>
                                                     <th class="grade-tabl-width">Review</th>
                                                 </tr>
                                                 </thead>
@@ -177,12 +177,14 @@
                                                 </tbody>
                                             </table>
                                             <span class="quiz-details-three-grade">
-                                                Your final grade for this quiz is <span> 4/4</span>.
+                                                Your final grade for this quiz is <span> 4/<?= $quiz_display->mark_value ?></span>.
                                             </span>
                                             </div>
                                             <div class="quiz-details-four">
-                                            <button class="quiz-details-four-attempt">Attempt Quiz</button>
-                                            <button class="quiz-details-four-back">Back to the course</button>
+                                            <?php if($quiz_display->canPerformQuiz): ?>
+                                                <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Attempt Quiz</button></a>
+                                            <?php endif; ?>
+                                            <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Back to the course</button></a>
                                             </div>
                                         </div>
                                         </div>

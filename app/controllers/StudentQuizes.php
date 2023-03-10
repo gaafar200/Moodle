@@ -11,7 +11,7 @@ class StudentQuizes extends Controller
 
     public function perform(int $quiz_id,int $course_id){
         if($this->studQuizes->checkStudentCanPerformQuiz($this->data["user"],$quiz_id,$course_id)){
-            $student_quiz_id = $this->studQuizes->performQuiz($this->data["user"],$quiz_id);
+            $student_quiz_id = $this->studQuizes->performQuiz($this->data["user"]->id,$quiz_id);
             $this->redirect("StudentQuizes/quiz/" . $student_quiz_id . "?page=" . 1);
         }
         else{

@@ -81,12 +81,20 @@ class Quiz extends Controller
 
     }
     public function quizDisplay(int $course_id,int $quiz_id){
+        $this->data["course_id"] = $course_id;
+        $this->data["quiz_id"] = $quiz_id;
         if($this->Auth->checkCanDisplayCourseMaterials($course_id)){
             $this->data["quiz_display"] = $this->quiz->getQuizDisplayData($quiz_id);
-            if($this->data["quiz_display"]){
-                $this->data["pageName"] = $this->data["quiz_display"][0]->name;
+            if($this->data["quiz_display"]) {
+                $studQuizes = new studQuizes();
+                $this->data["quiz_display"]->canPerformQuiz = (bool)$studQuizes->checkStudentCanPerformQuiz($this->data["user"],$quiz_id,$course_id);
+                $this->data["quiz_status"] = $this->quiz->checkQuizTime($quiz_id);
+                $this->data["quiz_display"]->quizStartDate = $this->quiz->quizGetStartTimeFormatted($quiz_id);
+                $this->data["quiz_display"]->quizendDate = $this->quiz->quizGetEndTimeFormatted($quiz_id);
+                $this->data["pageName"] = $this->data["quiz_display"]->name;
+                $this->data["course_name"] = $this->quiz->getCourseDataForQuiz($course_id);
+                $this->view("quizzes-details", $this->data);
             }
-            $this->view("quizzes-details",$this->data);
         }
         else{
             $this->forbidden();

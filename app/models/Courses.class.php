@@ -219,12 +219,22 @@ class Courses extends Model{
 
     private function addCourseQuizesToData($course_id, bool|array $data)
     {
-        $query = "SELECT id,name FROM quiz WHERE course_id = :course_id";
+        $query = "SELECT id,name FROM quiz WHERE course_id = :course_id AND status = 'ready'";
         $quiz_data = $this->db->read($query,
         [
            "course_id"=>$course_id
         ]);
         $data["quiz_data"] = $quiz_data;
         return $data;
+    }
+
+    public function getCourseName(int $course_id)
+    {
+        $query = "SELECT name FROM course WHERE id = :course_id LIMIT 1";
+        $data = $this->db->read($query,
+        [
+            "course_id"=>$course_id
+        ]);
+        return $data[0]->name;
     }
 }

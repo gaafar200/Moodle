@@ -82,7 +82,7 @@ class Course extends Controller
         }
     }
     public function addStudents($id){
-        if($this->Auth->hasRightPrivilege("technical")) {
+        if($this->data["user"]->rank == "lecturer") {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $this->course->addStudentToACourse($_POST["addStudent"], $id);
             }
@@ -95,7 +95,7 @@ class Course extends Controller
         }
     }
     public function removeStudents($id){
-        if($this->Auth->hasRightPrivilege("technical")) {
+        if($this->data["user"]->rank == "lecturer") {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $this->course->removeStudentFromACourse($_POST["delete"], $id);
             }

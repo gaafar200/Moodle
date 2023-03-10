@@ -323,3 +323,26 @@ function checkFieldOkay($data,$type = ""):bool{
 function displayCourseSideBar():string{
 
 }
+
+/**
+ * Quiz Details
+ */
+function displayQuizDateDetails($quiz_start_date,$quiz_end_date,$status):string{
+    if($status == "closed"){
+        return $quiz_start_date;
+    }
+    else{
+        return $quiz_end_date;
+    }
+}
+function displayQuizDateStat($status):string{
+    if($status == "closed"){
+        return "The quiz will be open on ";
+    }
+    else if($status == "available"){
+        return "The quiz will close on ";
+    }
+    else{
+        return "The quiz closed on ";
+    }
+}
