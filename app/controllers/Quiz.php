@@ -87,12 +87,13 @@ class Quiz extends Controller
             $this->data["quiz_display"] = $this->quiz->getQuizDisplayData($quiz_id);
             if($this->data["quiz_display"]) {
                 $studQuizes = new studQuizes();
-                $this->data["quiz_display"]->canPerformQuiz = (bool)$studQuizes->checkStudentCanPerformQuiz($this->data["user"],$quiz_id,$course_id);
+                $this->data["quiz_display"]->canPerformQuiz = $studQuizes->checkStudentCanPerformQuiz($this->data["user"],$quiz_id,$course_id);
                 $this->data["quiz_status"] = $this->quiz->checkQuizTime($quiz_id);
                 $this->data["quiz_display"]->quizStartDate = $this->quiz->quizGetStartTimeFormatted($quiz_id);
                 $this->data["quiz_display"]->quizendDate = $this->quiz->quizGetEndTimeFormatted($quiz_id);
                 $this->data["pageName"] = $this->data["quiz_display"]->name;
                 $this->data["course_name"] = $this->quiz->getCourseDataForQuiz($course_id);
+                $this->data["quiz_attempts"] = $studQuizes->getAllStudentAttempts($this->data["user"]->id,$quiz_id);
                 $this->view("quizzes-details", $this->data);
             }
         }

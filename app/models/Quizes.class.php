@@ -357,7 +357,10 @@ class Quizes extends model
         $end = $data[0]->end_time;
         return $this->getTimeFormattedNicely($date,$end);
     }
-    public function getTimeFormattedNicely($date,$time):string{
+    public function getTimeFormattedNicely($date,$time = ""):string{
+        if($time = ""){
+            return date('l, d F h:i A', strtotime("$date"));
+        }
         return  date('l, d F h:i A', strtotime("$date $time"));
     }
 

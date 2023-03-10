@@ -346,3 +346,9 @@ function displayQuizDateStat($status):string{
         return "The quiz closed on ";
     }
 }
+function displayGrade($grade,$status):string{
+    if($status == "finished"){
+        return $grade;
+    }
+    return "";
+}

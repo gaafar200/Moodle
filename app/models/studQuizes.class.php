@@ -145,4 +145,26 @@ class studQuizes extends Model
     public function getQuestionsForPage(int $pageNumber, int $student_quiz_id)
     {
     }
+
+    public function getAllStudentAttempts(int $stud_id, int $quiz_id):array | bool
+    {
+        $query = "SELECT grade,end_time FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id AND grade ORDER BY (id) ASC";
+        $data =  $this->db->read($query,
+        [
+           "student_id"=>$stud_id,
+           "quiz_id"=>$quiz_id
+        ]);
+        if(is_array($data)){
+            $data = $this->getAllDatesRight($data);
+        }
+        return $data;
+    }
+
+    private function getAllDatesRight(array $data):array
+    {
+        foreach($data as $attempt){
+            $attempt->end_time = $this->quiz->getTimeFormattedNicely($attempt->end_time);
+        }
+        return $data;
+    }
 }

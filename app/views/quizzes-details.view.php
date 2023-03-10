@@ -108,7 +108,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <div class="blog-details-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -142,51 +141,48 @@
                                             </span>
                                         </div>
                                         <div class="quiz-details-three">
-                                            <span class="quiz-details-three-summary">
-                                                Summary of your previous attempts
-                                            </span>
-                                            <table class="grade-table">
-                                                <thead>
-<<<<<<< HEAD
-                                                <tr>
-                                                    <th class="grade-tabl-width">Attempt</th>
-                                                    <th>State</th>
-                                                    <th class="grade-tabl-width">Grade / <span><?= $quiz_display->mark_value ?></span></th>
-                                                    <th class="grade-tabl-width">Review</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
+                                            <?php if($quiz_attempts && is_array($quiz_attempts)): ?>
+                                                <span class="quiz-details-three-summary">
+                                                    Summary of your previous attempts
+                                                </span>
+                                                <table class="grade-table">
+                                                    <thead>
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td class="grade-table-state">
-                                                            <span>Finished</span>
-                                                            <span>Submitted Monday, 6 March 2023, 4:09 PM</span>
-                                                        </td>
-                                                        <td>3.5</td>
-                                                        <td><a href="">Review</a></td>
+                                                        <th class="grade-tabl-width">Attempt</th>
+                                                        <th>State</th>
+                                                        <th class="grade-tabl-width">Grade / <span><?= $quiz_display->mark_value ?></span></th>
+                                                        <th class="grade-tabl-width">Review</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td class="grade-table-state">
-                                                            <span>Finished</span>
-                                                            <span>Submitted Monday, 6 March 2023, 4:09 PM</span>
-                                                        </td>
-                                                        <td>2.5</td>
-                                                        <td><a href="">Review</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <span class="quiz-details-three-grade">
-                                                Your final grade for this quiz is <span> 4/<?= $quiz_display->mark_value ?></span>.
-                                            </span>
-<<<<<<< HEAD
-                                            </div>
-                                            <div class="quiz-details-four">
-                                            <?php if($quiz_display->canPerformQuiz): ?>
-                                                <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Attempt Quiz</button></a>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php $count = 1 ?>
+                                                    <?php foreach ($quiz_attempts as $attempt):?>
+                                                        <tr>
+                                                            <td><?= $count++ ?></td>
+                                                            <td class="grade-table-state">
+                                                                <span>Finished</span>
+                                                                <span><?= $attempt->end_time ?></span>
+                                                            </td>
+                                                            <td><?= displayGrade($attempt->grade,$quiz_status) ?></td>
+                                                            <td><a href="">Review</a></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                                <?php if($quiz_status == "finished"): ?>
+                                                    <span class="quiz-details-three-grade">
+                                                        Your final grade for this quiz is <span> 4/<?= $quiz_display->mark_value ?></span>.
+                                                    </span>
+                                                <?php endif; ?>
+                                                </div>
                                             <?php endif; ?>
-                                            <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Back to the course</button></a>
-                                            </div>
+                                                <div class="quiz-details-four">
+                                                <?php if($quiz_display->canPerformQuiz): ?>
+                                                    <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Attempt Quiz</button></a>
+                                                <?php endif; ?>
+                                                <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Back to the course</button></a>
+                                                </div>
+
                                         </div>
 
                                         </div>
