@@ -126,94 +126,45 @@
                                     <div class="questions-page-container">
                                         <form class="form-questions">
                                             <div class="questions-page-questions">
-                                                <div class="questions-page-question-wrapper">
-                                                    <div class="questions-page-question-details">
-                                                        <span class="questions-page-question-details-number">
-                                                            Question <span>1</span>
-                                                        </span>
-                                                        <span class="questions-page-question-details-mark">
-                                                            <span>1</span> Mark
-                                                        </span>
-                                                    </div>
-                                                    <div class="questions-page-question-container">
-                                                        <img class="questions-page-question-container-img"
-                                                            src="https://moodle.iugaza.edu.ps/pluginfile.php/533946/question/questiontext/2051425/2/141222/Q3_4.png" />
-                                                        <span class="questions-page-question">What are the VTC critical
-                                                            voltages?</span>
-                                                        <span class="questions-page-select">Select one:</span>
-                                                        <div class="questions-page-choices">
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-one" name="answerer1" />
-                                                                <label for="choice-one">VOL= 0.2V, VOH= 4V, VIL= 0.5V,
-                                                                    VIH = 0.6V</label>
-                                                            </div>
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-two" name="answerer1" />
-                                                                <label for="choice-two">VOL= -3.8V, VOH= 0.0V, VIL=
-                                                                    -3.4V, VIH = -3.5V</label>
-                                                            </div>
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-three"
-                                                                    name="answerer1" />
-                                                                <label for="choice-three">VOL= -0.2V, VOH= -3.8V, VIL=
-                                                                    -1.5V, VIH = -1.4V</label>
-                                                            </div>
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-four" name="answerer1" />
-                                                                <label for="choice-four">VOL= -3.8V, VOH= 0.0V, VIL=
-                                                                    -3.5V, VIH = -3.4V</label>
-                                                            </div>
+                                                <?php $count = 1; ?>
+                                                <?php foreach ($questions as $question): ?>
+                                                    <div class="questions-page-question-wrapper">
+                                                        <div class="questions-page-question-details">
+                                                            <span class="questions-page-question-details-number">
+                                                                Question <span><?= $count++ ?> </span>
+                                                            </span>
+                                                            <span class="questions-page-question-details-mark">
+                                                                <span><?= $question->mark_value ?></span> Mark
+                                                            </span>
+                                                        </div>
+                                                        <div class="questions-page-question-container">
+                                                            <?php if($question->photo != ""): ?>
+                                                                <img class="questions-page-question-container-img"
+                                                                    src="<?= $question->photo ?>" />/
+                                                            <?php endif; ?>
+                                                            <span class="questions-page-question"><?= $question->question ?></span>
+                                                            <?php if($question->type == "essayQuestion"): ?>
+                                                                <label for="images" class="drop-container">
+                                                                    <span class="drop-title">Drop files here</span>
+                                                                    or
+                                                                    <input type="file" id="images" accept="*" />
+                                                                </label>
+                                                            <?php else: ?>
+                                                                <span class="questions-page-select">Select one:</span>
+                                                                <div class="questions-page-choices">
+                                                                    <?php foreach ($question->choices as $choice): ?>
+                                                                        <div class="questions-page-choice-one">
+                                                                            <input type="radio" id="<?= $choice->name ?>" name="<?= $question->name ?>" />
+                                                                            <label for="<?= $choice->name ?>"><?= $choice->choice ?></label>
+                                                                        </div>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <?php endforeach; ?>
 
-                                                <div class="questions-page-question-wrapper">
-                                                    <div class="questions-page-question-details">
-                                                        <span class="questions-page-question-details-number">
-                                                            Question 1
-                                                        </span>
-                                                        <span class="questions-page-question-details-mark">
-                                                            Mark 1
-                                                        </span>
-                                                    </div>
-                                                    <div class="questions-page-question-container">
-                                                        <img src="" />
-                                                        <span class="questions-page-question">What are the VTC critical
-                                                            voltages?</span>
-                                                        <span class="questions-page-select">Select one:</span>
-                                                        <div class="questions-page-choices">
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-true" name="answerer2" />
-                                                                <label for="choice-true">true</label>
-                                                            </div>
-                                                            <div class="questions-page-choice-one">
-                                                                <input type="radio" id="choice-false"
-                                                                    name="answerer2" />
-                                                                <label for="choice-false">false</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="questions-page-question-wrapper">
-                                                    <div class="questions-page-question-details">
-                                                        <span class="questions-page-question-details-number">
-                                                            Question 1
-                                                        </span>
-                                                        <span class="questions-page-question-details-mark">
-                                                            Mark 1
-                                                        </span>
-                                                    </div>
-                                                    <div class="questions-page-question-container">
-                                                        <img src="" />
-                                                        <span class="questions-page-question">What are the VTC critical
-                                                            voltages?</span>
-                                                        <label for="images" class="drop-container">
-                                                            <span class="drop-title">Drop files here</span>
-                                                            or
-                                                            <input type="file" id="images" accept="*" />
-                                                        </label>
-                                                    </div>
-                                                </div>
+
                                                 <div class="questions-page-move">
                                                     <button type="button" class="questions-page-move-previous">
                                                         Previous page
@@ -227,8 +178,8 @@
                                         <div class="quiz-navigation">
                                             <span class="quiz-navigation-title"> Quiz navigation </span>
                                             <img
-                                                src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=600" />
-                                            <span class="quiz-navigation-name">Mohammed Abo Sido</span>
+                                                src="<?= $user->photo ?>" />
+                                            <span class="quiz-navigation-name"><?= ucfirst($user->f_name) . " "  . ucfirst($user->l_name)?></span>
                                             <div class="quiz-navigation-questions">
                                                 <span class="quiz-navigation-questions-number">
                                                     <a href="#">1</a>

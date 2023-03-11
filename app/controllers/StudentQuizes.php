@@ -20,11 +20,20 @@ class StudentQuizes extends Controller
 
     }
     public function quiz(int $student_quiz_id){
-        $pageNumber = $this->studQuizes->getProperPageNumber($_GET["page"],$student_quiz_id);
-        if($pageNumber != $_GET["page"]){
-            $this->redirect("StudentQuizes/quiz/" . $student_quiz_id . "?page=" . $pageNumber);
+        if($this->studQuizes->checkRightQuizForStudent($this->data["user"]->id,$student_quiz_id)){
+            $this->data["pageName"] = "quiz";
+            $pageNumber = $this->studQuizes->getProperPageNumber($_GET["page"],$student_quiz_id);
+            if($pageNumber != $_GET["page"]){
+                $this->redirect("StudentQuizes/quiz/" . $student_quiz_id . "?page=" . $pageNumber);
+            }
+            $this->data["questions"] = $this->studQuizes->getQuestionsForPage($pageNumber,$student_quiz_id);
+            $this->view("quizzes-attempt",$this->data);
         }
-        $this->data["questions"] = $this->studQuizes->getQuestionsForPage($pageNumber,$student_quiz_id);
+
+        else{
+            $this->forbidden();
+        }
     }
+
 
 }

@@ -302,7 +302,7 @@ class Quizes extends model
 
     public function isRecursive(int $quiz_id)
     {
-        $query = "SELECT is_recursive FROM quiz WHERE quiz_id = :quiz_id";
+        $query = "SELECT is_recursive FROM quiz WHERE id = :quiz_id";
         $data = $this->db->read($query,
         [
            "quiz_id"=>$quiz_id
