@@ -140,4 +140,36 @@ class MultibaleTypeQuestion extends Questions
         return true;
 
     }
+
+    function registerNewAnswer($question_id, $answer, $student_quiz_id): void
+    {
+        $right_answers = $this->getRightAnswers($question_id);
+        $mark = $this->getQuestionMark($question_id);
+        if($answer == $right_answers[0]->choice){
+            $grade = $mark;
+        }
+        $grade = 0;
+        $query = "UPDATE student_quiz_question SET grade = :grade,is_solved = 1 WHERE question_id = :question_id AND student_quiz = :student_quiz";
+        $this->db->write($query,
+        [
+           "grade"=>$grade,
+            "question_id"=>$question_id,
+            "student_quiz"=>$student_quiz_id
+        ]);
+        $this->registerStudentChoice($question_id,$student_quiz_id,$answer);
+    }
+
+    private function getRightAnswers($question_id)
+    {
+        $query = "SELECT choice FROM question_choice WHERE question_id = :question_id AND is_right_answer = '1'";
+        return $this->db->read($query,
+        [
+           "question_id"=>$question_id
+        ]);
+    }
+
+    private function registerStudentChoice($question_id, $student_quiz_id, $answer):void
+    {
+
+    }
 }

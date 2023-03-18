@@ -59,4 +59,46 @@ class YesNoTypeQuestion extends Questions
         }
         return true;
     }
+
+    function registerNewAnswer($question_id, $answer, $student_quiz_id): void
+    {
+        $true_Answer = $this->getTrueAnswer($question_id);
+        $question_mark = $this->getQuestionMark($question_id);
+        if($answer == $true_Answer[0]->choice){
+            $mark = $question_mark;
+        }
+        else{
+            $mark = 0;
+        }
+        $query = "UPDATE student_quiz_question SET grade = :grade,is_solved = 1 WHERE question_id = :question_id AND student_quiz = :student_quiz";
+        $this->db->write($query,
+        [
+           "grade"=>$mark,
+            "question_id"=>$question_id,
+            "student_quiz"=>$student_quiz_id
+        ]);
+        $this->registerStudentChoice($question_id,$student_quiz_id,$answer);
+    }
+
+    private function getTrueAnswer($question_id)
+    {
+        $query = "SELECT choice FROM question_choice WHERE question_id = :question_id AND is_right_answer = '1' LIMIT 1";
+        return $this->db->read($query,
+        [
+           "question_id"=>$question_id
+        ]);
+    }
+
+    private function registerStudentChoice($question_id, $student_quiz_id,$choice):void
+    {
+        $student_quiz_question_id = $this->getStudentQuizQuestionId($question_id,$student_quiz_id);
+        $query = "INSERT INTO student_quiz_question_choices (student_quiz_question_id,choice) VALUES(:student_quiz_question_id,:choice)";
+        $this->db->write($query,
+        [
+           "student_quiz_question_id"=>$student_quiz_question_id,
+           "choice"=>$choice
+        ]);
+    }
+
+
 }

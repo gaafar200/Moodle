@@ -332,6 +332,7 @@ class Quizes extends model
         $date = $data[0]->quiz_date;
         $start = $data[0]->start_time;
         $end = $data[0]->end_time;
+
         $startQuizTime = date('Y-m-d H:i:s', strtotime("$date $start"));
         $endQuizTime = date('Y-m-d H:i:s', strtotime("$date $end"));
         $currentDate = date("Y-m-d H:i:s");
@@ -362,6 +363,26 @@ class Quizes extends model
             return date('l, d F h:i A', strtotime("$date"));
         }
         return  date('l, d F h:i A', strtotime("$date $time"));
+    }
+
+    public function getQuizDuration(int $quiz_id)
+    {
+        $query = "SELECT time FROM quiz WHERE id = :quiz_id";
+        $data = $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+        return $data[0]->time;
+    }
+
+    public function getCourseId(int $quiz_id)
+    {
+        $query = "SELECT course_id FROM quiz WHERE id = :quiz_id";
+        $data = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id
+        ]);
+        return $data[0]->course_id;
     }
 
 }

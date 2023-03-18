@@ -352,3 +352,18 @@ function displayGrade($grade,$status):string{
     }
     return "";
 }
+function displayTimeValue($value):string{
+    if($value < 10){
+        return "0" . $value;
+    }
+    return $value;
+}
+function displayMaxGrade($quiz_attempts):int{
+    $max = 0;
+    foreach ($quiz_attempts as $attempt){
+        if($attempt->grade > $max){
+            $max = $attempt->grade;
+        }
+    }
+    return  $max;
+}

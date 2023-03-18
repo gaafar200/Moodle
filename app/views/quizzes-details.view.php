@@ -141,7 +141,7 @@
                                             </span>
                                         </div>
                                         <div class="quiz-details-three">
-                                            <?php if($quiz_attempts && is_array($quiz_attempts)): ?>
+                                            <?php if(isset($quiz_attempts) && is_array($quiz_attempts)): ?>
                                                 <span class="quiz-details-three-summary">
                                                     Summary of your previous attempts
                                                 </span>
@@ -156,28 +156,30 @@
                                                     </thead>
                                                     <tbody>
                                                     <?php $count = 1 ?>
-                                                    <?php foreach ($quiz_attempts as $attempt):?>
-                                                        <tr>
-                                                            <td><?= $count++ ?></td>
-                                                            <td class="grade-table-state">
-                                                                <span>Finished</span>
-                                                                <span><?= $attempt->end_time ?></span>
-                                                            </td>
-                                                            <td><?= displayGrade($attempt->grade,$quiz_status) ?></td>
-                                                            <td><a href="">Review</a></td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
+                                                        <?php foreach ($quiz_attempts as $attempt):?>
+                                                            <tr>
+                                                                <td><?= $count++ ?></td>
+                                                                <td class="grade-table-state">
+                                                                    <span>Finished</span>
+                                                                    <span><?= $attempt->end_time ?></span>
+                                                                </td>
+                                                                <td><?= displayGrade($attempt->grade,$quiz_status) ?></td>
+                                                                <td><a href="">Review</a></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
                                                 <?php if($quiz_status == "finished"): ?>
                                                     <span class="quiz-details-three-grade">
-                                                        Your final grade for this quiz is <span> 4/<?= $quiz_display->mark_value ?></span>.
+                                                        Your final grade for this quiz is <span> <?= displayMaxGrade($quiz_attempts) ?>/<?= $quiz_display->mark_value ?></span>.
                                                     </span>
                                                 <?php endif; ?>
                                                 </div>
                                             <?php endif; ?>
                                                 <div class="quiz-details-four">
-                                                <?php if($quiz_display->canPerformQuiz): ?>
+                                                <?php if($canContinueQuiz): ?>
+                                                    <a href="<?= ROOT ?>StudentQuizes/quiz/<?= $canContinueQuiz[0]->id ?>?page=<?= $canContinueQuiz[0]->pageNumber ?>"><button class="quiz-details-four-attempt">Continue Quiz</button></a>
+                                                <?php elseif($quiz_display->canPerformQuiz): ?>
                                                     <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Attempt Quiz</button></a>
                                                 <?php endif; ?>
                                                 <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Back to the course</button></a>

@@ -123,7 +123,7 @@ class studQuizes extends Model
         if($pageNumber < 1){
             return 1;
         }
-        return $pageNumber;
+        return $pageNumber + 1;
     }
 
     private function getMaxiumPageNumber(int $student_quiz)
@@ -136,7 +136,7 @@ class studQuizes extends Model
         return $data[0]->maxPageNumbers;
     }
 
-    private function getQuizIdFromStudentQuiz(int $student_quiz):int
+    public function getQuizIdFromStudentQuiz(int $student_quiz):int
     {
         $query = "SELECT quiz_id FROM student_quiz WHERE id = :student_quiz";
         $data = $this->db->read($query,
@@ -154,12 +154,12 @@ class studQuizes extends Model
         [
            "student_quiz_id"=>$student_quiz_id
         ]);
-        return $this->addChoicesToThisQuestions($data);
+        return  $this->addChoicesToThisQuestions($data);
     }
 
     public function getAllStudentAttempts(int $stud_id, int $quiz_id):array | bool
     {
-        $query = "SELECT grade,end_time FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id AND grade ORDER BY (id) ASC";
+        $query = "SELECT grade,end_time FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id  ORDER BY (attempt_number) ASC";
         $data =  $this->db->read($query,
         [
            "student_id"=>$stud_id,
@@ -167,6 +167,7 @@ class studQuizes extends Model
         ]);
         if(is_array($data)){
             $data = $this->getAllDatesRight($data);
+            $data = $this->getAllAttemptsRight($stud_id,$quiz_id,$data);
         }
         return $data;
     }
@@ -231,5 +232,146 @@ class studQuizes extends Model
         }
         return false;
     }
+
+    public function getNumberOfQuizQuestions(int $student_quiz_id)
+    {
+        $quiz_id = $this->getQuizIdFromStudentQuiz($student_quiz_id);
+        return $this->quiz->getNumberOfQuestions($quiz_id);
+    }
+
+    public function getQuizTimeRemaining(int $student_quiz_id):array | bool
+    {
+        $quiz_id = $this->getQuizIdFromStudentQuiz($student_quiz_id);
+        $quiz_duration = $this->quiz->getQuizDuration($quiz_id);
+        $start_time = $this->getStartTime($student_quiz_id);
+        $current_time = date('Y-m-d h:i:s');
+        $now = new DateTime("$start_time");
+        $ref = new DateTime("$current_time");
+        $diff = $now->diff($ref);
+        $data["hours"] = $diff->h;
+        $data["minutes"] = $diff->i;
+        $data["seconds"] = $diff->s;
+        return $this->checkToSeeIfQuizStillOn($data,$quiz_duration);
+    }
+
+    private function getStartTime(int $student_quiz_id):string
+    {
+        $query = "SELECT start_time FROM student_quiz WHERE id = :student_quiz_id";
+        $data = $this->db->read($query,
+        [
+           "student_quiz_id"=>$student_quiz_id
+        ]);
+        return $data[0]->start_time;
+    }
+
+    private function checkToSeeIfQuizStillOn(array $data, $quiz_duration)
+    {
+        $numberOfMin = $data["hours"] * 60 + $data["minutes"];
+        $result = $quiz_duration - $numberOfMin;
+        if($result <= 0){
+            return false;
+        }
+        $data["hours"] = floor($result / 60);
+        $data["minutes"] = $result % 60;
+        if($data["seconds"] != 0){
+            $data["minutes"] -= 1;
+            $data["seconds"] = 60 - $data["seconds"];
+        }
+        return $data;
+    }
+
+    public function solveThisGroupOfQuestions($data,$student_quiz_id,$essayQuestions = "")
+    {
+        foreach($data as $key => $value){
+            $this->registerNewQuestion($key,$value,$student_quiz_id);
+        }
+        if($essayQuestions != "" && is_array($essayQuestions)){
+            foreach ($essayQuestions as $key => $value){
+                $this->registerNewQuestion($key,$value,$student_quiz_id);
+            }
+        }
+
+    }
+
+    private function registerNewQuestion($question_id, $choice,$student_quiz_id)
+    {
+        $question = new YesNoTypeQuestion();
+        $question_type = $question->getQuestionType($question_id);
+        $question_factory = new SpecialQuestionFactory();
+        $question = $question_factory->getQuestionForTypeFromTheDataBase($question_type);
+        $question->registerNewAnswer($question_id,$choice,$student_quiz_id);
+    }
+
+    public function getNumberOfPages(int $student_quiz_id)
+    {
+        $quiz_id = $this->getQuizIdFromStudentQuiz($student_quiz_id);
+        $query = "SELECT number_of_questions/3 as number_of_questions FROM quiz WHERE id = :quiz_id";
+        $data =  $this->db->read($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+        return ceil($data[0]->number_of_questions);
+    }
+
+    public function FinishThisAttempt(int $student_quiz_id):bool
+    {
+        $query = "UPDATE student_quiz SET grade = (SELECT sum(grade) FROM student_quiz_question WHERE student_quiz = :student_quiz) WHERE id = :student_quiz_id";
+        return $this->db->write($query,
+        [
+            "student_quiz"=>$student_quiz_id,
+            "student_quiz_id"=>$student_quiz_id
+        ]);
+    }
+
+    private function getAllAttemptsRight(int $stud_id, int $quiz_id,array $data):array
+    {
+        $count = 1;
+        foreach ($data as $attempt){
+            if($attempt->grade == null){
+                $attempt->grade = $this->getGradeForThisAttempt($stud_id, $quiz_id, $count);
+            }
+            $count++;
+        }
+        return $data;
+    }
+
+    private function getGradeForThisAttempt(int $stud_id, int $quiz_id, int $attempt_number):int
+    {
+        $query = "SELECT sum(grade) as grade FROM student_quiz_question WHERE student_quiz =  (SELECT id FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id AND attempt_number = :attempt_number LIMIT 1)";
+        $data = $this->db->read($query,
+        [
+            "student_id"=>$stud_id,
+            "quiz_id"=>$quiz_id,
+            "attempt_number"=>$attempt_number
+        ]);
+        if($data){
+            if($data[0]->grade == null){
+                return 0;
+            }
+            return $data[0]->grade;
+        }
+        return 0;
+    }
+
+    public function checkQuizContinue(int $student_id,int $quiz_id):array | bool
+    {
+        $query = "SELECT id FROM student_quiz WHERE quiz_id = :quiz_id AND student_id = :student_id AND grade = null ORDER BY attempt_number DESC LIMIT 1";
+        $data = $this->db->read($query,
+        [
+           "quiz_id"=>$quiz_id,
+           "student_id"=>$student_id
+        ]);
+        if(!$data){
+            echo "ya1";
+            return false;
+        }
+        $check = $this->getQuizTimeRemaining($data[0]->id);
+        if(!$check){
+            return false;
+        }
+        $data[0]->pageNumber = $this->getExpectedPageNumber($data[0]->id);
+        return $data;
+    }
+
 
 }

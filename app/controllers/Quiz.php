@@ -94,6 +94,7 @@ class Quiz extends Controller
                 $this->data["pageName"] = $this->data["quiz_display"]->name;
                 $this->data["course_name"] = $this->quiz->getCourseDataForQuiz($course_id);
                 $this->data["quiz_attempts"] = $studQuizes->getAllStudentAttempts($this->data["user"]->id,$quiz_id);
+                $this->data["canContinueQuiz"] = $studQuizes->checkQuizContinue($this->data["user"]->id,$this->data["quiz_id"]);
                 $this->view("quizzes-details", $this->data);
             }
         }

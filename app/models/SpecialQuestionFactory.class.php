@@ -15,4 +15,16 @@ class SpecialQuestionFactory implements IQuestionFactory
             return new YesNoTypeQuestion();
         }
     }
+    public function getQuestionForTypeFromTheDataBase(string $type):Questions{
+        if($type == "trueOrFalse"){
+            return new YesNoTypeQuestion();
+        }
+        else if($type == "essayQuestion"){
+            return new EassyTypeQuestion();
+        }
+        else if($type == "multiableChoice"){
+            return new MultibaleTypeQuestion();
+        }
+        return new YesNoTypeQuestion();
+    }
 }

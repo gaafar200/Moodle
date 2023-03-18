@@ -124,7 +124,7 @@
                                         <h4 class="course-name">Digital Electronics</h4>
                                     </div>
                                     <div class="questions-page-container">
-                                        <form class="form-questions">
+                                        <form class="form-questions" method="POST" enctype="multipart/form-data">
                                             <div class="questions-page-questions">
                                                 <?php $count = 1; ?>
                                                 <?php foreach ($questions as $question): ?>
@@ -147,14 +147,14 @@
                                                                 <label for="images" class="drop-container">
                                                                     <span class="drop-title">Drop files here</span>
                                                                     or
-                                                                    <input type="file" id="images" accept="*" />
+                                                                    <input type="file" name="<?= $question->id ?>" id="images" accept="*" />
                                                                 </label>
                                                             <?php else: ?>
                                                                 <span class="questions-page-select">Select one:</span>
                                                                 <div class="questions-page-choices">
                                                                     <?php foreach ($question->choices as $choice): ?>
-                                                                        <div class="questions-page-choice-one">
-                                                                            <input type="radio" id="<?= $choice->name ?>" name="<?= $question->name ?>" />
+                                                                        <div onclick="document.querySelector('#<?= $question->name .  $choice->name ?>').click()" class="questions-page-choice-one">
+                                                                            <input value="<?= $choice->choice ?>" type="radio" id="<?= $question->name .  $choice->name ?>" name="<?= $question->id ?>" />
                                                                             <label for="<?= $choice->name ?>"><?= $choice->choice ?></label>
                                                                         </div>
                                                                     <?php endforeach; ?>
@@ -169,10 +169,16 @@
                                                     <button type="button" class="questions-page-move-previous">
                                                         Previous page
                                                     </button>
-                                                    <button type="submit" class="questions-page-move-next">
-                                                        Next page
-                                                    </button>
-                                                </div>
+                                                    <?php if(!$Finish): ?>
+                                                        <button type="submit" class="questions-page-move-next">
+                                                            Next page
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button type="submit" class="questions-page-move-next">
+                                                            Finish Attempt
+                                                        </button>
+                                                    <?php endif; ?>
+                                                    </div>
                                             </div>
                                         </form>
                                         <div class="quiz-navigation">
@@ -181,44 +187,19 @@
                                                 src="<?= $user->photo ?>" />
                                             <span class="quiz-navigation-name"><?= ucfirst($user->f_name) . " "  . ucfirst($user->l_name)?></span>
                                             <div class="quiz-navigation-questions">
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">1</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">2</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">3</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">4</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">5</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">6</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">7</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">8</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">9</a>
-                                                </span>
-                                                <span class="quiz-navigation-questions-number">
-                                                    <a href="#">10</a>
-                                                </span>
+                                                <?php for($i = 1;$i <= $number_of_quiz_questions;$i++): ?>
+                                                    <span class="quiz-navigation-questions-number">
+                                                        <a href="#"><?= $i ?></a>
+                                                    </span>
+                                                <?php endfor; ?>
                                             </div>
                                             <a href="#" class="quiz-navigation-finish">Finish attempt...</a>
                                             <div class="quiz-navigation-timer">
                                                 <span class="quiz-navigation-time-left"> Time left </span>
                                                 <div class="quiz-navigation-time">
-                                                    <span class="quiz-navigation-time-hours">01</span>:
-                                                    <span class="quiz-navigation-time-minutes">35</span>:
-                                                    <span class="quiz-navigation-time-seconds">30</span>
+                                                    <span class="quiz-navigation-time-hours"><?= displayTimeValue($quiz_time["hours"]) ?></span>:
+                                                    <span class="quiz-navigation-time-minutes"><?= displayTimeValue($quiz_time["minutes"]) ?></span>:
+                                                    <span class="quiz-navigation-time-seconds"><?= displayTimeValue($quiz_time["seconds"]) ?></span>
                                                 </div>
                                             </div>
                                         </div>

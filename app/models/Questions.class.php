@@ -385,7 +385,7 @@ Abstract class Questions extends Model
         return true;
     }
 
-    private function getQuestionMark($question_id)
+    protected function getQuestionMark($question_id)
     {
         $query = "SELECT mark_value FROM question WHERE id = :question_id";
         $result = $this->db->read($query,[
@@ -395,6 +395,31 @@ Abstract class Questions extends Model
             return ["quiz_question"=>"question does not exists"];
         }
         return $result[0]->mark_value;
+    }
+    public function getQuestionType($question_id):string
+    {
+        $query = "SELECT question_type FROM question WHERE id = :question_id";
+        $data = $this->db->read($query,
+        [
+           "question_id"=>$question_id
+        ]);
+        return $data[0]->question_type;
+    }
+
+    abstract function registerNewAnswer($question_id, $answer, $student_quiz_id):void;
+    public function getStudentQuizQuestionId($question_id, $student_quiz_id):int
+    {
+        $query = "SELECT id FROM student_quiz_question WHERE question_id = :question_id AND student_quiz = :student_quiz";
+        $data = $this->db->read($query,
+            [
+                "question_id"=>$question_id,
+                "student_quiz"=>$student_quiz_id
+            ]);
+        if($data){
+            return $data[0]->id;
+        }
+        return 0;
+
     }
 
 }
