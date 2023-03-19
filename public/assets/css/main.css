@@ -183,9 +183,9 @@ textarea {
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -196,6 +196,7 @@ textarea {
    ========================================================================== */
 
 @media print {
+
   *,
   *:before,
   *:after {
@@ -334,6 +335,26 @@ textarea {
   justify-content: space-around;
   gap: 20px;
 }
+
+
+.quiz-list-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.quiz-list-btns a {
+  flex: 1;
+}
+
+.quiz-list-btns button {
+  width: 100%;
+  flex: 1;
+}
+
+
 
 /* End Modify all-Professor page */
 
@@ -521,9 +542,9 @@ textarea {
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -534,6 +555,7 @@ textarea {
    ========================================================================== */
 
 @media print {
+
   *,
   *:before,
   *:after {
@@ -678,25 +700,30 @@ textarea {
   border: 1px solid #d7dfe3;
   height: 5rem;
 }
+
 .course-active-name {
   font-size: 1.9rem;
   font-family: "Tajawal", sans-serif;
   color: #0f6fc5;
 }
+
 .course-quiz-list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
 }
+
 .course-quiz-list-quiz {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 .course-quiz-list-link {
   font-size: 1rem;
 }
+
 .course-quiz-list-link:hover {
   color: #0b3b66;
   text-decoration: underline;
@@ -710,6 +737,7 @@ textarea {
   background-color: #eef5f9;
   padding: 1rem;
 }
+
 .course-name-wrapper {
   display: flex;
   align-items: center;
@@ -719,6 +747,7 @@ textarea {
   border: 1px solid #d7dfe3;
   height: 5rem;
 }
+
 .course-name {
   font-size: 1.3rem;
   font-family: "Tajawal", sans-serif;
@@ -733,17 +762,20 @@ textarea {
   background-color: white;
   border: 1px solid #d7dfe3;
 }
+
 .quiz-details-one {
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
 }
+
 .quiz-details-one-name {
   font-size: 2.3rem;
   font-weight: 500;
   font-family: "Tajawal", sans-serif;
   color: #455a64;
 }
+
 .quiz-details-one-description {
   font-size: 1.1rem;
   font-weight: 500;
@@ -768,12 +800,14 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+
 .quiz-details-three-summary {
   font-family: "Tajawal", sans-serif;
   font-size: 2rem;
   color: #455a64;
   font-weight: 500;
 }
+
 .grade-table {
   border-collapse: collapse;
   width: 100%;
@@ -783,6 +817,7 @@ textarea {
   font-family: Arial, sans-serif;
   border-top: 1px solid #ddd;
 }
+
 .grade-tabl-width {
   width: 10%;
 }
@@ -794,13 +829,16 @@ textarea {
   border-bottom: 1px solid #ddd;
   padding: 0.8rem;
 }
+
 .grade-table th {
   color: #444;
   font-weight: bold;
 }
+
 .grade-table td {
   background-color: #f2f2f2;
 }
+
 .grade-table-state {
   display: flex;
   flex-direction: column;
@@ -859,6 +897,7 @@ textarea {
   align-items: flex-start;
   gap: 2%;
 }
+
 .form-questions {
   width: 75%;
   background-color: white;
@@ -877,6 +916,7 @@ textarea {
   display: flex;
   gap: 1.5rem;
 }
+
 .questions-page-question-details {
   width: 12%;
   height: 8rem;
@@ -910,24 +950,29 @@ textarea {
   object-fit: contain;
   align-self: center;
 }
+
 .questions-page-question {
   font-size: 1.4rem;
 }
+
 .questions-page-choices {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
 }
-.questions-page-choice-one > * {
+
+.questions-page-choice-one>* {
   cursor: pointer;
 }
+
 .questions-page-move {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .questions-page-move-previous {
   font-family: "Tajawal", sans-serif;
   font-size: 1.1rem;
@@ -941,6 +986,7 @@ textarea {
   transition: all 0.2s ease-in-out;
   margin-bottom: 1.5rem;
 }
+
 .questions-page-move-previous:hover {
   background-color: #bec4c9;
 }
@@ -959,9 +1005,11 @@ textarea {
   transition: all 0.2s ease-in-out;
   margin-bottom: 1.5rem;
 }
+
 .questions-page-move-next:hover {
   background-color: #1d1652;
 }
+
 .quiz-navigation {
   width: 23%;
   background-color: white;
@@ -971,18 +1019,21 @@ textarea {
   flex-direction: column;
   gap: 1rem;
 }
+
 .quiz-navigation-title {
   font-size: 1.6rem;
   font-weight: 500;
   color: #455a64;
   font-family: "Tajawal", sans-serif;
 }
-.quiz-navigation > img {
+
+.quiz-navigation>img {
   width: 100%;
   height: 17rem;
   object-fit: cover;
   border-radius: 6px;
 }
+
 .quiz-navigation-name {
   font-size: 1.3rem;
   font-weight: 500;
@@ -998,6 +1049,7 @@ textarea {
   align-items: center;
   gap: 0.5rem;
 }
+
 .quiz-navigation-questions-number {
   width: 2.4rem;
   height: 2.9rem;
@@ -1007,11 +1059,12 @@ textarea {
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .quiz-navigation-questions-number:hover {
   background-color: rgb(197, 195, 195);
 }
 
-.quiz-navigation-questions-number > a {
+.quiz-navigation-questions-number>a {
   font-family: "Tajawal", sans-serif;
   width: 100%;
   height: 100%;
@@ -1031,6 +1084,7 @@ textarea {
   text-decoration: none;
   color: #1a73ec;
 }
+
 .quiz-navigation-finish:hover {
   text-decoration: underline;
   color: #0c3d83;
@@ -1049,9 +1103,19 @@ textarea {
   font-family: "Tajawal", sans-serif;
   font-weight: bold;
 }
+
 /*End Quiz  */
 
 .change-background {
   background-color: #eef5f9 !important;
   border: 1px solid #d7dfe3;
+}
+
+
+.correct-answer-message {
+  width: 100%;
+  padding: 1rem;
+  background-color: #fcefdc;
+  margin: 1rem 0;
+  color: #956c33;
 }

@@ -111,22 +111,21 @@
                 <div class="blog-details-inner">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            
                             <div class="latest-blog-single blog-single-full-view">
                                 <div class="top-btn">
-                                    <h4> Quizes List </h4>
-                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Quiz</button></a>
+                                    <h4> Students Marks </h4>
+                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back Quiz List</button></a>
                                 </div>
                                 <div class="table-flex">
-
                                     <div class="tabel-thead">
                                         <div class="td-id"> ID </div>
-                                        <div class="td"> Quiz Name </div>
-                                        <div class="td-flex">Quiz Date</div>
-                                        <div class="td-flex">Quiz Time</div>
+                                        <div class="td"> Student Name </div>
+                                        <div class="td-flex">Quiz Name</div>
+                                        <div class="td-flex">Attempts</div>
                                         <div class="td-flex">Quiz Mark</div>
                                         <div class="td-last justify-content-center">Actions</div>
                                     </div>
-
                                     <!-- ------- Here goes the loop -----  -->
                                     <?php if ($quizes_data) :
                                         $count = 1;
@@ -137,23 +136,13 @@
                                                     <div class="td-id">
                                                         <span><?= $count++ ?></span>
                                                     </div>
-                                                    <div class="td"><?= $quiz->name ?></div>
-                                                    <div class="td-flex"><?= $quiz->date ?></div>
-                                                    <div class="td-flex"><?= $quiz->time ?></div>
-                                                    <div class="td-flex"><?= $quiz->mark ?></div>
+                                                    <div class="td">Abdullah</div>
+                                                    <div class="td-flex">Quiz#1</div>
+                                                    <div class="td-flex">3 attempts</div>
+                                                    <div class="td-flex">10</div>
                                                     <div class="td-last quiz-list-btns  ">
-                                                        <a href="<?= ROOT ?>QuizQuestions/<?= $course_id ?>/<?= $quiz->id ?>"><button type="button" class="btn btn-success">Questions</button></a>
+                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Mark</button></a>
                                                         <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit</button></a>
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Marks</button></a>
-                                                        <?php if ($quiz->status != "ready") : ?>
-                                                            <a href="<?= ROOT ?>Quiz/activate/<?= $quiz->id ?>/<?= $course_id ?>"><button <?= isActiveButtonActive($quiz->status) ?> type="button" class="btn btn-success">Activate</button></a>
-                                                        <?php else : ?>
-                                                            <a href="<?= ROOT ?>Quiz/deactivate/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-danger">Deactivate</button></a>
-                                                        <?php endif; ?>
-                                                        <form method="POST">
-                                                            <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </form>

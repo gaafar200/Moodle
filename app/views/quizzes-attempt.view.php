@@ -213,6 +213,75 @@
         </div>
     </div>
 </div>
-
 </div>
+<script>
+let countDown = document.querySelector('.quiz-navigation-time')
+let countDownHours = document.querySelector('.quiz-navigation-time-hours')
+let countDownMinutes = document.querySelector('.quiz-navigation-time-minutes')
+let countDownSeconds = document.querySelector('.quiz-navigation-time-seconds')
+
+// Set the countdown time in hours, minutes, and seconds
+let hours = Number(countDownHours.innerHTML);
+let minutes = Number(countDownMinutes.innerHTML);
+let seconds =Number(countDownSeconds.innerHTML);
+
+// Calculate the total countdown time in seconds
+let totalTime = hours * 3600 + minutes * 60 + seconds;
+
+// Get the HTML element where the countdown will be displayed
+
+
+// Update the countdown timer every second
+let countdown = setInterval(function() {
+
+  // Calculate the remaining time in hours, minutes, and seconds
+  let remainingHours = Math.floor(totalTime / 3600);
+  let remainingMinutes = Math.floor((totalTime % 3600) / 60);
+  let remainingSeconds = Math.floor(totalTime % 60);
+  
+if(remainingHours === 0 && remainingMinutes === 0 && remainingSeconds < 60){
+              countDown.style.backgroundColor = 'red';
+}
+  // Display the remaining time in the HTML element
+  countDownHours.innerHTML = remainingHours > 9? remainingHours : '0' + remainingHours ;
+  countDownMinutes.innerHTML = remainingMinutes > 9? remainingMinutes :'0'+ remainingMinutes ;
+  countDownSeconds.innerHTML = remainingSeconds > 9? remainingSeconds : '0' + remainingSeconds ;
+
+  
+
+  // Decrease the total countdown time by 1 second
+  totalTime--;
+
+  // Stop the countdown when the total countdown time reaches zero
+  if (totalTime < 0) {
+
+    const url1 = window.location.href;
+    const quizId = url1.split(/[/?]/);
+    const idId = quizId[quizId.length-2];
+    console.log(idId);
+    const data = {
+        time :"finish",
+    };
+ const url = `http://localhost/model/public/StudentQuizes/finish/${idId}`;
+
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(response => response.url)
+  .then(data => {
+    window.location.href =data;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+    clearInterval(countdown);
+
+  }
+
+}, 1000); // Run the countdown function every second
+</script>
 <?php $this->view("include/footer"); ?>
