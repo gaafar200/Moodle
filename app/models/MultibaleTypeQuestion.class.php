@@ -145,10 +145,10 @@ class MultibaleTypeQuestion extends Questions
     {
         $right_answers = $this->getRightAnswers($question_id);
         $mark = $this->getQuestionMark($question_id);
+        $grade = 0;
         if($answer == $right_answers[0]->choice){
             $grade = $mark;
         }
-        $grade = 0;
         $query = "UPDATE student_quiz_question SET grade = :grade,is_solved = 1 WHERE question_id = :question_id AND student_quiz = :student_quiz";
         $this->db->write($query,
         [
@@ -166,10 +166,5 @@ class MultibaleTypeQuestion extends Questions
         [
            "question_id"=>$question_id
         ]);
-    }
-
-    private function registerStudentChoice($question_id, $student_quiz_id, $answer):void
-    {
-
     }
 }

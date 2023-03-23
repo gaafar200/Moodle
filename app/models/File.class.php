@@ -46,7 +46,7 @@ class File extends model
 
     private function createImageUniquePath($image,$intended) : String
     {
-        $name = explode(".",$image["image"]["name"]);
+        $name = explode(".",$image["name"]);
         $ext = $name[1];
         $name = $name[0];
         $destinationPath = $this->getFileDirectory($intended) . $name . $this->generateRandomString(4) . "." . $ext;

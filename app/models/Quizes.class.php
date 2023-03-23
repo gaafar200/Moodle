@@ -197,6 +197,10 @@ class Quizes extends model
         if(is_array($result)){
             return $result;
         }
+        $result = $this->checkIfQuizHaveEssayQuestion($id);
+        if($result){
+            $data["is_auto_correct"] = "no";
+        }
         $sql = "UPDATE quiz SET name = :quiz_name,quiz_date = :date,start_time = :start_time,end_time = :end_time,number_of_questions = :number_of_questions,time = :time,mark_value = :mark_value,max_attempts = :max_attempts,is_recursive = :is_recursive,is_auto_correct = :is_auto_correct,is_shuffled = :is_shuffled,is_disclosed = :is_disclosed,description = :description WHERE id = :id";
         $data["id"] = $id;
         return $this->db->write($sql,$data);
@@ -384,5 +388,28 @@ class Quizes extends model
         ]);
         return $data[0]->course_id;
     }
+
+    public function makeQuizNotAutoCorrect(int $quiz_id)
+    {
+        $query = "UPDATE quiz SET is_auto_correct = 'no' WHERE id = :quiz_id";
+        $this->db->write($query,
+        [
+            "quiz_id"=>$quiz_id
+        ]);
+    }
+
+    public function checkIfQuizHaveEssayQuestion(int $id):bool
+    {
+        $query = "SELECT question_id FROM quiz_questions qq JOIN question q ON(qq.question_id = q.id) WHERE qq.quiz_id = :quiz_id and q.question_type = 'essayQuestion' LIMIT 1";
+        $result = $this->db->read($query,
+        [
+            "quiz_id"=>$id
+        ]);
+        if($result){
+            return true;
+        }
+        return false;
+    }
+
 
 }

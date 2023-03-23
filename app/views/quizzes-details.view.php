@@ -151,7 +151,7 @@
                                                         <th class="grade-tabl-width">Attempt</th>
                                                         <th>State</th>
                                                         <th class="grade-tabl-width">Grade / <span><?= $quiz_display->mark_value ?></span></th>
-                                                        <th class="grade-tabl-width">Review</th>
+                                                        <th class="grade-tabl-width"><a href="www.google.com">Review</a></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -163,13 +163,17 @@
                                                                     <span>Finished</span>
                                                                     <span><?= $attempt->end_time ?></span>
                                                                 </td>
-                                                                <td><?= displayGrade($attempt->grade,$quiz_status) ?></td>
-                                                                <td><a href="">Review</a></td>
+                                                                <td><?= displayGrade($attempt->grade,$quiz_status,$attempt->id) ?></td>
+                                                                <td>
+                                                                <?php if(canReview($quiz_status,$attempt->id)): ?>
+                                                                    <a href="<?= ROOT ?>StudentQuizes/reviewQuiz">Review</a>
+                                                                <?php endif; ?>
+                                                                </td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
-                                                <?php if($quiz_status == "finished"): ?>
+                                                <?php if(displayGrade($attempt->grade,$quiz_status,$attempt->id)): ?>
                                                     <span class="quiz-details-three-grade">
                                                         Your final grade for this quiz is <span> <?= displayMaxGrade($quiz_attempts) ?>/<?= $quiz_display->mark_value ?></span>.
                                                     </span>

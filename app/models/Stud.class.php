@@ -128,4 +128,13 @@ class Stud extends User
         }
         return false;
     }
+
+    public function getStudentQuizData(int $student_id):array | bool
+    {
+        $query = "SELECT f_name,l_name,photo FROM users WHERE id = :student_id AND rank = 'student' LIMIT 1";
+        return $this->db->read($query,
+        [
+           "student_id"=>$student_id
+        ]);
+    }
 }

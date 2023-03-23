@@ -89,16 +89,7 @@ class YesNoTypeQuestion extends Questions
         ]);
     }
 
-    private function registerStudentChoice($question_id, $student_quiz_id,$choice):void
-    {
-        $student_quiz_question_id = $this->getStudentQuizQuestionId($question_id,$student_quiz_id);
-        $query = "INSERT INTO student_quiz_question_choices (student_quiz_question_id,choice) VALUES(:student_quiz_question_id,:choice)";
-        $this->db->write($query,
-        [
-           "student_quiz_question_id"=>$student_quiz_question_id,
-           "choice"=>$choice
-        ]);
-    }
+
 
 
 }

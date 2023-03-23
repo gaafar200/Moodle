@@ -346,8 +346,9 @@ function displayQuizDateStat($status):string{
         return "The quiz closed on ";
     }
 }
-function displayGrade($grade,$status):string{
-    if($status == "finished"){
+function displayGrade($grade,$status,$quiz_id):string{
+    $studQuizes = new studQuizes();
+    if($status == "finished" && !$studQuizes->checkHasUnMarkedQuestions($quiz_id)){
         return $grade;
     }
     return "";
@@ -366,4 +367,38 @@ function displayMaxGrade($quiz_attempts):int{
         }
     }
     return  $max;
+}
+function displayStudentQuizGrade($grade):string{
+    if($grade == "not attempted" || $grade == NULL){
+        return "N/A";
+    }
+    return $grade;
+}
+function displayMark($auto_correct,$student_quiz_id):string{
+    $studQuizes = new studQuizes();
+    if($auto_correct == "yes" || $student_quiz_id == "null" || !$studQuizes->checkHasUnMarkedQuestions($student_quiz_id)){
+        return "disabled";
+    }
+    return "";
+}
+function checkCanEditCorrection($quiz_id):string{
+    $quiz = new Quizes();
+    if($quiz->checkIfQuizHaveEssayQuestion($quiz_id)){
+        return "disabled";
+    }
+    return "";
+}
+function canReview($status,$student_quiz_id):bool{
+    $studQuizes = new studQuizes();
+    if($status == "finished" && !$studQuizes->checkHasUnMarkedQuestions($student_quiz_id)){
+        return true;
+    }
+    return false;
+
+}
+function getAutoValue($getAutoValue):string{
+    if($getAutoValue){
+        return "no";
+    }
+    return "";
 }

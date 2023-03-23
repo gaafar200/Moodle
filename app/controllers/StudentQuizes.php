@@ -78,8 +78,26 @@ class StudentQuizes extends Controller
             $this->forbidden();
         }
     }
+    public function marks(int $quiz_id,int $course_id){
+        $this->data["pageName"] = "quiz marks";
+        $this->data["course_id"] = $course_id;
+        $this->data["students_marks_in_quiz"] = $this->studQuizes->getStudentMarksInQuiz($quiz_id,$course_id);
+        $this->view("students-marks-list",$this->data);
+    }
+    public function reviewQuiz(){
+        $this->data["pageName"] = "Review Quiz";
+        $this->view("quiz-attempt-review",$this->data);
+    }
+    public function markQuiz(int $student_quiz_id){
+        $this->data["pageName"] = "mark quiz";
+        $this->data["student_quiz_details"] = $this->studQuizes->getStudentQuizDetails($student_quiz_id);
 
+        $this->view("quiz-attempt-mark",$this->data);
+    }
 
+    private function getStudentQuizDetails()
+    {
+    }
 
 
 }

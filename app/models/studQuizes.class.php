@@ -159,7 +159,7 @@ class studQuizes extends Model
 
     public function getAllStudentAttempts(int $stud_id, int $quiz_id):array | bool
     {
-        $query = "SELECT grade,end_time FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id  ORDER BY (attempt_number) ASC";
+        $query = "SELECT id,grade,end_time FROM student_quiz WHERE student_id = :student_id AND quiz_id = :quiz_id  ORDER BY (attempt_number) ASC";
         $data =  $this->db->read($query,
         [
            "student_id"=>$stud_id,
@@ -297,8 +297,8 @@ class studQuizes extends Model
     {
         $question = new YesNoTypeQuestion();
         $question_type = $question->getQuestionType($question_id);
-        $question_factory = new SpecialQuestionFactory();
-        $question = $question_factory->getQuestionForTypeFromTheDataBase($question_type);
+        $question = $this->getQuestionForThisType($question_type);
+
         $question->registerNewAnswer($question_id,$choice,$student_quiz_id);
     }
 
@@ -362,7 +362,6 @@ class studQuizes extends Model
            "student_id"=>$student_id
         ]);
         if(!$data){
-            echo "ya1";
             return false;
         }
         $check = $this->getQuizTimeRemaining($data[0]->id);
@@ -371,6 +370,106 @@ class studQuizes extends Model
         }
         $data[0]->pageNumber = $this->getExpectedPageNumber($data[0]->id);
         return $data;
+    }
+
+    public function getStudentMarksInQuiz(int $quiz_id, int $course_id):bool | array
+    {
+        $query = "SELECT  f_name,l_name,q.name ,IFNULL(grade,'not attempted') as grade,0 as attempt_number,q.is_auto_correct as auto_correct, 'null' as student_quiz_id FROM users u join student_courses sc ON(u.id = sc.student_id ) JOIN quiz q on(sc.course_id=q.course_id) WHERE q.id=:quiz_id and sc.course_id = :course_id AND sc.student_id NOT IN (SELECT sq.student_id FROM users u JOIN student_quiz sq ON(u.id = sq.student_id) JOIN quiz q ON(q.id = sq.quiz_id) WHERE quiz_id = 15) UNION all SELECT u.f_name,u.l_name,q.name, max(sq.grade) as grade,count(sq.id) as attempt_number,q.is_auto_correct as auto_correct,sq.id as student_quiz_id FROM users u JOIN student_quiz sq ON(u.id = sq.student_id) JOIN quiz q ON(q.id = sq.quiz_id) WHERE quiz_id = :quiz_id GROUP BY student_id,u.f_name,u.l_name,q.name;";
+        return $this->db->read($query,
+            [
+                "quiz_id"=>$quiz_id,
+                "course_id"=>$course_id
+            ]);
+    }
+
+    public function checkHasUnMarkedQuestions($student_quiz_id):bool
+    {
+        $query = "SELECT id FROM student_quiz_question WHERE grade IS NULL AND student_quiz = :quiz_id";
+        $result = $this->db->read($query,
+        [
+            "quiz_id"=>$student_quiz_id
+        ]);
+        if($result){
+            return true;
+        }
+        return false;
+    }
+
+    public function getStudentQuizDetails(int $student_quiz_id)
+    {
+        if($student_quiz_id != -1){
+            $student_id = $this->getStudentIdFromStudentQuizId($student_quiz_id);
+            $data["student_data"] = $this->student->getStudentQuizData($student_id);
+            $data["quiz_questions"] = $this->getStudentQuizQuestions($student_quiz_id);
+            return $data;
+        }
+        return false;
+    }
+
+    private function getStudentIdFromStudentQuizId(int $student_quiz_id)
+    {
+        $query = "SELECT student_id FROM student_quiz WHERE id = :student_quiz_id";
+        $result = $this->db->read($query,
+        [
+            "student_quiz_id"=>$student_quiz_id
+        ]);
+        if($result){
+            return $result[0]->student_id;
+        }
+        return -1;
+    }
+
+    private function getStudentQuizQuestions(int $student_quiz_id):array
+    {
+        $query = "SELECT q.question,q.mark_value,q.id,q.question_type,q.photo,sqq.grade,sqq.is_solved,sqq.id as student_quiz_question FROM student_quiz_question sqq JOIN question q ON (sqq.question_id = q.id)  WHERE sqq.student_quiz = :student_quiz_id; ";
+        $data = $this->db->read($query,
+        [
+           "student_quiz_id"=>$student_quiz_id
+        ]);
+        foreach ($data as $question):
+            $q = $this->getQuestionForThisType($question->question_type);
+            $question->choices = $q->getQuestionChoices($question->id);
+            if($question->choices && $question->is_solved == 1):
+                $studentChosenAnswer = $this->getStudentChosenAnswer($question->student_quiz_question);
+                foreach ($question->choices as $choice):
+                    if($studentChosenAnswer == $choice->choice){
+                        $choice->choosen = true;
+                    }
+                endforeach;
+            else:
+                if($question->is_solved == 1):
+                    $question->answer = $this->getStudentEssayQuestionAnswer($question->student_quiz_question);
+                endif;
+            endif;
+        endforeach;
+        return $data;
+    }
+    public function getQuestionForThisType($question_type) :Questions{
+        $question_factory = new SpecialQuestionFactory();
+        return  $question_factory->getQuestionForTypeFromTheDataBase($question_type);
+    }
+
+    private function getStudentChosenAnswer($student_quiz_question):string
+    {
+        $query = "SELECT choice FROM student_quiz_question_choices WHERE student_quiz_question_id = :student_quiz_question_id";
+        $data =  $this->db->read($query,
+        [
+           "student_quiz_question_id"=>$student_quiz_question
+        ]);
+        if($data){
+            return $data[0]->choice;
+        }
+        return "";
+    }
+
+    private function getStudentEssayQuestionAnswer($student_quiz_question)
+    {
+        $query = "SELECT File FROM student_quiz_question_files WHERE student_quiz_question_id = :student_quiz_question_id";
+        $data = $this->db->read($query,
+        [
+           "student_quiz_question_id"=>$student_quiz_question
+        ]);
+        return $data[0]->File;
     }
 
 

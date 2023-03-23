@@ -133,11 +133,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="auto-correct">Auto Correct</label>
-                                    <select required name="is_auto_correct" class="form-control" id="auto-correct">
-                                        <option value="none" selected="" disabled="">
+                                    <select  required name="is_auto_correct" class="form-control" id="auto-correct">
+                                        <option value="no" disabled selected="">
                                             Auto Correct</option>
-                                        <option value="no" <?= checkQuizAutoCorrect($quiz_date,"no") ?>>No</option>
-                                        <option value="yes" <?= checkQuizAutoCorrect($quiz_date,"yes") ?>>Yes</option>
+                                        <option value="no"  <?= checkQuizAutoCorrect($quiz_date,"no") ?>>No</option>
+                                        <option <?= checkCanEditCorrection($quiz_id) ?> value="yes" <?= checkQuizAutoCorrect($quiz_date,"yes") ?>>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

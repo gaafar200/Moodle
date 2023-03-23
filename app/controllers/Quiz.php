@@ -13,14 +13,14 @@ class Quiz extends Controller
         $this->quiz = new Quizes();
     }
 
-    public function index(int $id){
+    public function index(int $course_id){
         if($this->data["user"]->rank == "lecturer") {
             $this->data["pageName"] = "Quizes";
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $this->quiz->deleteQuiz($_POST["quiz_id"]);
             }
-            $this->data["course_id"] = $id;
-            $this->data["quizes_data"] = $this->quiz->getAllQuizes($id);
+            $this->data["course_id"] = $course_id;
+            $this->data["quizes_data"] = $this->quiz->getAllQuizes($course_id);
             $this->view("quizzes-list", $this->data);
         }
         else{
@@ -46,6 +46,7 @@ class Quiz extends Controller
     public function edit(int $quiz_id,int $courseId){
         if($this->data["user"]->rank == "lecturer"){
             $this->data["pageName"] = "Edit Quiz";
+            $this->data["canEditAutoCorrection"] = $this->quiz->checkIfQuizHaveEssayQuestion($quiz_id);
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $result = $this->quiz->editQuiz($_POST,$quiz_id);
                 if($result === true){
@@ -54,6 +55,7 @@ class Quiz extends Controller
                 $this->data["errors"] = $result;
              }
             $this->data["quiz_date"] = $this->quiz->getQuizData($quiz_id);
+            $this->data["quiz_id"] = $quiz_id;
             $this->view("edit-quiz",$this->data);
         }
         else{
@@ -102,6 +104,7 @@ class Quiz extends Controller
             $this->forbidden();
         }
     }
+
 
 
 }

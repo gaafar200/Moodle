@@ -291,6 +291,11 @@ Abstract class Questions extends Model
         if(is_array($check)){
             return $check;
         }
+        $question_type = $this->getQuestionType($question_id);
+        if($question_type == "essayQuestion"){
+            $quiz = new Quizes();
+            $quiz->makeQuizNotAutoCorrect($quiz_id);
+        }
         $query = "INSERT INTO quiz_questions (question_id,quiz_id) VALUES(:question_id,:quiz_id)";
         $check =  $this->db->write($query,
         [
@@ -420,6 +425,16 @@ Abstract class Questions extends Model
         }
         return 0;
 
+    }
+    public function registerStudentChoice($question_id, $student_quiz_id,$choice):void
+    {
+        $student_quiz_question_id = $this->getStudentQuizQuestionId($question_id,$student_quiz_id);
+        $query = "INSERT INTO student_quiz_question_choices (student_quiz_question_id,choice) VALUES(:student_quiz_question_id,:choice)";
+        $this->db->write($query,
+            [
+                "student_quiz_question_id"=>$student_quiz_question_id,
+                "choice"=>$choice
+            ]);
     }
 
 }

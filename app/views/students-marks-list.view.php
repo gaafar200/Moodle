@@ -115,34 +115,33 @@
                             <div class="latest-blog-single blog-single-full-view">
                                 <div class="top-btn">
                                     <h4> Students Marks </h4>
-                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back Quiz List</button></a>
+                                    <a href="<?= ROOT ?>Quiz/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back</button></a>
                                 </div>
                                 <div class="table-flex">
                                     <div class="tabel-thead">
                                         <div class="td-id"> ID </div>
                                         <div class="td"> Student Name </div>
                                         <div class="td-flex">Quiz Name</div>
-                                        <div class="td-flex">Attempts</div>
+                                        <div>number_of_attempts</div>
                                         <div class="td-flex">Quiz Mark</div>
                                         <div class="td-last justify-content-center">Actions</div>
                                     </div>
                                     <!-- ------- Here goes the loop -----  -->
-                                    <?php if ($quizes_data) :
+                                    <?php if ($students_marks_in_quiz) :
                                         $count = 1;
                                     ?>
-                                        <?php foreach ($quizes_data as $quiz) : ?>
+                                        <?php foreach ($students_marks_in_quiz as $student_mark) : ?>
                                             <form method="POST">
                                                 <div class="table-tbody mt-2">
                                                     <div class="td-id">
                                                         <span><?= $count++ ?></span>
                                                     </div>
-                                                    <div class="td">Abdullah</div>
-                                                    <div class="td-flex">Quiz#1</div>
-                                                    <div class="td-flex">3 attempts</div>
-                                                    <div class="td-flex">10</div>
-                                                    <div class="td-last quiz-list-btns  ">
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Mark</button></a>
-                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                                                    <div class="td"><?= $student_mark->f_name . " " . $student_mark->l_name  ?></div>
+                                                    <div class="td-flex"><?= $student_mark->name ?></div>
+                                                    <div class="td-flex"><?= $student_mark->attempt_number ?></div>
+                                                    <div class="td-flex"><?= displayStudentQuizGrade($student_mark->grade) ?></div>
+                                                    <div class="td-last quiz-list-btns">
+                                                        <a href="<?= ROOT ?>StudentQuizes/markQuiz/<?= $student_mark->student_quiz_id ?>"><button <?= displayMark($student_mark->auto_correct,$student_mark->student_quiz_id) ?> type="button" class="btn btn-success">Mark</button></a>
                                                     </div>
                                                 </div>
                                             </form>

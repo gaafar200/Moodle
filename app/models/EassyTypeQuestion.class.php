@@ -27,20 +27,24 @@ class EassyTypeQuestion extends Questions
            "student_quiz"=>$student_quiz_id
         ]);
         $student_quiz_question_id = $this->getStudentQuizQuestionId($question_id,$student_quiz_id);
-        if($answer["error"] != 0){
+        if($answer["error"] == 0){
             $this->registerAnswerValue($answer,$student_quiz_question_id);
         }
     }
 
-    private function registerAnswerValue($answer,$student_quiz_question_id)
+    private function registerAnswerValue($answer,$student_quiz_question_id):bool
     {
         $file = new File();
         $filePath = $file->uploadToFileSystem($answer);
+        if(is_array($filePath)){
+            return false;
+        }
         $query = "INSERT INTO student_quiz_question_files (student_quiz_question_id,File) VALUES(:student_quiz_question_id,:file)";
         $this->db->write($query,
         [
            "student_quiz_question_id"=>$student_quiz_question_id,
             "file"=>$filePath
         ]);
+        return true;
     }
 }
