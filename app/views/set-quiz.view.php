@@ -78,7 +78,7 @@
 </div>
 <!-- Single pro tab review Start-->
 <div class="single-pro-review-area mt-t-30 mg-b-15">
-    <div class="container-fluid " >
+    <div class="container-fluid ">
         <div class="row " style="margin-top:100px ;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
@@ -107,11 +107,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="final-mark">Quiz Time</label>
-                                    <input required name="time" type="number"  id="final-mark" class="form-control" placeholder="Enter the Number of minutes for the quiz">
+                                    <input required name="time" type="number" id="final-mark" class="form-control" placeholder="Enter the Number of minutes for the quiz">
                                 </div>
                                 <div class="form-group">
                                     <label for="final-mark">Mark Value</label>
-                                    <input required name="mark_value"  type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
+                                    <input required name="mark_value" type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
                                 </div>
 
                             </div>
@@ -146,7 +146,7 @@
                                         <option value="none" selected="" disabled="">
                                             Are Questions Shuffled</option>
                                         <option value="no">No</option>
-                                        <option value="yes" >Yes</option>
+                                        <option value="yes">Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -154,8 +154,8 @@
                                     <select required name="is_disclosed" class="form-control" id="auto-correct">
                                         <option value="none" selected="" disabled="">
                                             Are Marks Disclosed</option>
-                                        <option value="no" >No</option>
-                                        <option value="yes" >Yes</option>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-group res-mg-t-15">

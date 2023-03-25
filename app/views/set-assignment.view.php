@@ -1,6 +1,7 @@
-<?php $this->view("include/header", ["pageName" => $pageName]); ?>
-<?php $this->view("include/sidebar"); ?>
-<?php $this->view("include/upbar", ["user" => $user]); ?>
+<?php $this->view('include/header', ['pageName' => $pageName]); ?>
+<?php $this->view('include/sidebar'); ?>
+<?php $this->view('include/upbar', ['user' => $user]); ?>
+
 <!-- Mobile Menu start -->
 <div class="mobile-menu-area">
     <div class="container">
@@ -14,7 +15,6 @@
                                     <li><a href="index.html">Dashboard</a></li>
                                 </ul>
                             </li>
-
                             <li><a data-toggle="collapse" data-target="#demoevent" href="#">Professors <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                 <ul id="demoevent" class="collapse dropdown-header-top">
                                     <li><a href="all-professors.html">All Professors</a>
@@ -75,90 +75,65 @@
     </div>
 </div>
 <!-- Mobile Menu end -->
-<div class="breadcome-area">
-    <div class="container-fluid">
-        <div class="row">
+</div>
+<!-- Single pro tab review Start-->
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid ">
+        <div class="row " style="margin-top:100px ;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcome-list single-page-breadcome" style="margin-top:  10vh;">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcome-heading">
-                                <form role="search" class="sr-input-func">
-                                    <input type="text" placeholder="Search..." class="search-int form-control" name="search">
-                                    <a><button type="submit" class="pro-5"><i class="fa fa-search"></i></button></a>
-                                </form>
+                <div class="product-payment-inner-st">
+                    <form action="" method="POST" class="dropzone-custom needsclick add-professors" id="demo1-upload">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="assignment-name">Assignment Name</label>
+                                    <input required name="assignment_name" type="text" id="assignment-name" class="form-control" placeholder="Assignment Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="start-date">Start Date</label>
+                                    <input required name="start-date" type="date" class="form-control" placeholder="Start Date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">End Date</label>
+                                    <input required name="end-date" type="date" class="form-control" placeholder="End Date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="final-mark">Mark Value</label>
+                                    <input required name="mark_value" type="number" id="final-mark" class="form-control" placeholder="Enter the Final Mark Of the Quiz">
+                                </div>
+                                <div class="form-group">
+                                    <label for="number-of-attempts">Number Of
+                                        Attempts</label>
+                                    <input required name="max_attempts" type="number" id="number-of-attempts" class="form-control" placeholder="Number Of Attempts">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group res-mg-t-15">
+                                    <label for="description-quiz">Description</label>
+                                    <textarea required name="description" id="description-quiz" placeholder="Description"></textarea>
+                                </div>
+                                <label for="images" class="drop-container">
+                                    <span class="drop-title">Drop files here</span>
+                                    or
+                                    <input type="file" name="" id="images" accept="*" />
+                                </label>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <ul class="breadcome-menu">
-                                <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                </li>
-                                <li><span class="bread-blod">Course Info</span>
-                                </li>
-                            </ul>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="payment-adress" style="margin-top:15px ;">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Set Assignment</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-<div class="blog-details-area mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="blog-details-inner">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            
-                            <div class="latest-blog-single blog-single-full-view">
-                                <div class="top-btn">
-                                    <h4> Students Quizzes Marks </h4>
-                                    <a href="<?= ROOT ?>Quiz/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back</button></a>
-                                </div>
-                                <div class="table-flex">
-                                    <div class="tabel-thead">
-                                        <div class="td-id"> ID </div>
-                                        <div class="td"> Student Name </div>
-                                        <div class="td-flex">Quiz Name</div>
-                                        <div>Number Of Attempts</div>
-                                        <div class="td-flex">Quiz Mark</div>
-                                        <div class="td-last justify-content-center">Actions</div>
-                                    </div>
-                                    <!-- ------- Here goes the loop -----  -->
-                                    <?php if ($students_marks_in_quiz) :
-                                        $count = 1;
-                                    ?>
-                                        <?php foreach ($students_marks_in_quiz as $student_mark) : ?>
-                                            <form method="POST">
-                                                <div class="table-tbody mt-2">
-                                                    <div class="td-id">
-                                                        <span><?= $count++ ?></span>
-                                                    </div>
-                                                    <div class="td"><?= $student_mark->f_name . " " . $student_mark->l_name  ?></div>
-                                                    <div class="td-flex"><?= $student_mark->name ?></div>
-                                                    <div class="td-flex"><?= $student_mark->attempt_number ?></div>
-                                                    <div class="td-flex"><?= displayStudentQuizGrade($student_mark->grade) ?></div>
-                                                    <div class="td-last quiz-list-btns">
-                                                        <a href="<?= ROOT ?>StudentQuizes/markQuiz/<?= $student_mark->student_quiz_id ?>"><button <?= displayMark($student_mark->auto_correct,$student_mark->student_quiz_id) ?> type="button" class="btn btn-success">Mark</button></a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<?php $this->view("include/footer"); ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 
-
-
+<?php $this->view('include/footer'); ?>

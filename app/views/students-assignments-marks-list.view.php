@@ -111,19 +111,18 @@
                 <div class="blog-details-inner">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            
                             <div class="latest-blog-single blog-single-full-view">
                                 <div class="top-btn">
-                                    <h4> Students Quizzes Marks </h4>
+                                    <h4> Students Assignments Marks </h4>
                                     <a href="<?= ROOT ?>Quiz/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back</button></a>
                                 </div>
                                 <div class="table-flex">
                                     <div class="tabel-thead">
                                         <div class="td-id"> ID </div>
                                         <div class="td"> Student Name </div>
-                                        <div class="td-flex">Quiz Name</div>
+                                        <div class="td-flex">Assignment Name</div>
                                         <div>Number Of Attempts</div>
-                                        <div class="td-flex">Quiz Mark</div>
+                                        <div class="td-flex">Assignment Mark</div>
                                         <div class="td-last justify-content-center">Actions</div>
                                     </div>
                                     <!-- ------- Here goes the loop -----  -->

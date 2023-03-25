@@ -111,37 +111,48 @@
                 <div class="blog-details-inner">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            
                             <div class="latest-blog-single blog-single-full-view">
                                 <div class="top-btn">
-                                    <h4> Students Quizzes Marks </h4>
-                                    <a href="<?= ROOT ?>Quiz/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">back</button></a>
+                                    <h4> Assignments List </h4>
+                                    <a href="<?= ROOT ?>Quiz/set/<?= $course_id ?>"><button type="button" class="btn btn-custon-rounded-four btn-success btnWidth">Set Assignment</button></a>
                                 </div>
                                 <div class="table-flex">
+
                                     <div class="tabel-thead">
                                         <div class="td-id"> ID </div>
-                                        <div class="td"> Student Name </div>
-                                        <div class="td-flex">Quiz Name</div>
-                                        <div>Number Of Attempts</div>
-                                        <div class="td-flex">Quiz Mark</div>
+                                        <div class="td">Assignment Name </div>
+                                        <div class="td-flex">Assignment Start Date</div>
+                                        <div class="td-flex">Assignment End Date</div>
+                                        <div class="td-flex">Assignment Mark</div>
                                         <div class="td-last justify-content-center">Actions</div>
                                     </div>
+
                                     <!-- ------- Here goes the loop -----  -->
-                                    <?php if ($students_marks_in_quiz) :
+                                    <?php if ($quizes_data) :
                                         $count = 1;
                                     ?>
-                                        <?php foreach ($students_marks_in_quiz as $student_mark) : ?>
+                                        <?php foreach ($quizes_data as $quiz) : ?>
                                             <form method="POST">
                                                 <div class="table-tbody mt-2">
                                                     <div class="td-id">
                                                         <span><?= $count++ ?></span>
                                                     </div>
-                                                    <div class="td"><?= $student_mark->f_name . " " . $student_mark->l_name  ?></div>
-                                                    <div class="td-flex"><?= $student_mark->name ?></div>
-                                                    <div class="td-flex"><?= $student_mark->attempt_number ?></div>
-                                                    <div class="td-flex"><?= displayStudentQuizGrade($student_mark->grade) ?></div>
-                                                    <div class="td-last quiz-list-btns">
-                                                        <a href="<?= ROOT ?>StudentQuizes/markQuiz/<?= $student_mark->student_quiz_id ?>"><button <?= displayMark($student_mark->auto_correct,$student_mark->student_quiz_id) ?> type="button" class="btn btn-success">Mark</button></a>
+                                                    <div class="td"><?= $quiz->name ?></div>
+                                                    <div class="td-flex"><?= $quiz->date ?></div>
+                                                    <div class="td-flex"><?= $quiz->time ?></div>
+                                                    <div class="td-flex"><?= $quiz->mark ?></div>
+                                                    <div class="td-last quiz-list-btns  ">
+                                                        <a href="<?= ROOT ?>Quiz/edit/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                                                        <a href="<?= ROOT ?>StudentQuizes/marks/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-success">Marks</button></a>
+                                                        <?php if ($quiz->status != "ready") : ?>
+                                                            <a href="<?= ROOT ?>Quiz/activate/<?= $quiz->id ?>/<?= $course_id ?>"><button <?= isActiveButtonActive($quiz->status) ?> type="button" class="btn btn-success">Activate</button></a>
+                                                        <?php else : ?>
+                                                            <a href="<?= ROOT ?>Quiz/deactivate/<?= $quiz->id ?>/<?= $course_id ?>"><button type="button" class="btn btn-danger">Deactivate</button></a>
+                                                        <?php endif; ?>
+                                                        <form method="POST">
+                                                            <input type="hidden" name="quiz_id" value="<?= $quiz->id ?>">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </form>
@@ -158,7 +169,3 @@
 </div>
 </div>
 <?php $this->view("include/footer"); ?>
-
-
-
-
