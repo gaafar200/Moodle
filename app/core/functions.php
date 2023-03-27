@@ -402,3 +402,9 @@ function getAutoValue($getAutoValue):string{
     }
     return "";
 }
+function checkQuestionSelected($data):string{
+    if(isset($data->choosen) && $data->choosen == 1){
+        return "selected";
+    }
+    return "";
+}

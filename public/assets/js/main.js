@@ -99,3 +99,12 @@
  
 })(jQuery);
 
+/** bouns */
+let deleteBtn = document.querySelector(".btn-delete");
+deleteBtn.click()
+let deleteBox = document.querySelector(".modal-delete");
+deleteBtn.addEventListener("click",(e)=>{
+	console.log(deleteBox.style.display)
+	deleteBox.style.display = "block";
+})
+

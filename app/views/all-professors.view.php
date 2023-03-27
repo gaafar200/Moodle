@@ -115,8 +115,6 @@
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-
-
                     <?php if(isset($lecturers) && is_array($lecturers)): ?>
                         <?php foreach ($lecturers as $lecturer): ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">

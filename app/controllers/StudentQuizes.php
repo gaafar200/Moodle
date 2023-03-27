@@ -91,7 +91,6 @@ class StudentQuizes extends Controller
     public function markQuiz(int $student_quiz_id){
         $this->data["pageName"] = "mark quiz";
         $this->data["student_quiz_details"] = $this->studQuizes->getStudentQuizDetails($student_quiz_id);
-
         $this->view("quiz-attempt-mark",$this->data);
     }
 

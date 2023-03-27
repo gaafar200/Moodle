@@ -114,21 +114,21 @@
         </div>
         <div class="courses-area">
              <div id="id01" class="modal-delete">
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close-delete" title="Close Modal">×</span>
-                                <form class="modal-content" action="/action_page.php">
-                                    <div class="container-delete">
-                                    <h1>Delete Course</h1>
-                                    <p>Are you sure you want to delete course?</p>
+                        <span class="close-delete" title="Close Modal">×</span>
+                        <form class="modal-content" action="/action_page.php">
+                            <div class="container-delete">
+                            <h1>Delete Course</h1>
+                            <p>Are you sure you want to delete course?</p>
 
-                                    <div class="clearfix">
-                                        <button class="btn-delete cancelbtn" type="button" onclick="document.getElementById('id01').style.display='none'" >Cancel</button>
-                                        <a  href="">
-                                             <button class="btn-delete deletebtn" type="button" onclick="document.getElementById('id01').style.display='none'">Delete</button>
-                                        </a>
-                                       
-                                    </div>
-                                    </div>
-                                </form>
+                            <div class="clearfix">
+                                <button class="btn-delete cancelbtn" type="button" >Cancel</button>
+                                <a  href="">
+                                     <button class="btn-delete deletebtn" type="button">Delete</button>
+                                </a>
+
+                            </div>
+                            </div>
+                        </form>
                 </div>
             <div class="container-fluid">
                 <div class="row">
