@@ -1119,3 +1119,54 @@ textarea {
   margin: 1rem 0;
   color: #956c33;
 }
+
+
+.assignment-details {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 3rem auto;
+}
+
+.assignment-details td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+.assignment-details td.assignment-label {
+  font-weight: bold;
+  width: 20%;
+}
+
+.assignment-details tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+.assignment-details tr:hover td {
+  background-color: #f2f2f2;
+}
+
+.assignment-details tr:first-child td {
+  border-top: none;
+}
+
+.assignment-details tr:last-child td {
+  border-bottom: none;
+}
+
+.assignment-details .last-row td {
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.assignment-details .last-row td:first-child {
+  border-left: none;
+}
+
+.assignment-details .last-row td:last-child {
+  border-right: none;
+}
+
+.assignment-details .last-row td[colspan="2"] {
+  border-bottom: none;
+}

@@ -108,6 +108,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
         <div class="blog-details-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -125,54 +130,23 @@
                                             <span class="quiz-details-one-name"><?= $quiz_display->name ?></span>
                                             <p class="quiz-details-one-description"><?= $quiz_display->description ?></p>
                                             </div>
-                                            <div class="quiz-details-two">
 
-                                            <span class="quiz-details-two-attempts">
-                                                Attempts allowed: <span><?= $quiz_display->max_attempts  ?></span>
-                                            </span>
-                                            <span class="quiz-details-two-date">
-                                                <?= displayQuizDateStat($quiz_status) ?><span><?= displayQuizDateDetails($quiz_display->quizStartDate,$quiz_display->quizendDate,$quiz_status); ?></span>
-                                            </span>
-                                            <span class="quiz-details-two-time">
-                                                Time limit: <span><?= $quiz_display->time ?> mins</span>
-                                            </span>
-                                            <span class="quiz-details-two-method">
-                                                Grading method: <span>Highest grade</span>
-                                            </span>
-                                        </div>
                                         <div class="quiz-details-three">
                                             <?php if(isset($quiz_attempts) && is_array($quiz_attempts)): ?>
                                                 <span class="quiz-details-three-summary">
-                                                    Summary of your previous attempts
+                                                    File submissions
                                                 </span>
-                                                <table class="grade-table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="grade-tabl-width">Attempt</th>
-                                                        <th>State</th>
-                                                        <th class="grade-tabl-width">Grade / <span><?= $quiz_display->mark_value ?></span></th>
-                                                        <th class="grade-tabl-width"><a href="www.google.com">Review</a></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <?php $count = 1 ?>
-                                                        <?php foreach ($quiz_attempts as $attempt):?>
-                                                            <tr>
-                                                                <td><?= $count++ ?></td>
-                                                                <td class="grade-table-state">
-                                                                    <span>Finished</span>
-                                                                    <span><?= $attempt->end_time ?></span>
-                                                                </td>
-                                                                <td><?= displayGrade($attempt->grade,$quiz_status,$attempt->id) ?></td>
-                                                                <td>
-                                                                <?php if(canReview($quiz_status,$attempt->id)): ?>
-                                                                    <a href="<?= ROOT ?>StudentQuizes/reviewQuiz">Review</a>
-                                                                <?php endif; ?>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
+                                                <div class="form-group alert-up-pd">
+                                        
+                                                                    <label for="images" class="drop-container">
+                                                                    <span class="drop-title">Drop files here</span>
+                                                                    or
+                                                                    <input name="image" type="file" id="images" accept="image/*" required>
+                                                                        <?php if(isset($errors) && isset($errors["image"])): ?>
+                                                                            <em for="image" class="invalid"><?= ucfirst($errors["image"]) ?></em>
+                                                                        <?php endif; ?>
+                                                                    </label>
+                                                                </div>
                                                 <?php if(displayGrade($attempt->grade,$quiz_status,$attempt->id)): ?>
                                                     <span class="quiz-details-three-grade">
                                                         Your final grade for this quiz is <span> <?= displayMaxGrade($quiz_attempts) ?>/<?= $quiz_display->mark_value ?></span>.
@@ -182,11 +156,10 @@
                                             <?php endif; ?>
                                                 <div class="quiz-details-four">
                                                 <?php if($canContinueQuiz): ?>
-                                                    <a href="<?= ROOT ?>StudentQuizes/quiz/<?= $canContinueQuiz[0]->id ?>?page=<?= $canContinueQuiz[0]->pageNumber ?>"><button class="quiz-details-four-attempt">Continue Quiz</button></a>
                                                 <?php elseif($quiz_display->canPerformQuiz): ?>
-                                                    <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Attempt Quiz</button></a>
+                                                    <a href="<?= ROOT ?>StudentQuizes/perform/<?= $quiz_id ?>/<?= $course_id ?>"><button class="quiz-details-four-attempt">Save Changes</button></a>
                                                 <?php endif; ?>
-                                                <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Back to the course</button></a>
+                                                <a href="<?= ROOT ?>course/info/<?= $course_id ?>"><button class="quiz-details-four-back">Cancel</button></a>
                                                 </div>
                                         </div>
                                         </div>
@@ -198,23 +171,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
 
 
 

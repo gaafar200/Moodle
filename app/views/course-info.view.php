@@ -136,6 +136,7 @@
                                                             Course Actions
                                                         </button>
                                                         <div  class=" dropdown-menu ">
+                                                            <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Set Announcement</button></a>
                                                             <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Assignment Control</button></a>
                                                             <a href="<?= ROOT ?>Quiz/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Quizes Control</button></a>
                                                             <a href="<?= ROOT ?>Question/<?= $courseDetails[0]->id ?>"><button  type="button" class="btn btn-custon-rounded-four btn-success style-btn">Questions Control</button></a>
@@ -147,6 +148,13 @@
                                             </div>
                                             <h1><a class="blog-ht" href="#">Courses Description</a></h1>
                                             <p><?= ucfirst($courseDetails[0]->description) ?></p>
+                                                                                                                                    <div class="course-active">
+                                                <h4 class="course-active-name">Announcement</h4>
+                                            </div>
+                                            <div class="course-quiz-list">
+                                                <h3>Title<h3>
+                                                <p>Description</p>
+                                            </div>
                                             <div class="course-active">
                                                 <h4 class="course-active-name">Quizzes</h4>
                                             </div>
@@ -160,6 +168,21 @@
                                                 <?php endforeach; ?>
                                              <?php endif; ?>
                                             </div>
+                                                                                        <div class="course-active">
+                                                <h4 class="course-active-name">Assignment</h4>
+                                            </div>
+                                            <div class="course-quiz-list">
+                                             <?php if(is_array($courseDetails["quiz_data"]) && !empty($courseDetails["quiz_data"])): ?>
+                                                <?php foreach ($courseDetails["quiz_data"] as $quiz): ?>
+                                                    <div class="course-quiz-list-quiz">
+                                                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#06c;}.cls-2{fill:#fff;}</style></defs><title>48px_sourcefile_20170718_multi</title><circle class="cls-1" cx="24" cy="24" r="24"/><path id="path1" class="cls-2" d="M33.53,27.56l1.29,1.29-5.89,5.89-3.47-3.47L26.76,30l2.18,2.18Zm-3.38-2.81a6.39,6.39,0,1,0,6.39,6.39A6.4,6.4,0,0,0,30.15,24.75ZM24.68,13.24v3.28H28l-.39-.39ZM13.71,12V33h8.42l0-.17a8.08,8.08,0,0,1-.17-1.65A8.22,8.22,0,0,1,29.1,23l.15,0V18.36H23.78a.92.92,0,0,1-.92-.92V12Zm10-1.84a.64.64,0,0,1,.26,0h0l0,0,0,0h0l.11.06h0l0,0,0,0,0,0,.06.06h0l4.91,4.91,1.48,1.48h0l0,0h0l0,0,0,0,0,0,0,0v0h0l0,0,0,0,0,0,0,0h0v.11h0l0,0v5.76l.11,0A8.23,8.23,0,1,1,22.8,35l-.13-.26H12.79a.92.92,0,0,1-.92-.92V11a.92.92,0,0,1,.92-.92Z"/></svg>
+                                                        <a href="<?= ROOT ?>Quiz/quizDisplay/<?= $courseDetails[0]->id?>/<?= $quiz->id; ?>" class="course-quiz-list-link"><?= $quiz->name ?></a>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                             <?php endif; ?>
+                                            </div>
+                                                                                        </div>
+
                                         </div>
                                         <div>
                                         </div>
